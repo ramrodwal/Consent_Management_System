@@ -34,7 +34,7 @@ function Homepage(){
                 <Card.Img variant="top" class="loginnominee" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTbXZH7DM5U-bbtD7FCITcGN5Fn0Sk_cW4ng&usqp=CAU" />
                 </a>
         <Card.Body>
-          <Card.Title>NOMIEE</Card.Title>
+          <Card.Title>NONE- NOMIEE</Card.Title>
           </Card.Body>
                 </Card>
                 <Card>
