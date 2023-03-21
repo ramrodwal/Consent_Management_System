@@ -33,7 +33,7 @@ function SignUp(){
             event.preventDefault();
             const patient = { fname: fname, mname: mname , lname: lname, age: age,email:email, username:username, phone:phone, address:address, state: state, city:city, zip:zip, 
             aadhar:aadhar, password:password, confirmPassword:confirmPassword };
-            axios.post('http://localhost:8080/api/patients', patient)
+            axios.post('http://localhost:9090/api/patients', patient)
                 .then(response => console.log(response))
                 .catch(error => console.log(error));
         }

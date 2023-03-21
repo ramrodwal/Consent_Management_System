@@ -9,7 +9,7 @@ function Content(){
 
 
   const handleClick = () => {
-    axios.get('http://localhost:8080/api/patient')
+    axios.get('http://localhost:9090/api/patient')
       .then(response => setPatients(response.data))
       .catch(error => console.log(error));
   };
