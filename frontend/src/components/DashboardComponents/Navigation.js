@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+//import Profile from 'src/components/Profile.js';
 
 function Navigation(){
     return (<>
@@ -11,8 +12,9 @@ function Navigation(){
         <Navbar.Brand href="#Homepage.js">Consent Management System</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link >Profile</Nav.Link>
+          <Nav className="me-auto">  
+            <Nav.Link href="/Profile.js" >Profile</Nav.Link>
+            
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
