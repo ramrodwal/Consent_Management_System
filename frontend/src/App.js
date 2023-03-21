@@ -130,7 +130,7 @@ function PatientDet(){
   return(
     <>
       <DoctorNavbar/>
-      <PatientDetails.js/>
+      <PatientDetails/>
     </>
   );
 }
