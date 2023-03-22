@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Central_Hospital {
+public class CentralHospital {
 
     private int hospital_id;
     private String hospital_name;

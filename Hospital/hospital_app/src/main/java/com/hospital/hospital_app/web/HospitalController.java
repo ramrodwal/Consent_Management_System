@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.hospital_app.entity.Admin;
+import com.hospital.hospital_app.entity.CentralHospital;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -33,5 +34,11 @@ public class HospitalController {
             }
         }
         return new ResponseEntity<>(admin, HttpStatus.BAD_REQUEST);
+    }
+
+    //hospital registratrion 
+    @PostMapping("/admin-login/register-hospital")
+    public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
+        return new ResponseEntity<CentralHospital>(central_hospital, null);
     }
 }
