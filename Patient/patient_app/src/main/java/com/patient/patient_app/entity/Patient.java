@@ -1,15 +1,24 @@
 package com.patient.patient_app.entity;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+import com.fasterxml.jackson.core.sym.Name;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Patient {
+    
     
     private String fname;
     private String mname;
