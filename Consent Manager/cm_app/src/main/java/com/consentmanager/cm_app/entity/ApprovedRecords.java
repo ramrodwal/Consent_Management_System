@@ -2,7 +2,7 @@ package com.consentmanager.cm_app.entity;
 
 import java.time.LocalDate;
 
-public class Approved_Records {
+public class ApprovedRecords {
     private String practioner_aadhar;
     private String patient_aadhar;
     private int record_id;

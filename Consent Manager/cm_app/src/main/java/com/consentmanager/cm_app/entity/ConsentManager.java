@@ -1,6 +1,6 @@
 package com.consentmanager.cm_app.entity;
 
-public class Consent_Manager {
+public class ConsentManager {
     private int hospital_id;
     private String practioner_aadhar;
     private String patient_aadhar;
