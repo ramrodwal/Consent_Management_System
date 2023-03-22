@@ -1,0 +1,79 @@
+html {
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  /* background: #eee; */
+  background-color: #ADD8E6;
+  font-family: "McLaren", cursive;
+  /* background-image: url("https://i5.peapod.com/c/H9/H952X.jpg"); */
+}
+
+header{
+  background-color: #05242f;
+  margin: auto -16px;
+  padding: 16px 32px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+header h1 {
+  text-align: center;
+  color: #f5f3f3;
+  font-family: "McLaren", cursive;
+  font-weight: 200;
+}
+.logo{
+  width: 20%;
+  height: 20%;
+}
+
+.card{
+  padding-top: 2%;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+
+}
+.loginas{
+  padding: 2%;
+  text-align: center;
+}
+
+.loginpatient{
+  width: 180px;
+  height: 200px;
+}
+.logindoc{
+  width: 180px;
+  height: 200px;
+}
+.loginnominee{
+  width: 180px;
+  height: 200px;
+}
+.loginadmin{
+  width: 180px;
+  height: 200px;
+}
+
+.forgotpass{
+  text-align: center;
+  padding-top: 2%;
+}
+
+.navbar-side{
+  padding-left: 10%;
+}
+
+#formsamerow{
+
+  padding-right: 20%;
+}
+
+#shiftright{
+  padding-left:1.25%;
+}
+
+.showpatientbutton{
+  /* align: center; */
+  padding-top: 0.5%;
+  padding-left: 28%;
+}
