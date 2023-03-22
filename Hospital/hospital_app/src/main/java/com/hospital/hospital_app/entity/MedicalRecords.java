@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Medical_Records {
+public class MedicalRecords {
     private int hospital_id;
     private String practioner_aadhar;
     private String patient_aadhar;
