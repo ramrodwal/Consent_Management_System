@@ -1,12 +1,24 @@
 package com.hospital.hospital_app.entity;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +32,14 @@ import lombok.Setter;
 @Table(name = "centralHospital")
 public class CentralHospital {
 
-    @Id
+    @JsonIgnore
+    @OneToMany(mappedBy = "ch" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalPractitioner> mp=new ArrayList<>();
+
+    //primary key
+    @Id 
+    @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
+    @GenericGenerator( name = "native", strategy = "native" )
     @Column(name = "hospital_id",nullable = false)
     private int hospital_id;
     
@@ -29,10 +48,11 @@ public class CentralHospital {
     @NotBlank(message = "hospital name can not be empty")
     private String hospital_name;
 
-    @Column(nullable = false)
+    @Pattern(regexp="\\d{10}", message="Invalid phone number")
+    @Column(nullable = false,unique = true)
     @NonNull
-    @NotBlank(message = "hospital number can not be empty")
-    private String number;
+    @NotBlank(message = "hospital contact number can not be empty")
+    private String contactNumber;
 
     @Column(nullable = false)
     @NonNull
@@ -49,9 +69,10 @@ public class CentralHospital {
     @NotBlank(message = "address can not be empty")
     private String address;
 
+    @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "zipcode can not be blank")
-    private int zipcode;
+    private long zipcode;
     
 }
