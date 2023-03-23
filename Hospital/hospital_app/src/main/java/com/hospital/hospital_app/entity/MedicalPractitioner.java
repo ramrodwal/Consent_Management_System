@@ -1,14 +1,24 @@
 package com.hospital.hospital_app.entity;
 
+import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.resource.beans.internal.FallbackBeanInstanceProducer;
 import org.springframework.format.annotation.NumberFormat;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +30,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "MedicalPractitioner")
-public class MedicalPractioner {
+public class MedicalPractitioner {
 
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "first name can not be empty")
     private String fname;
 
-    @Column()
+    @Column
     private String mname;
 
     @Column(nullable = false)
@@ -35,6 +45,7 @@ public class MedicalPractioner {
     @NotBlank(message = "last name can not be empty")
     private String lname;
 
+    @Min(value = 21)
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "age can not be empty")
@@ -51,10 +62,10 @@ public class MedicalPractioner {
     @Email(message = "enter a valid email address")
     private String email;
 
-    @Column(nullable = false)
+    @Pattern(regexp="\\d{10}", message="Invalid phone number")
+    @Column(nullable = false,unique = true)
     @NonNull
-    @NotBlank(message = "number can not be empty")
-    @NumberFormat
+    @NotBlank(message = "contact number can not be empty")
     private String number;
 
     @Column(nullable = false)
@@ -72,18 +83,20 @@ public class MedicalPractioner {
     @NotBlank(message = "address can not be empty")
     private String address;
 
+    @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "zipcode can not be empty")
-    private int zipcode;
+    private long zipcode;
 
     @Id
-    @Column(nullable = false)
+    @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
+    @Column(nullable = false,unique = true)
     @NonNull
     @NotBlank(message = "aadhar number can not be empty")
     private String practioner_aadhar;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @NonNull
     @NotBlank(message = "medical license id can not be empty")
     private String medical_license_id;
@@ -98,26 +111,29 @@ public class MedicalPractioner {
     @NotBlank(message = "qualification can not be empty")
     private String qualification;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @NonNull
     @NotBlank(message = "username can not be empty")
     private String username;
 
     @Column(nullable = false)
+    @Size(min = 6)
     @NonNull
     @NotBlank(message = "password can not be empty")
     private String password;
 
+    
     @Column(nullable = false)
+    @Size(min = 6)
     @NonNull
     @NotBlank(message = "confirm password can not be empty")
     private String confirmPassword;
 
-    @Id
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "hospital id can not be empty")
-    private int hospital_id;
+    //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hid", referencedColumnName = "hospital_id")
+    private CentralHospital ch;
 
 
 
