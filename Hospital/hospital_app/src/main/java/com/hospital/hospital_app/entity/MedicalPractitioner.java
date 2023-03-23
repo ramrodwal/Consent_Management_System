@@ -98,7 +98,7 @@ public class MedicalPractitioner {
     private long zipcode;
 
     @Id
-    @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
+    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
     @Column(nullable = false,unique = true)
     @NonNull
     @NotBlank(message = "aadhar number can not be empty")
