@@ -59,7 +59,7 @@ public class Patient {
     @Email(message = "please enter a valid email")
     private String email;
 
-    @Column
+    @Column(nullable = false)
     @Pattern(regexp="\\d{10}", message="please enter a valid phone number")
     private String contactNo;
 
@@ -76,7 +76,7 @@ public class Patient {
     @Column(nullable = false)
     @NotNull
     @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
-    private int zipcode;
+    private long zipcode;
 
     @Column(nullable = false)
     @NotBlank(message = "please enter a address")
