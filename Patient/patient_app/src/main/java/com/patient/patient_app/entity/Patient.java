@@ -28,11 +28,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "patient_table")
+@Table(name = "patient")
 public class Patient {
     
     @JsonIgnore
-    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "p1", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecordMapping> recordList = new ArrayList<>();
 
     @Column(nullable = false)
