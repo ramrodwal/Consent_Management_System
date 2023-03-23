@@ -32,25 +32,25 @@ public class ConsentManager {
     @NotBlank(message = "Hospital id cannot be blank")
     private int hospital_id;
 
-    @Id
+    
     @Column(name = "practitioner_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practioner_aadhar;
 
-    @Id
+    
     @Column(name = "patient_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "Patient aadhar can not be empty")
     private String patient_aadhar;
 
-    @Id
+    
     @Column(name = "disease_name",nullable = false)
     @NonNull
     @NotBlank(message = "disease name cannot be blank")
     private String disease_name;
-    
-    @Id
+
+
     @Column(name = "status",nullable = false)
     @NonNull
     @NotBlank(message = "status cannot be blank")

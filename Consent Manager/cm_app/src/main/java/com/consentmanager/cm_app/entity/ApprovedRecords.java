@@ -21,13 +21,13 @@ import lombok.Setter;
 @Table(name= "approvedRecords")
 
 public class ApprovedRecords {
-    @Id
+    
     @Column(name = "practitioner_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practioner_aadhar;
 
-    @Id
+    
     @Column(name = "patient_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "patient aadhar cannot be blank")
@@ -39,25 +39,25 @@ public class ApprovedRecords {
     @NotBlank(message = "record id cannot be blank")
     private int record_id;
 
-    @Id
+    
     @Column(name = "disease_name",nullable = false)
     @NonNull
     @NotBlank(message = "disease name cannot be blank")
     private String disease_name;
 
-    @Id
+    
     @Column(name = "record",nullable = false)
     @NonNull
     @NotBlank(message = "record  cannot be blank")
     private String record;
 
-    @Id
+    
     @Column(name = "approved_date",nullable = false)
     @NonNull
     @NotBlank(message = "approved date cannot be blank")
     private LocalDate approved_date;
+
     
-    @Id
     @Column(name = "validity",nullable = false)
     @NonNull
     @NotBlank(message = "validity cannot be blank")
