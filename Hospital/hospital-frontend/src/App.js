@@ -1,12 +1,14 @@
 import logo from './logo.svg';
 import React from 'react';
-import './App.css';
+// import './App.css';
 import HospitalHome from './HospitalHome';
 import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-dom";
 
 import DoctorLogin from './DoctorLogin';
 import BookAppointmentDoctor from './BookAppointmentDoctor';
 import AdminLogin from './AdminLogin';
+import AdminPostLogin from './AdminPostLogin';
+import HospitalList from './HospitalList';
 
 function HospHome(){
   return(
@@ -40,6 +42,22 @@ function AdminLog(){
   );
 }
 
+function AdmPostLog(){
+  return(
+      <>
+        <AdminPostLogin/>
+      </>
+  );
+}
+
+function HospList(){
+  return(
+      <>
+        <HospitalList/>
+      </>
+  );
+}
+
 function App() {
   return (
     <div className="App">
@@ -51,6 +69,8 @@ function App() {
         <Route exact path={"/BookAppointmentDoctor"} element={<BookAppointmentDoc/>}></Route>
         <Route exact path={"/DoctorLogin"} element={<DocLogin/>}></Route>
         <Route exact path={"/AdminLogin"} element={<AdminLog/>}></Route>
+        <Route exact path={"/AdminPostLogin"} element={<AdmPostLog/>}></Route>
+        <Route exact path={"/HospitalList"} element={<HospList/>}></Route>
 
         </Routes>
       </Router>           
