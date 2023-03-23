@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recodr_mapping {
+public class RecordMapping {
     
     @Column(nullable = false)
     @NotBlank
