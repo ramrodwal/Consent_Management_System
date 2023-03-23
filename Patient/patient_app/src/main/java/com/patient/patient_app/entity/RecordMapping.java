@@ -25,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="RecordMappingTable")
+@Table(name="RecordMapping")
 public class RecordMapping {
     
     @Id
@@ -42,7 +42,7 @@ public class RecordMapping {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "patient_id", referencedColumnName = "patient_aadhar")
-    private Patient patient;
+    private Patient p1;
 
 
 }
