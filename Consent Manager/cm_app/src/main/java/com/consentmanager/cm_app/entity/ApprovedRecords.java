@@ -2,10 +2,17 @@ package com.consentmanager.cm_app.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -19,9 +26,26 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name= "approvedRecords")
+// @IdClass(ApprovedId.class)
 
 public class ApprovedRecords {
-    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "consent_id", referencedColumnName = "consent_id")
+    private ConsentManager cm;
+
+    @Id
+    @Column(name = "approved_id",nullable = false)
+    @NonNull
+    @NotBlank(message = "Approved id cannot be blank")
+    private int approved_id;
+
+    @Column(name = "record_id",nullable = false)
+    @NonNull
+    @NotBlank(message = "record id cannot be blank")
+    private int record_id;
+
     @Column(name = "practitioner_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
@@ -32,13 +56,6 @@ public class ApprovedRecords {
     @NonNull
     @NotBlank(message = "patient aadhar cannot be blank")
     private String patient_aadhar;
-
-    @Id
-    @Column(name = "record_id",nullable = false)
-    @NonNull
-    @NotBlank(message = "record id cannot be blank")
-    private int record_id;
-
     
     @Column(name = "disease_name",nullable = false)
     @NonNull

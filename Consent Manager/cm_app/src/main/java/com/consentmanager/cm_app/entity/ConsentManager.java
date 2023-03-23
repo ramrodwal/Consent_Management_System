@@ -3,10 +3,17 @@ package com.consentmanager.cm_app.entity;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,7 +33,17 @@ import lombok.Setter;
 
 
 public class ConsentManager {
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "cm",cascade = CascadeType.ALL,orphanRemoval = true )
+    private List<ApprovedRecords> approvedRecords=new ArrayList<>(); 
+
     @Id
+    @Column(name = "consent_id",nullable = false)
+    @NonNull
+    @NotBlank(message = "Consent id cannot be blank")
+    private int consent_id;
+
     @Column(name = "hospital_id",nullable = false)
     @NonNull
     @NotBlank(message = "Hospital id cannot be blank")
