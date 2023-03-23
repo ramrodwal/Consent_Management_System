@@ -28,7 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Patient")
+@Table(name = "patient_table")
 public class Patient {
     
     @JsonIgnore
@@ -83,10 +83,10 @@ public class Patient {
     @NotNull
     private String address;
 
+    @Id
     @Column(nullable = false, unique = true)
     @NotBlank
     @NotNull
-    @Id
     @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
     private String patient_aadhar;
 

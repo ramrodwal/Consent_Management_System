@@ -25,14 +25,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Record_Mapping")
+@Table(name="RecordMappingTable")
 public class RecordMapping {
     
+    @Id
     @Column(nullable = false)
-    @Id 
     @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    private String Id;
+    private int Id;
 
     @Column(nullable = false)
     @NotBlank

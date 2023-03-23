@@ -46,7 +46,7 @@ public class CentralHospital {
 
     //primary key
     @Id 
-    @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
+    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
     @Column(name = "hospital_id",nullable = false)
     private int hospital_id;
