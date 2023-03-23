@@ -1,18 +1,22 @@
 package com.hospital.hospital_app.entity;
 
-import org.hibernate.annotations.ManyToAny;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.resource.beans.internal.FallbackBeanInstanceProducer;
-import org.springframework.format.annotation.NumberFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -31,6 +35,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "MedicalPractitioner")
 public class MedicalPractitioner {
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 
     @Column(nullable = false)
     @NonNull
@@ -132,9 +140,12 @@ public class MedicalPractitioner {
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hid", referencedColumnName = "hospital_id")
-    private CentralHospital ch;
+    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
+    private CentralHospital ch1;
 
+    
+    
+    
 
 
 }

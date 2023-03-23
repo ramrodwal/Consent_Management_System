@@ -2,12 +2,22 @@ package com.hospital.hospital_app.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,44 +32,43 @@ import lombok.Setter;
 
 public class MedicalRecords {
 
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "practitioner aadhar number can not be empty")
-    private String practioner_aadhar;
 
-    @Id
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "Hospital id can not be empty")
-    private int hospital_id;
+    //hospital_id is foreign key refrencing centralhospital hospital_id with on delete cascade 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
+    private CentralHospital ch2;
 
-    @Column(nullable = false)
+    //doctor_id is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "doctor_id", referencedColumnName = "practioner_aadhar")
+    private MedicalPractitioner medicalPractitioner;
+
+
+    @Column(nullable = false, name = "patient_id",unique = true)
+    @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
     @NonNull
     @NotBlank(message = "patient aadhar number can not be empty")
     private String patient_aadhar;
 
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "record id can not be empty")
+    @Id 
+    @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
+    @GenericGenerator( name = "native", strategy = "native" )
+    @Column(name = "record_id",nullable = false)
     private int record_id;
 
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "disease id can not be empty")
-    private int disease_id;
-
+    
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "disease name can not be empty")
     private String disease_name;
 
+    //yaha file ka dekhna hai
     @Column(nullable = false)
     @NonNull
     @NotBlank(message = "patient record can not be empty")
     private String record;
 
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "date time  can not be empty")
-    private LocalDate date; 
+   
 }
