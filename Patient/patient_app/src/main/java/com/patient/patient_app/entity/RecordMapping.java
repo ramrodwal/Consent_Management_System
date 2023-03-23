@@ -39,10 +39,10 @@ public class RecordMapping {
     @NotNull
     private int hospital_id;
 
-    //patient_Id is foreign key refrencing patien's patient_aadhar with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "patient_Id", referencedColumnName = "patient_aadhar")
+    @JoinColumn(name = "patient_id", referencedColumnName = "patient_aadhar")
     private Patient patient;
+
 
 }
