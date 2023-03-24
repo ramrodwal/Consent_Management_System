@@ -2,12 +2,19 @@ package com.hospital.hospital_app.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.repository.HospitalRepository;
 
+// @Component
+@Service
 public class HospitalService {
 
-    HospitalRepository hospitalRepository=new HospitalRepository();
+    @Autowired
+    HospitalRepository hospitalRepository;
+
     public int checkAdminCred(Admin admin){
 
         int status=0;
