@@ -82,8 +82,8 @@ function App() {
     <div className="App">
       <Router>
       <Routes>
-      <Route exact path={"/"} element={<Home />}></Route> 
-        <Route exact path={"/Login.js"} element={<LoginPage />}></Route>
+      {/* <Route exact path={"/"} element={<Home />}></Route>  */}
+        <Route exact path={"/"} element={<LoginPage />}></Route>
         <Route exact path={"/ForgotPassword.js"} element={<ForgotPass />}></Route>
         <Route exact path={"/SignUp.js"} element={<SignUpPage />}></Route>
         <Route exact path={"/PatientDashboard.js"} element={<PatientDash/>}></Route>

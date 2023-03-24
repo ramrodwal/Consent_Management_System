@@ -1,9 +1,11 @@
-import React from 'react'
-import { PrimaryNav, MenuLink, Menu, Hamburger } from './NavElement'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 const PatientNavbar = () => {
   return (
     <>
-      <PrimaryNav>
+      {/* <PrimaryNav>
         <Hamburger />
         <Menu>
           <MenuLink to="/Profile.js" activeStyle>
@@ -16,7 +18,17 @@ const PatientNavbar = () => {
             Appointments
           </MenuLink>
         </Menu>
-      </PrimaryNav>
+      </PrimaryNav> */}
+     <Navbar className='patientnavbar' variant="dark">
+        <Container>
+          <Navbar.Brand href="#home" >Consent Management Portal</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home"></Nav.Link>
+            <Nav.Link href="#features"></Nav.Link>
+            <Nav.Link href="#pricing">Logout </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
     </>
   )
 }

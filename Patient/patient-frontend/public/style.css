@@ -32,6 +32,24 @@ header h1 {
   border: none;
 
 }
+.patientnavbar{
+  background-color: #05242f;
+}
+.navbartext{
+  color: white;
+}
+.patientcard{
+  padding-top: 100px;
+}
+.patientdashboard{
+  padding-top: 20px;
+  text-align: center;
+}
+.patientdashboardcard{
+  padding-right: 10px;
+  width: 180px;
+  height: 200px;
+}
 .loginas{
   padding: 2%;
   text-align: center;
