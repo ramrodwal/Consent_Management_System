@@ -10,6 +10,8 @@ import AdminLogin from './AdminLogin';
 import AdminPostLogin from './AdminPostLogin';
 import HospitalList from './HospitalList';
 import RegisterNewDoctor from './RegisterNewDoctor';
+import RegisterNewHospital from './RegisterNewHospital';
+import DoctorList from './DoctorList';
 
 function HospHome(){
   return(
@@ -67,6 +69,20 @@ function RegNewDoc(){
   );
 }
 
+function RegNewHosp(){
+  return(
+    <>
+      <RegisterNewHospital/>
+    </>
+  )
+}
+
+function DocList(){
+  <>
+    <DoctorList/>
+  </>
+}
+
 function App() {
   return (
     <div className="App">
@@ -81,6 +97,8 @@ function App() {
         <Route exact path={"/AdminPostLogin"} element={<AdmPostLog/>}></Route>
         <Route exact path={"/HospitalList"} element={<HospList/>}></Route>
         <Route exact path={"/RegisterNewDoctor"} element={<RegNewDoc/>}></Route>
+        <Route exact path={"/DoctorList"} element={<DocList/>}></Route>
+        <Route exact path={"/RegisterNewHospital"} element={<RegNewHosp/>}></Route>
 
         </Routes>
       </Router>           
