@@ -46,9 +46,11 @@ return(
 <Container>
 
     <Container className='topCentre'>
+        <center>
     <Card className='toplogo'>
       <Card.Img src="https://cdn-icons-png.flaticon.com/512/3891/3891530.png" />
   </Card>
+  </center>
     </Container>
   
   <h1 class="forgotpass">Doctors' Sign-Up:</h1>

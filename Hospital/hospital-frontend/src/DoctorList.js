@@ -3,7 +3,7 @@ import React from 'react'
 function DoctorList(){
     return(
         <>
-            <h1>Doctors, List</h1>
+            <h1>Doctors' List</h1>
         </>
     )
 }

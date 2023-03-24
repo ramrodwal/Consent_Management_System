@@ -21,7 +21,9 @@ function AdminPostLogin() {
 
 <CardGroup  className='topgroup'>
       <Card >
+        <a href='/RegisterNewHospital'>
         <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/746/746821.png" />
+        </a>
         <Card.Body>
           
           
@@ -62,7 +64,9 @@ function AdminPostLogin() {
       
       </Card>
       <Card>
+        <a href="/DoctorList">
         <Card.Img variant="top" className='Images' src="https://img.freepik.com/premium-vector/male-doctor-holding-clipboard_43633-7151.jpg?w=2000" /> 
+        </a>
         <Card.Body>
           
          
