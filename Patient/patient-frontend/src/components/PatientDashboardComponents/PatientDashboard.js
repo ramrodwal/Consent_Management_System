@@ -3,12 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Container from 'react-bootstrap/Container';
 
 function PatientDashboard(){
     return (
         <>
             <h1>Welcome Patient Name</h1>
-            <container>
+            <Container>
                 <h3>Your records</h3>
                 <br>
                 </br>
@@ -39,7 +40,7 @@ function PatientDashboard(){
       )}
 
 
-            </container>
+            </Container>
 
         </>
   );
