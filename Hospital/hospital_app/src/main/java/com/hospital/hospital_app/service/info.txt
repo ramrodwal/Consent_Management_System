@@ -1,1 +1,0 @@
-service contains business-rwelated operations. Service is also the middleman between Controller and repository

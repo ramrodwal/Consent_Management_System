@@ -1,3 +1,0 @@
-step 1- controller , service and reposiory must be in separate folder
-step 2- only reposiory can access the data store
-step 3- move every crud operatiobn into repository

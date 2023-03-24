@@ -1,2 +1,0 @@
-The repository makes crud operations on the database
-every crud operation should be inside the repository class
