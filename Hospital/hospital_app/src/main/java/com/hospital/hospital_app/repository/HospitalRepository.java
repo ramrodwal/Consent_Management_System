@@ -3,8 +3,12 @@ package com.hospital.hospital_app.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.hospital.hospital_app.entity.Admin;
 
+// @Component
+@Repository
 public class HospitalRepository {
     
     

@@ -1,8 +1,10 @@
 package com.hospital.hospital_app.web;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +18,13 @@ import com.hospital.hospital_app.service.HospitalService;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/hospital")
+@Component
 public class HospitalController {
 
-    
-    HospitalService hospitalService=new HospitalService();
+    //this is tight coupling (not recommended, makes unit testing impossible), will do loose coupling 
+    //solution in dependency injection
+    @Autowired
+    HospitalService hospitalService;
     
     //admin login authentication check
     @PostMapping("/admin-login")
