@@ -13,7 +13,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 function AdminPostLogin() {
     return(
         <>
-        <center><h1>Admin Post Login</h1></center>
+        <center><h1>Welcome Admin</h1></center>
         
             <Container>
                 
@@ -32,7 +32,9 @@ function AdminPostLogin() {
         
       </Card>
       <Card>
+        <a href='/RegisterNewDoctor'>
         <Card.Img variant="top" className='Images' src="https://img.freepik.com/premium-vector/doctor-nurse-with-patient-files_1639-36846.jpg?w=2000" />
+        </a>
         <Card.Body>
           
           
