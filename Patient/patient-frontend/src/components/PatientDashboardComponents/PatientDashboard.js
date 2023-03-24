@@ -3,14 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/esm/Container";
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import { IconName } from "react-icons/fa";
 
 function PatientDashboard(){
     return (
         <>
-            <h1>Welcome Patient Name</h1>
-            <Container>
-                <h3>Your records</h3>
+        <Container>
+            <h1 className="patientdashboard">Welcome!</h1>
+            
+                {/* <h3>Your records</h3>
                 <br>
                 </br>
                 Sugar Reports{' '}
@@ -37,7 +41,39 @@ function PatientDashboard(){
             <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
           </DropdownButton>
         ),
-      )}
+      )} */}
+
+<CardGroup className="patientcard">
+      <Card >
+        <a className="patientdashboardcard">
+        <Card.Img variant="top" src="/consent.png"  />
+        </a>
+        <Card.Body>
+          <Card.Title>View All Requests</Card.Title>
+        </Card.Body>
+       
+      </Card>
+      <Card >
+        <a className="patientdashboardcard">
+        <Card.Img variant="top" src="/profile.png" />
+        </a>
+        <Card.Body>
+          <Card.Title>View/Update Profile</Card.Title>
+         
+        </Card.Body>
+        
+      </Card>
+      <Card >
+        <a className="patientdashboardcard">
+        <Card.Img variant="top" src="/records.jpg" />
+        </a>
+        <Card.Body>
+          <Card.Title>View Records</Card.Title>
+       
+        </Card.Body>
+       
+      </Card>
+    </CardGroup>
 
 
             </Container>

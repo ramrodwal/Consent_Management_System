@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import OtpInput from 'react-otp-input';
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
