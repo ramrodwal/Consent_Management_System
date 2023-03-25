@@ -13,6 +13,7 @@ import RegisterNewDoctor from './RegisterNewDoctor';
 import RegisterNewHospital from './RegisterNewHospital';
 import DoctorList from './DoctorList';
 
+
 function HospHome(){
   return(
       <>

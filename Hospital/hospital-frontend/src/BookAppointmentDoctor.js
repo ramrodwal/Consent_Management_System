@@ -4,6 +4,7 @@ function BookAppointmentDoctor(){
     return(
         <>
             Book Appointment
+            
         </>
     );
 }
