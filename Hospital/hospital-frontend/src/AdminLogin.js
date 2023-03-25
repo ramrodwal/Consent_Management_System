@@ -6,9 +6,15 @@ function AdminLogin(){
     return(
         <>
 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-      <Navbar.Brand href="/HospitalHome">Hospital Home</Navbar.Brand>
+      <Navbar.Brand href="/HospitalHome"><img
+              alt=""
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJGgyT3J650KbeCUJAxvyYv7xwkd_5F1i108zeySI&s"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}Hospital Home</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
@@ -47,9 +53,11 @@ function AdminLogin(){
             />
           </div>
           <div className="d-grid gap-2 mt-3">
+            
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
+            
           </div>
           
         </div>

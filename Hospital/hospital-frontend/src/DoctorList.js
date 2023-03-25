@@ -12,7 +12,13 @@ function DoctorList(){
 
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-      <Navbar.Brand href="/AdminPostLogin">Admin</Navbar.Brand>
+      <Navbar.Brand href="/AdminPostLogin"><img
+              alt=""
+              src="https://cdn.imgbin.com/21/4/22/imgbin-computer-icons-login-user-system-administrator-admin-L1LTfM47FsD3A2gus0rdy8WpJ.jpg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}Admin</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
