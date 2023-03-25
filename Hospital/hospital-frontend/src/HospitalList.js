@@ -15,23 +15,29 @@ function HospitalList(){
 
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-        <Navbar.Brand href="/AdminPostLogin">Admin</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
-            <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
-            <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
-            
-          </Nav>
-          <Nav>
-            <Nav.Link href="/HospitalHome">Logout</Nav.Link>
-           
-          </Nav>
-        </Navbar.Collapse>
-      
-    </Navbar>
+      <Navbar.Brand href="/AdminPostLogin"><img
+              alt=""
+              src="https://cdn.imgbin.com/21/4/22/imgbin-computer-icons-login-user-system-administrator-admin-L1LTfM47FsD3A2gus0rdy8WpJ.jpg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}Admin</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
+          <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
+          <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
+          <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
+          
+        </Nav>
+        <Nav>
+          <Nav.Link href="/HospitalHome">Logout</Nav.Link>
+         
+        </Nav>
+      </Navbar.Collapse>
+    
+  </Navbar>
 
 
             <center><h1>Hospital List</h1></center>
