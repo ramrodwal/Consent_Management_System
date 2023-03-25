@@ -3,12 +3,9 @@ import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Dropdown from 'react-bootstrap/Dropdown';
 import "./HospitalComponents/HospitalStyle.css"
 
 import { useState } from 'react';
-import Col from 'react-bootstrap/Col';
 import axios from "axios";
 
 function RegisterNewHospital(){

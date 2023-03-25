@@ -78,9 +78,11 @@ function RegNewHosp(){
 }
 
 function DocList(){
-  <>
-    <DoctorList/>
-  </>
+  return(
+    <>
+      <DoctorList/>
+    </>
+  )
 }
 
 function App() {
