@@ -1,35 +1,60 @@
 import React from 'react';
-import Container from "react-bootstrap/esm/Container";
-import Card from "react-bootstrap/Card";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 function AdminLogin(){
     return(
         <>
-            Admin Login
-            <Container>
-          <Card>
-                <Card.Img class="logo" src="logo.png" />
-                </Card>
-                <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="text" placeholder="Username" />
-        
-      </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+      <Navbar.Brand href="/HospitalHome">Hospital Home</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/BookAppointmentDoctor">Book Appointment</Nav.Link>
+          <Nav.Link href="/DoctorLogin">Doctors' Login</Nav.Link>
+          <Nav.Link href="/AdminLogin">Admin Login</Nav.Link>
+          
+          
+        </Nav>
+        
+      </Navbar.Collapse>
+    
+  </Navbar>
+            <div className='pageheading'>
+            <center><h1>Admin Login</h1></center>
+            </div>
 
-        </Container>
+            <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Login</h3>
+          <div className="form-group mt-3">
+            <label>Username</label>
+            <input
+              type="text"
+              className="form-control mt-1"
+              placeholder="Enter Username"
+            />
+          </div>
+          <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Enter password"
+            />
+          </div>
+          <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+          
+        </div>
+      </form>
+    </div>
         </>
     );
 }
