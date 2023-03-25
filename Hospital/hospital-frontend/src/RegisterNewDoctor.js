@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import "./HospitalComponents/HospitalStyle.css"
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 import { useState } from 'react';
 import axios from "axios";
@@ -40,7 +42,27 @@ function RegisterNewDoctor(){
 
   // const handleChange = (otp) => this.setState({ otp });
 return(
+    <>
+
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      
+      <Navbar.Brand href="/AdminPostLogin">Admin</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
+          <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
+          <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
+          <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
+          
+        </Nav>
+        <Nav>
+          <Nav.Link href="/HospitalHome">Logout</Nav.Link>
+         
+        </Nav>
+      </Navbar.Collapse>
     
+  </Navbar>
 <Container>
 
     <Container className='topCentre'>
@@ -137,9 +159,17 @@ return(
  
     
 
+      <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Qualification</Form.Label>
+  <Form.Control type="text" placeholder="Qualification" value={aadhar}  onChange={(event) => setAadhar(event.target.value)}/>
+  </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Aadhar Number</Form.Label>
   <Form.Control type="text" placeholder="Enter Aadhar Card Number" value={aadhar}  onChange={(event) => setAadhar(event.target.value)}/>
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Hospital Id</Form.Label>
+  <Form.Control type="text" placeholder="Hospital Id" value={aadhar}  onChange={(event) => setAadhar(event.target.value)}/>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicPassword">
   <Form.Label>Password</Form.Label>
@@ -155,6 +185,7 @@ return(
 </Form>
 
 </Container>
+</>
 );
 
 }
