@@ -14,7 +14,7 @@ import Table from 'react-bootstrap/Table'
 function HospitalList(){
     
     return(
-        <Container>
+        <>
             <center><h1>Hospital List</h1></center>
 
             <Table stripped bordered hover variant="dark" size="sm">
@@ -78,7 +78,7 @@ function HospitalList(){
     </tr>
   </tbody>
 </Table>
-  </Container> 
+  </> 
     );
 }
 
