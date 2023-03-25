@@ -28,12 +28,13 @@ function SignUp(){
           const [aadhar, setAadhar] = useState('');
           const [password, setPassword] = useState('');
           const [confirmPassword, setConfirmPassword] = useState('');
+          const [gender,setGender]=useState('');
 
           const handleSubmit = (event) => {
             event.preventDefault();
             const patient = { fname: fname, mname: mname , lname: lname, age: age,email:email, username:username, phone:phone, address:address, state: state, city:city, zip:zip, 
             aadhar:aadhar, password:password, confirmPassword:confirmPassword };
-            axios.post('http://localhost:9090/api/patients', patient)
+            axios.post('http://localhost:8765/patient/register', patient)
                 .then(response => console.log(response))
                 .catch(error => console.log(error));
         }
@@ -60,10 +61,14 @@ function SignUp(){
         <Form.Label>Last Name</Form.Label>
         <Form.Control type="text" placeholder="Enter Last Name" value={lname}  onChange={(event) => setLname(event.target.value)}/> 
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicText" >
+        <Form.Label>Gender</Form.Label>
+        <Form.Control type="text" placeholder="Enter your gender" value={gender}  onChange={(event) => setGender(event.target.value)}/>
+        </Form.Group>
         <Row id="shiftright">
         <Form.Group className="mb-3" controlId="formBasicText" id="formsamerow">
         <Form.Label>Age</Form.Label>
-        <Form.Control type="text" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
+        <Form.Control type="number" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
         </Form.Group>
 
 
@@ -109,7 +114,7 @@ function SignUp(){
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Zip Code</Form.Label>
-        <Form.Control type="text" placeholder="Enter Zip Code" value={zip}  onChange={(event) => setZip(event.target.value)}/>
+        <Form.Control type="number" placeholder="Enter Zip Code" value={zip}  onChange={(event) => setZip(event.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Aadhar Number</Form.Label>
