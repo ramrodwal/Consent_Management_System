@@ -4,6 +4,8 @@ import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 import { useState } from 'react';
 import axios from "axios";
@@ -36,7 +38,26 @@ function RegisterNewHospital(){
   }
 
     return(
-        
+        <>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      
+      <Navbar.Brand href="/AdminPostLogin">Admin</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
+          <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
+          <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
+          <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
+          
+        </Nav>
+        <Nav>
+          <Nav.Link href="/HospitalHome">Logout</Nav.Link>
+         
+        </Nav>
+      </Navbar.Collapse>
+    
+  </Navbar>
         
         <Container>
                 <h1>Register New Hospital:</h1>
@@ -84,6 +105,7 @@ function RegisterNewHospital(){
 </Form>
 
 </Container>
+</>
 
     )
 }
