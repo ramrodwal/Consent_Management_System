@@ -13,6 +13,7 @@ import RegisterNewDoctor from './RegisterNewDoctor';
 import RegisterNewHospital from './RegisterNewHospital';
 import DoctorList from './DoctorList';
 import DoctorDashboard from './DoctorDashboard';
+import AddMedicalRecords from './AddMedicalRecords';
 
 function HospHome(){
   return(
@@ -95,6 +96,14 @@ function DocDash(){
   )
 }
 
+function AddMedRec(){
+  return(
+    <>
+      <AddMedicalRecords/>
+    </>
+  )
+}
+
 function App() {
   return (
     <div className="App">
@@ -112,6 +121,7 @@ function App() {
         <Route exact path={"/DoctorList"} element={<DocList/>}></Route>
         <Route exact path={"/RegisterNewHospital"} element={<RegNewHosp/>}></Route>
         <Route exact path={"/DoctorDashboard"} element={<DocDash/>}></Route>
+        <Route exact path={"/AddMedicalRecords"} element={<AddMedRec/>}></Route>
 
         </Routes>
       </Router>           
