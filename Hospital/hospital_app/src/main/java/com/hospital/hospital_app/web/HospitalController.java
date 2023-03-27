@@ -14,6 +14,8 @@ import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.CentralHospital;
 import com.hospital.hospital_app.service.HospitalService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/hospital")
@@ -33,7 +35,7 @@ public class HospitalController {
 
     //hospital registratrion 
     @PostMapping("/admin-login/register-hospital")
-    public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
+    public ResponseEntity<CentralHospital> hospitalRegistration( @Valid @RequestBody CentralHospital central_hospital){
         System.out.println(central_hospital.getHospital_name());
         return new ResponseEntity<CentralHospital>(hospitalService.registerHospital(central_hospital), HttpStatus.CREATED);
     }
