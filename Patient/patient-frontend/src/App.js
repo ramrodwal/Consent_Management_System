@@ -13,6 +13,7 @@ import Profile from './components/PatientDashboardComponents/Profile';
 import Appointments from './components/PatientDashboardComponents/Appointments';
 // import VerifyOTP from './components/VerifyOTP';
 import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-dom";
+import AllRequest from './AllRequest';
 
 function Home(){
   return (
@@ -77,6 +78,14 @@ function Appoin(){
     </>
   );
 }
+
+function AllReq(){
+  return(
+    <>
+    <AllRequest/>
+    </>
+  )
+}
 function App() {
   return (
     <div className="App">
@@ -89,8 +98,9 @@ function App() {
         <Route exact path={"/PatientDashboard.js"} element={<PatientDash/>}></Route>
         <Route exact path={"/Notification.js"} element={<Notifi />}></Route>
         <Route exact path={"/Profile.js"} element={<Prof />}></Route>
-        <Route exact path={"/Appointments.js"} element={<Appoin/>}></Route>
-        {/* <Route exact path={"/VerifyOTP.js"} element={<VerifyOTP/>}></Route> */}
+        <Route exact path={"/AllRequest.js"} element={<AllReq/>}></Route>
+
+          {/* <Route exact path={"/VerifyOTP.js"} element={<VerifyOTP/>}></Route> */}
         {/* <Route exact path={"/PatientDetails.js"} element={<PatientDet />}></Route> */}
       </Routes>
       </Router>

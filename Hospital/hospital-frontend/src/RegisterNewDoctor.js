@@ -69,7 +69,7 @@ return(
           
         </Nav>
         <Nav>
-          <Nav.Link href="/HospitalHome">Logout</Nav.Link>
+          <Nav.Link href="/">Logout</Nav.Link>
          
         </Nav>
       </Navbar.Collapse>

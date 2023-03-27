@@ -6,6 +6,8 @@ package com.consentmanager.cm_app.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.micrometer.common.lang.NonNull;
@@ -41,36 +43,28 @@ public class ConsentManager {
     @Id
     @Column(name = "consent_id",nullable = false)
     @NonNull
-    // @NotBlank(message = "Consent id cannot be blank")
     private int consent_id;
 
     @Column(name = "hospital_id",nullable = false)
     @NonNull
-    // @NotBlank(message = "Hospital id cannot be blank")
     private int hospital_id;
 
     
-    @Column(name = "practitioner_aadhar",nullable = false)
-    @NonNull
+    @Column(name = "practitioner_aadhar")
     @NotBlank(message = "practitioner aadhar cannot be blank")
-    private String practioner_aadhar;
+    private String practitioner_aadhar;
 
     
-    @Column(name = "patient_aadhar",nullable = false)
-    @NonNull
+    @Column(name = "patient_aadhar")
     @NotBlank(message = "Patient aadhar can not be empty")
     private String patient_aadhar;
 
     
-    @Column(name = "disease_name",nullable = false)
-    @NonNull
+    @Column(name = "disease_name")
     @NotBlank(message = "disease name cannot be blank")
     private String disease_name;
 
 
-    @Column(name = "status",nullable = false)
-    @NonNull
-    @NotBlank(message = "status cannot be blank")
-    // @Value("pending")
+    @Column(name = "status")
     private String status="pending";
 }
