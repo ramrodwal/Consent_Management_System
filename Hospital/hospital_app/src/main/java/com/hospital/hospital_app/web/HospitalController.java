@@ -36,7 +36,7 @@ public class HospitalController {
     @PostMapping("/admin-login/register-hospital")
     public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
         System.out.println(central_hospital.getHospital_name());
-        return new ResponseEntity<CentralHospital>(central_hospital, null);
+        return new ResponseEntity<CentralHospital>(hospitalService.registerHospital(central_hospital), HttpStatus.CREATED);
     }
 
 }

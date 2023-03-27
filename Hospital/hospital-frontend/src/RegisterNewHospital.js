@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from 'react-router-dom'
 
 import { useState } from 'react';
 import axios from "axios";
@@ -68,7 +69,7 @@ function RegisterNewHospital(){
     </Container>
   
   
-  <Form>
+  <Form onClick={handleSubmit}>
 
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)} />
@@ -101,10 +102,12 @@ function RegisterNewHospital(){
   <Form.Label>Zip Code</Form.Label>
   <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode}  onChange={(event) => setZipcode(event.target.value)}/>
   </Form.Group>
-
-  <Button variant="primary" type="submit" href='/AdminPostLogin' onClick={handleSubmit} >
+<Link to='/AdminPostLogin'>
+  <Button variant="primary"  type="submit"  >
     Submit
   </Button>
+  </Link>
+
 </Form>
 
 </Container>
