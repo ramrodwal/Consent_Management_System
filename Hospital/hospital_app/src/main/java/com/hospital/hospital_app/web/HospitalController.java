@@ -42,6 +42,6 @@ public class HospitalController {
     //hospital registratrion 
     @PostMapping("/admin-login/register-hospital")
     public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
-        return new ResponseEntity<CentralHospital>(central_hospital, null);
+        return new ResponseEntity<CentralHospital>(HttpStatus.CREATED);
     }
 }
