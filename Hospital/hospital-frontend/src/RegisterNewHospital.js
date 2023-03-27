@@ -74,6 +74,7 @@ function RegisterNewHospital(){
   <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)}/>
   </Form.Group>
     
+  
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Hospital Name</Form.Label>
   <Form.Control type="text" placeholder="Hospital Name" value={hospital_name}  onChange={(event) => setHospitalName(event.target.value)}/>
