@@ -12,7 +12,7 @@ import HospitalList from './HospitalList';
 import RegisterNewDoctor from './RegisterNewDoctor';
 import RegisterNewHospital from './RegisterNewHospital';
 import DoctorList from './DoctorList';
-
+import DoctorDashboard from './DoctorDashboard';
 
 function HospHome(){
   return(
@@ -86,6 +86,15 @@ function DocList(){
   )
 }
 
+
+function DocDash(){
+  return(
+    <>
+      <DoctorDashboard/>
+    </>
+  )
+}
+
 function App() {
   return (
     <div className="App">
@@ -93,7 +102,7 @@ function App() {
       <Routes>
         {/* <Route exact path="*" element={<Redirect to="/"/>}></Route> */}
          
-        <Route exact path={"/HospitalHome"} element={<HospHome/>}></Route>
+        <Route exact path={"/"} element={<HospHome/>}></Route>
         <Route exact path={"/BookAppointmentDoctor"} element={<BookAppointmentDoc/>}></Route>
         <Route exact path={"/DoctorLogin"} element={<DocLogin/>}></Route>
         <Route exact path={"/AdminLogin"} element={<AdminLog/>}></Route>
@@ -102,6 +111,7 @@ function App() {
         <Route exact path={"/RegisterNewDoctor"} element={<RegNewDoc/>}></Route>
         <Route exact path={"/DoctorList"} element={<DocList/>}></Route>
         <Route exact path={"/RegisterNewHospital"} element={<RegNewHosp/>}></Route>
+        <Route exact path={"/DoctorDashboard"} element={<DocDash/>}></Route>
 
         </Routes>
       </Router>           
