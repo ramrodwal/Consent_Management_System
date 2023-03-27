@@ -75,36 +75,30 @@ public class Patient {
 
     @Column(nullable = false)
     @NotNull
-    @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
     private long zipcode;
 
     @Column(nullable = false)
     @NotBlank(message = "please enter a address")
-    @NotNull
     private String address;
 
     @Id
     @Column(nullable = false, unique = true)
     @NotBlank
-    @NotNull
     @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
     private String patient_aadhar;
 
     @Column(nullable = false, unique = true)
     @NotBlank
-    @NotNull
     private String username;
 
     @Column(nullable = false)
     @Size(min = 6)
     @NotBlank
-    @NotNull
     private String password;
 
     @Column(nullable = false)
     @Size(min = 6)
     @NotBlank
-    @NotNull
     private String confirmPassword;  
 
 

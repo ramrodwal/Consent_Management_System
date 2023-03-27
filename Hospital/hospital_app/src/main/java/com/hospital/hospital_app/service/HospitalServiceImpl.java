@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-
 public class HospitalServiceImpl implements HospitalService {
 
     private HospitalRepository hospitalRepository;

@@ -13,19 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.patient.patient_app.entity.Patient;
 import com.patient.patient_app.service.PatientService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/patient")
-@Component
 public class PatientController {
 
     @Autowired
     PatientService patientService;
 
     @PostMapping("/register")
-    public ResponseEntity<Patient> savePatient(@RequestBody Patient patient){
-        
-        return new ResponseEntity<>(patientService.savPatient(patient),HttpStatus.CREATED);
+    public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
+        System.out.println(patient.getGender());
+        return new ResponseEntity<>(patientService.registerPatient(patient), HttpStatus.CREATED);
     }
 
     
