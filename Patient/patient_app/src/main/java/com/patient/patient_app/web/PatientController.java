@@ -1,5 +1,7 @@
 package com.patient.patient_app.web;
 
+import java.net.ResponseCache;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +40,7 @@ public class PatientController {
         return new ResponseEntity<>(patientService.getPatient(patient_aadhar), HttpStatus.OK);
 
     }
+
+    
     
 }
