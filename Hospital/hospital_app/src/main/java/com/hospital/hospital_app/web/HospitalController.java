@@ -1,6 +1,8 @@
 package com.hospital.hospital_app.web;
 
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.CentralHospital;
 import com.hospital.hospital_app.service.HospitalService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -30,18 +34,13 @@ public class HospitalController {
     @PostMapping("/admin-login")
     public ResponseEntity<Admin> adminLogin(@RequestBody Admin admin){
 
-        int status=hospitalService.checkAdminCred(admin);
-        if(status==2){
-            return new ResponseEntity<>(admin, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(admin, HttpStatus.BAD_REQUEST); 
-        }
+        return new ResponseEntity<Admin>(admin, null);
     }
 
     //hospital registratrion 
     @PostMapping("/admin-login/register-hospital")
     public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
-        return new ResponseEntity<CentralHospital>(HttpStatus.CREATED);
+        return new ResponseEntity<CentralHospital>(central_hospital, null);
     }
+
 }
