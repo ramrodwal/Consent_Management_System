@@ -19,6 +19,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -81,6 +82,7 @@ public class CentralHospital {
     @Column(nullable = false)
     @NonNull
     // @NotBlank(message = "zipcode can not be blank")
+    //not blank can not be used with numbers
     private long zipcode;
     
 }
