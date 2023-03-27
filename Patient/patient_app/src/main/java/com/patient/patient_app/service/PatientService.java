@@ -6,5 +6,6 @@ public interface PatientService {
 
     Patient registerPatient(Patient patient);
     Patient getPatient(String patient_aadhar);
+    Patient updateProfile(Patient patient);
     
 }
