@@ -41,12 +41,12 @@ public class ConsentManager {
     @Id
     @Column(name = "consent_id",nullable = false)
     @NonNull
-    @NotBlank(message = "Consent id cannot be blank")
+    // @NotBlank(message = "Consent id cannot be blank")
     private int consent_id;
 
     @Column(name = "hospital_id",nullable = false)
     @NonNull
-    @NotBlank(message = "Hospital id cannot be blank")
+    // @NotBlank(message = "Hospital id cannot be blank")
     private int hospital_id;
 
     
