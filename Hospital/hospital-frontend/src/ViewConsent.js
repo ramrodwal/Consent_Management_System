@@ -11,6 +11,32 @@ import Table from 'react-bootstrap/Table'
 function ViewConsent(){
 return(
     <>
+
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      
+      
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto">
+          
+          <Nav.Link href="/ConsentRequest">Request Consent</Nav.Link>
+          
+        </Nav>
+        <Nav className="me-auto">
+          
+          <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
+          
+        </Nav>
+        <Nav pullRight>
+          <Nav.Link href="/HospitalHome" >Logout</Nav.Link>
+         
+        </Nav>
+
+      
+
+      </Navbar.Collapse>
+    
+  </Navbar>
     
     <center><h1 className='pageheading'>Consent List</h1></center>
 

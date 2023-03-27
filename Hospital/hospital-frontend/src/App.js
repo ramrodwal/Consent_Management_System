@@ -15,6 +15,7 @@ import DoctorList from './DoctorList';
 import DoctorDashboard from './DoctorDashboard';
 import AddMedicalRecords from './AddMedicalRecords';
 import ViewConsent from './ViewConsent';
+import ConsentRequest from './ConsentRequest';
 
 function HospHome(){
   return(
@@ -113,6 +114,14 @@ function ViewCon(){
   )
 }
 
+function ConsentReq(){
+  return(
+    <>
+      <ConsentRequest/>
+    </>
+  )
+}
+
 function App() {
   return (
     <div className="App">
@@ -132,6 +141,8 @@ function App() {
         <Route exact path={"/DoctorDashboard"} element={<DocDash/>}></Route>
         <Route exact path={"/AddMedicalRecords"} element={<AddMedRec/>}></Route>
         <Route exact path={"/ViewConsent"} element={<ViewCon/>}></Route>
+        <Route exact path={"/ConsentRequest"} element={<ConsentReq/>}></Route>
+
 
 
         </Routes>

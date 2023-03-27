@@ -14,6 +14,11 @@ return(
       
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto">
+          
+          <Nav.Link href="/ViewConsent">Request Consent</Nav.Link>
+          
+        </Nav>
         <Nav className="me-auto">
           
           <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
