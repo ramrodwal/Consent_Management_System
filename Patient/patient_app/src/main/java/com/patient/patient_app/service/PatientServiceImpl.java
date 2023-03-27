@@ -2,6 +2,7 @@ package com.patient.patient_app.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.patient.patient_app.entity.Patient;
@@ -36,8 +37,16 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient updateProfile(Patient patient) {
-        return patientsRepository.save(patient);
+    public Patient updateProfile(Patient updatedPatient) {
+
+        Optional<Patient> patientOptional = patientsRepository.findById(updatedPatient.getPatient_aadhar());
+        if (!patientOptional.isPresent()) {
+            return null;
+        }
+
+        Patient existingPatient = patientOptional.get();
+        BeanUtils.copyProperties(updatedPatient, existingPatient, "patient_aadhar");
+        return patientsRepository.save(existingPatient);
     }
     
 }

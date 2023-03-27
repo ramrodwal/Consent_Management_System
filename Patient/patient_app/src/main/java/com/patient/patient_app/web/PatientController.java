@@ -48,23 +48,24 @@ public class PatientController {
             return ResponseEntity.notFound().build();
         }
 
-    existingPatient.setFname(updatedPatient.getFname());
-    existingPatient.setMname(updatedPatient.getMname());
-    existingPatient.setLname(updatedPatient.getLname());
-    existingPatient.setAge(updatedPatient.getAge());
-    existingPatient.setGender(updatedPatient.getGender());
-    existingPatient.setEmail(updatedPatient.getEmail());
-    existingPatient.setContactNo(updatedPatient.getContactNo());
-    existingPatient.setState(updatedPatient.getState());
-    existingPatient.setCity(updatedPatient.getCity());
-    existingPatient.setZipcode(updatedPatient.getZipcode());
-    existingPatient.setAddress(updatedPatient.getAddress());
-    existingPatient.setUsername(updatedPatient.getUsername());
-    existingPatient.setPassword(updatedPatient.getPassword());
-    existingPatient.setConfirmPassword(updatedPatient.getConfirmPassword());
+    // existingPatient.setFname(updatedPatient.getFname());
+    // existingPatient.setMname(updatedPatient.getMname());
+    // existingPatient.setLname(updatedPatient.getLname());
+    // existingPatient.setAge(updatedPatient.getAge());
+    // existingPatient.setGender(updatedPatient.getGender());
+    // existingPatient.setEmail(updatedPatient.getEmail());
+    // existingPatient.setContactNo(updatedPatient.getContactNo());
+    // existingPatient.setState(updatedPatient.getState());
+    // existingPatient.setCity(updatedPatient.getCity());
+    // existingPatient.setZipcode(updatedPatient.getZipcode());
+    // existingPatient.setAddress(updatedPatient.getAddress());
+    // existingPatient.setUsername(updatedPatient.getUsername());
+    // existingPatient.setPassword(updatedPatient.getPassword());
+    // existingPatient.setConfirmPassword(updatedPatient.getConfirmPassword());
 
-    Patient updated = patientService.updateProfile(existingPatient);
-    return ResponseEntity.ok(updated);
+    // Patient updated = patientService.updateProfile(existingPatient);
+    // return ResponseEntity.ok(updated);
+    return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.CREATED);
 
     }
 
