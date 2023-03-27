@@ -25,7 +25,7 @@ public class PatientController {
 
     @PostMapping("/register")
     public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
-        System.out.println(patient.getGender());
+        System.out.println(patient.getFname());
         return new ResponseEntity<>(patientService.registerPatient(patient), HttpStatus.CREATED);
     }
 
