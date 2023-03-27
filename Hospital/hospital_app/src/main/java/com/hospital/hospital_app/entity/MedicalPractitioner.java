@@ -106,10 +106,10 @@ public class MedicalPractitioner {
     private String confirmPassword;
 
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
-    private CentralHospital ch1;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+   // @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hid", referencedColumnName = "hospital_id")
+    private CentralHospital centralHospital;
 
 
 }

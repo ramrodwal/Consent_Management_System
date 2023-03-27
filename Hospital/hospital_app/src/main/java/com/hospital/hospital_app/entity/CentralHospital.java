@@ -33,8 +33,8 @@ import lombok.Setter;
 public class CentralHospital {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "ch1" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalPractitioner> mp1=new ArrayList<>();
+    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalPractitioner> mp1;
 
     @JsonIgnore
     @OneToMany(mappedBy = "ch2" , cascade = CascadeType.ALL, orphanRemoval = true)
