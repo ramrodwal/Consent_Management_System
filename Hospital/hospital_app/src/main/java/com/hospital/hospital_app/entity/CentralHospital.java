@@ -77,10 +77,10 @@ public class CentralHospital {
     @NotBlank(message = "address can not be empty")
     private String address;
 
-    @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
+    // @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
     @Column(nullable = false)
     @NonNull
-    @NotBlank(message = "zipcode can not be blank")
+    // @NotBlank(message = "zipcode can not be blank")
     private long zipcode;
     
 }

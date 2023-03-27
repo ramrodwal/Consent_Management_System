@@ -26,7 +26,7 @@ function RegisterNewHospital(){
       const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name , contactNumber: contactNumber, state: state,city:city, address:address, zipcode:zipcode};
       axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
           .then(response => console.log(response))
-          .catch(error => console.log(error));
+          .catch(error => console.log("There is an error!!"));
   }
 
     return(
@@ -68,7 +68,7 @@ function RegisterNewHospital(){
     </Container>
   
   
-  <Form onSubmit={handleSubmit}>
+  <Form>
 
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)} />
@@ -102,7 +102,7 @@ function RegisterNewHospital(){
   <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode}  onChange={(event) => setZipcode(event.target.value)}/>
   </Form.Group>
 
-  <Button variant="primary" type="submit" href='/AdminPostLogin' >
+  <Button variant="primary" type="submit" href='/AdminPostLogin' onClick={handleSubmit} >
     Submit
   </Button>
 </Form>
