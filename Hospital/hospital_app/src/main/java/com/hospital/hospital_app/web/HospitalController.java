@@ -15,6 +15,8 @@ import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.CentralHospital;
 import com.hospital.hospital_app.service.HospitalService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/hospital")
@@ -30,18 +32,14 @@ public class HospitalController {
     @PostMapping("/admin-login")
     public ResponseEntity<Admin> adminLogin(@RequestBody Admin admin){
 
-        int status=hospitalService.checkAdminCred(admin);
-        if(status==2){
-            return new ResponseEntity<>(admin, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(admin, HttpStatus.BAD_REQUEST); 
-        }
+        return new ResponseEntity<Admin>(admin, null);
     }
 
     //hospital registratrion 
     @PostMapping("/admin-login/register-hospital")
-    public ResponseEntity<CentralHospital> hospitalRegistration(@RequestBody CentralHospital central_hospital){
-        return new ResponseEntity<CentralHospital>(central_hospital, null);
+    public ResponseEntity<CentralHospital> hospitalRegistration(@Valid @RequestBody CentralHospital central_hospital){
+        hospitalService.registerHospital(central_hospital);
+        return new ResponseEntity<CentralHospital>(HttpStatus.CREATED);
     }
+
 }
