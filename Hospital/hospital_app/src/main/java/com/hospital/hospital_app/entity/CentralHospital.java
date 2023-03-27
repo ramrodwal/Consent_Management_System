@@ -19,7 +19,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,40 +48,33 @@ public class CentralHospital {
     @Id 
     @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "hospital_id",nullable = false)
     private int hospital_id;
     
-    @Column(nullable = false)
     @NonNull
     @NotBlank(message = "hospital name can not be empty")
     private String hospital_name;
 
     @Pattern(regexp="\\d{10}", message="Invalid phone number")
-    @Column(nullable = false,unique = true)
+    @Column(unique = true)
     @NonNull
     @NotBlank(message = "hospital contact number can not be empty")
     private String contactNumber;
 
-    @Column(nullable = false)
     @NonNull
     @NotBlank(message = "state can not be empty")
     private String state;
 
-    @Column(nullable = false)
     @NonNull
     @NotBlank(message = "city can not be empty")
     private String city;
 
-    @Column(nullable = false)
     @NonNull
     @NotBlank(message = "address can not be empty")
     private String address;
 
-    // @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
+
     @Column(nullable = false)
     @NonNull
-    // @NotBlank(message = "zipcode can not be blank")
-    //not blank can not be used with numbers
     private long zipcode;
     
 }
