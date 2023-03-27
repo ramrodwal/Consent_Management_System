@@ -16,7 +16,7 @@ return(
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           
-          <Nav.Link href="/DoctorList">View Consent</Nav.Link>
+          <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
           
         </Nav>
         <Nav pullRight>
