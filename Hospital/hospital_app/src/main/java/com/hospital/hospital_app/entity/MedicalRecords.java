@@ -46,27 +46,23 @@ public class MedicalRecords {
     private MedicalPractitioner medicalPractitioner;
 
 
-    @Column(nullable = false, name = "patient_id",unique = true)
-    @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
-    @NonNull
+    @Column(name = "patient_id",unique = true)
+    // @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
     @NotBlank(message = "patient aadhar number can not be empty")
     private String patient_aadhar;
 
     @Id 
     @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "record_id",nullable = false)
+    @Column(name = "record_id")
     private int record_id;
 
     
-    @Column(nullable = false)
-    @NonNull
+    
     @NotBlank(message = "disease name can not be empty")
     private String disease_name;
-
     //yaha file ka dekhna hai
-    @Column(nullable = false)
-    @NonNull
+    
     @NotBlank(message = "patient record can not be empty")
     private String record;
 
