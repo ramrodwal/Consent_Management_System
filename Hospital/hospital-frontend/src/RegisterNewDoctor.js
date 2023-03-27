@@ -90,7 +90,7 @@ return(
   </center>
     </Container>
   
-  <h1 class="forgotpass">Doctors' Sign-Up:</h1>
+  <h1 class="forgotpass">Medical Practitioner's Sign-Up:</h1>
   <Form onSubmit={handleSubmit}>
     
   <Form.Group className="mb-3" controlId="formBasicText" >
