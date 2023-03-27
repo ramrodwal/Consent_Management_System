@@ -101,3 +101,6 @@ header h1 {
 .tablehead{
   width: 5%;
 }
+.checkbox{
+  text-align: right;
+}
