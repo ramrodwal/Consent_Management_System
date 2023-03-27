@@ -105,7 +105,7 @@ return(
   <Form.Label>Age</Form.Label>
   <Form.Control type="number" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
   </Form.Group>
-  {/* <Form.Group controlId="formBasicSelect">
+  <Form.Group controlId="formBasicSelect">
         <Form.Label>Gender</Form.Label>
         <Form.Control as="select" value={gender} onChange={(event) => setGender(event.target.value)}>
           <option value="none">select</option>
@@ -113,12 +113,12 @@ return(
           <option value="Female">Female</option>
           <option value="Others">Others</option>
         </Form.Control>
-      </Form.Group> */}
+      </Form.Group>
 
-<Form.Group className="mb-3" controlId="formBasicText" >
+{/* <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Gender</Form.Label>
   <Form.Control type="text" placeholder="Gender" value={gender}  onChange={(event) => setGender(event.target.value)}/> 
-  </Form.Group>
+  </Form.Group> */}
 
 
   
