@@ -40,9 +40,9 @@ function RegisterNewDoctor(){
       event.preventDefault();
       const practitionerDetails = { fname: fname, mname: mname , lname: lname, age: age,gender:gender, email:email, username:username, number:number, state: state, city:city, address:address, 
       zipcode:zipcode, practitioner_aadhar:practitioner_aadhar, medical_license_id:medical_license_id,specialisation: specialisation,qualification: qualification,password: password,confirmPassword: confirmPassword, hospital_id:hospital_id };
-      axios.post('http://localhost:9098/hospital/admin-login/signup', practitionerDetails)
+      axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
           .then(response => console.log(response))
-          .catch(error => console.log(error));
+          .catch(error => console.log("There is an error!!"));
   }
   // state = { otp: '' };
 
@@ -108,6 +108,7 @@ return(
   <Form.Group controlId="formBasicSelect">
         <Form.Label>Gender</Form.Label>
         <Form.Control as="select" value={gender} onChange={(event) => setGender(event.target.value)}>
+          <option value="none">select</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Others">Others</option>
@@ -166,6 +167,7 @@ return(
   <Form.Group controlId="formBasicSelect">
         <Form.Label>Specialization</Form.Label>
         <Form.Control as="select" value={specialisation} onChange={(event) => setSpecialisation(event.target.value)}>
+        <option value="none">select</option>
           <option value="Neuro">Neuro</option>
           <option value="Gyna">Gyna</option>
           <option value="Uro">Uro</option>
