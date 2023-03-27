@@ -42,7 +42,7 @@ public class MedicalRecords {
     //doctor_id is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "doctor_id", referencedColumnName = "practioner_aadhar")
+    @JoinColumn(name = "doctor_id", referencedColumnName = "practitioner_aadhar")
     private MedicalPractitioner medicalPractitioner;
 
 

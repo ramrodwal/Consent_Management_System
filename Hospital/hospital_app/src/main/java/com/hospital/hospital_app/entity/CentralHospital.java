@@ -73,8 +73,7 @@ public class CentralHospital {
     private String address;
 
 
-    @Column(nullable = false)
-    @NonNull
-    private long zipcode;
+    @NotBlank(message = "zipcode can not be empty")
+    private String zipcode;
     
 }
