@@ -12,27 +12,19 @@ import axios from "axios";
 
 function RegisterNewHospital(){
 
-    const [fname, setFname ]= useState();
-    const [mname, setMname] = useState('');
-    const [lname, setLname] = useState('');
-    const [dob, setDob] = useState('');
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
+    
+    const [hospital_id, setHospitalId]=useState('');
+    const [hospital_name, setHospitalName] = useState('');
+    const [contactNumber, setContactNumber] = useState('');
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
-    const [zip, setZip] = useState('');
-    const [aadhar, setAadhar] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [gender, setGender] = useState('');
+    const [address, setAddress] = useState('');
+    const [zipcode, setZipcode] = useState('');
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      const patient = { fname: fname, mname: mname , lname: lname, dob: dob,email:email, username:username, phone:phone, address:address, state: state, city:city, zip:zip, 
-      aadhar:aadhar, password:password, confirmPassword:confirmPassword };
-      axios.post('http://localhost:9090/api/patients', patient)
+      const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name , contactNumber: contactNumber, state: state,city:city, address:address, zipcode:zipcode};
+      axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
           .then(response => console.log(response))
           .catch(error => console.log(error));
   }
@@ -77,21 +69,22 @@ function RegisterNewHospital(){
   
   
   <Form onSubmit={handleSubmit}>
+
+  <Form.Group className="mb-3" controlId="formBasicText" >
+  <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)}/>
+  </Form.Group>
     
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Hospital Name</Form.Label>
-  <Form.Control type="text" placeholder="Hospital Name" value={fname}  onChange={(event) => setFname(event.target.value)}/>
+  <Form.Control type="text" placeholder="Hospital Name" value={hospital_name}  onChange={(event) => setHospitalName(event.target.value)}/>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Contact Number</Form.Label>
-  <Form.Control type="text" placeholder="Contact Number" value={mname}  onChange={(event) => setMname(event.target.value)}/>
+  <Form.Control type="text" placeholder="Contact Number" value={contactNumber}  onChange={(event) => setContactNumber(event.target.value)}/>
   </Form.Group>
   
   
-  <Form.Group className="mb-3" controlId="formBasicText">
-  <Form.Label>Address</Form.Label>
-  <Form.Control type="text" placeholder="Enter Address" value={address}  onChange={(event) => setAddress(event.target.value)}/>
-  </Form.Group>
+  
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>State</Form.Label>
   <Form.Control type="text" placeholder="Enter State" value={state}  onChange={(event) => setState(event.target.value)}/>
@@ -101,11 +94,15 @@ function RegisterNewHospital(){
   <Form.Control type="text" placeholder="Enter City" value={city}  onChange={(event) => setCity(event.target.value)}/>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Address</Form.Label>
+  <Form.Control type="text" placeholder="Enter Address" value={address}  onChange={(event) => setAddress(event.target.value)}/>
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Zip Code</Form.Label>
-  <Form.Control type="text" placeholder="Enter Zip Code" value={zip}  onChange={(event) => setZip(event.target.value)}/>
+  <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode}  onChange={(event) => setZipcode(event.target.value)}/>
   </Form.Group>
 
-  <Button variant="primary" type="submit" >
+  <Button variant="primary" type="submit" href='/AdminPostLogin' >
     Submit
   </Button>
 </Form>
