@@ -25,7 +25,7 @@ public class PractitionerController {
     //practitioner registration
     @PostMapping("/admin-login/signup")
     public ResponseEntity<MedicalPractitioner> hospitalRegistration( @Valid @RequestBody MedicalPractitioner medicalPractitioner){
-        System.out.println(medicalPractitioner.getAddress());
+        System.out.println(medicalPractitioner.getGender());
         return new ResponseEntity<MedicalPractitioner>(practitionerService.registerPractitioner(medicalPractitioner), HttpStatus.CREATED);
     }
 }

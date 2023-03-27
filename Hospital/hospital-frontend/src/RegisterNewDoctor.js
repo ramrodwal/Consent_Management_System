@@ -38,7 +38,7 @@ function RegisterNewDoctor(){
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      const practitionerDetails = { fname: fname, mname: mname , lname: lname, age: age,gender:gender, email:email, username:username, number:number, state: state, city:city, address:address, 
+      const practitionerDetails = { fname: fname, mname: mname , lname: lname, age: age, gender: gender, email:email, username:username, number:number, state: state, city:city, address:address, 
       zipcode:zipcode, practitioner_aadhar:practitioner_aadhar, medical_license_id:medical_license_id,specialisation: specialisation,qualification: qualification,password: password,confirmPassword: confirmPassword, hospital_id:hospital_id };
       axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
           .then(response => console.log(response))
@@ -105,7 +105,7 @@ return(
   <Form.Label>Age</Form.Label>
   <Form.Control type="number" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
   </Form.Group>
-  <Form.Group controlId="formBasicSelect">
+  {/* <Form.Group controlId="formBasicSelect">
         <Form.Label>Gender</Form.Label>
         <Form.Control as="select" value={gender} onChange={(event) => setGender(event.target.value)}>
           <option value="none">select</option>
@@ -113,7 +113,12 @@ return(
           <option value="Female">Female</option>
           <option value="Others">Others</option>
         </Form.Control>
-      </Form.Group>
+      </Form.Group> */}
+
+<Form.Group className="mb-3" controlId="formBasicText" >
+  <Form.Label>Gender</Form.Label>
+  <Form.Control type="text" placeholder="Gender" value={gender}  onChange={(event) => setGender(event.target.value)}/> 
+  </Form.Group>
 
 
   
