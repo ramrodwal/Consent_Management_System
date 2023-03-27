@@ -1,9 +1,25 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useState } from 'react';
+import axios from "axios";
 
 function AdminLogin(){
+
+  const [username, setUsername]=useState('');
+  const [password, setPassword] = useState('');
+  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const hospitalDetails = { username: username,password: password};
+    axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
+}
     return(
+
+      
         <>
 
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -42,6 +58,7 @@ function AdminLogin(){
               type="text"
               className="form-control mt-1"
               placeholder="Enter Username"
+              value={username}  onChange={(event) => setUsername(event.target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -50,6 +67,7 @@ function AdminLogin(){
               type="password"
               className="form-control mt-1"
               placeholder="Enter password"
+              value={password}  onChange={(event) => setPassword(event.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">

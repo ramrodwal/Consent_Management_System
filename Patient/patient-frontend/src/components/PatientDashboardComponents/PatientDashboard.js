@@ -45,7 +45,7 @@ function PatientDashboard(){
 
 <CardGroup className="patientcard">
       <Card >
-        <a className="patientdashboardcard">
+        <a className="patientdashboardcard" href="/AllRequest.js">
         <Card.Img variant="top" src="/consent.png"  />
         </a>
         <Card.Body>

@@ -95,3 +95,9 @@ header h1 {
   padding-top: 0.5%;
   padding-left: 28%;
 }
+.tabledata{
+  text-align: center;
+}
+.tablehead{
+  width: 5%;
+}
