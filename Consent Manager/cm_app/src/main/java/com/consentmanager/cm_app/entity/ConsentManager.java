@@ -6,6 +6,8 @@ package com.consentmanager.cm_app.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.micrometer.common.lang.NonNull;
@@ -15,7 +17,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 
 import lombok.Getter;
@@ -50,27 +51,25 @@ public class ConsentManager {
     private int hospital_id;
 
     
-    @Column(name = "practitioner_aadhar",nullable = false)
+    @Column(name = "practitioner_aadhar")
     @NonNull
-    @NotBlank(message = "practitioner aadhar cannot be blank")
-    private String practioner_aadhar;
+    // @NotBlank(message = "practitioner aadhar cannot be blank")
+    private String practitioner_aadhar;
 
     
-    @Column(name = "patient_aadhar",nullable = false)
+    @Column(name = "patient_aadhar")
     @NonNull
-    @NotBlank(message = "Patient aadhar can not be empty")
+    // @NotBlank(message = "Patient aadhar can not be empty")
     private String patient_aadhar;
 
     
-    @Column(name = "disease_name",nullable = false)
+    @Column(name = "disease_name")
     @NonNull
-    @NotBlank(message = "disease name cannot be blank")
+    // @NotBlank(message = "disease name cannot be blank")
     private String disease_name;
 
 
-    @Column(name = "status",nullable = false)
+    @Column(name = "status")
     @NonNull
-    @NotBlank(message = "status cannot be blank")
-    // @Value("pending")
     private String status="pending";
 }
