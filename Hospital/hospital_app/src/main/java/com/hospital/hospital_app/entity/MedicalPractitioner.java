@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
@@ -35,10 +36,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "MedicalPractitioner")
 public class MedicalPractitioner {
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 
     @NotBlank(message = "first name can not be empty")
     private String fname;
@@ -106,10 +103,15 @@ public class MedicalPractitioner {
     private String confirmPassword;
 
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-   // @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hid", referencedColumnName = "hospital_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hospital_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 
 
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 }

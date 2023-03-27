@@ -32,14 +32,19 @@ function RegisterNewDoctor(){
     const [qualification, setQualification] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [hospital_id, setHospitalId] = useState('');
+    const [hospital_id, setHospitalId] = useState({
+      centralHospital: {
+        hospital_id:''
+      }
+    });
+    
     
 
 
     const handleSubmit = (event) => {
       event.preventDefault();
       const practitionerDetails = { fname: fname, mname: mname , lname: lname, age: age, gender: gender, email:email, username:username, number:number, state: state, city:city, address:address, 
-      zipcode:zipcode, practitioner_aadhar:practitioner_aadhar, medical_license_id:medical_license_id,specialisation: specialisation,qualification: qualification,password: password,confirmPassword: confirmPassword, hospital_id:hospital_id };
+      zipcode:zipcode, practitioner_aadhar:practitioner_aadhar, medical_license_id:medical_license_id,specialisation: specialisation,qualification: qualification,password: password,confirmPassword: confirmPassword, centralHospital:{hospital_id:hospital_id.centralHospital.hospital_id}};
       axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
           .then(response => console.log(response))
           .catch(error => console.log("There is an error!!"));
@@ -186,17 +191,17 @@ return(
   
   <Form.Group className="mb-3" controlId="formBasicPassword">
   <Form.Label>Password</Form.Label>
-  <Form.Control type="text" placeholder="Password" value={password}  onChange={(event) => setPassword(event.target.value)} required="password"/>
+  <Form.Control type="password" placeholder="Password" value={password}  onChange={(event) => setPassword(event.target.value)} required/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicPassword">
   <Form.Label>Confirm Password</Form.Label>
-  <Form.Control type="text" placeholder="Confirm Password" value={confirmPassword}  onChange={(event) => setConfirmPassword(event.target.value)} required="password"/>
+  <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword}  onChange={(event) => setConfirmPassword(event.target.value)} required/>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Hospital Id</Form.Label>
-  <Form.Control type="number" placeholder="Hospital Id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)}/>
+  <Form.Control type="number" placeholder="Hospital Id" value={hospital_id.centralHospital.hospital_id}  onChange={(event) => setHospitalId({centralHospital:{hospital_id:event.target.value}})}/>
   </Form.Group>
 
   <Button variant="primary" type="submit" >

@@ -32,18 +32,6 @@ import lombok.Setter;
 @Table(name = "centralHospital")
 public class CentralHospital {
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalPractitioner> mp1;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "ch2" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> mr1=new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "centralHospital1" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PatientList> pl1=new ArrayList<>();
-
     //primary key
     @Id 
     @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
@@ -75,5 +63,18 @@ public class CentralHospital {
 
     @NotBlank(message = "zipcode can not be empty")
     private String zipcode;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalPractitioner> mp1=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "ch2" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> mr1=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "centralHospital1" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientList> pl1=new ArrayList<>();
+    
     
 }
