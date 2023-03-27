@@ -17,6 +17,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 
 import lombok.Getter;
@@ -42,34 +43,28 @@ public class ConsentManager {
     @Id
     @Column(name = "consent_id",nullable = false)
     @NonNull
-    // @NotBlank(message = "Consent id cannot be blank")
     private int consent_id;
 
     @Column(name = "hospital_id",nullable = false)
     @NonNull
-    // @NotBlank(message = "Hospital id cannot be blank")
     private int hospital_id;
 
     
     @Column(name = "practitioner_aadhar")
-    @NonNull
-    // @NotBlank(message = "practitioner aadhar cannot be blank")
+    @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practitioner_aadhar;
 
     
     @Column(name = "patient_aadhar")
-    @NonNull
-    // @NotBlank(message = "Patient aadhar can not be empty")
+    @NotBlank(message = "Patient aadhar can not be empty")
     private String patient_aadhar;
 
     
     @Column(name = "disease_name")
-    @NonNull
-    // @NotBlank(message = "disease name cannot be blank")
+    @NotBlank(message = "disease name cannot be blank")
     private String disease_name;
 
 
     @Column(name = "status")
-    @NonNull
     private String status="pending";
 }
