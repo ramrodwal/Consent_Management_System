@@ -1,6 +1,8 @@
 package com.hospital.hospital_app.web;
 
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,7 @@ public class HospitalController {
     //hospital registratrion 
     @PostMapping("/admin-login/register-hospital")
     public ResponseEntity<CentralHospital> hospitalRegistration(@Valid @RequestBody CentralHospital central_hospital){
+        System.out.print(central_hospital.getHospital_name());
         hospitalService.registerHospital(central_hospital);
         return new ResponseEntity<CentralHospital>(HttpStatus.CREATED);
     }
