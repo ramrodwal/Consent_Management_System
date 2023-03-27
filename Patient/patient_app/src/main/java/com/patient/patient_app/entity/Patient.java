@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.data.relational.core.mapping.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.micrometer.common.lang.NonNull;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,68 +37,60 @@ public class Patient {
     @OneToMany(mappedBy = "p1", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecordMapping> recordList = new ArrayList<>();
 
-    @Column(nullable = false)
-    @NotBlank(message = "first name cannot be blank")
+    @NotBlank
     private String fname;
     
     @Column
     private String mname;
     
-    @Column(nullable = false)
-    @NotBlank(message = "last name cannot be blank")
+    @NotBlank
     private String lname;
 
     @Column(nullable = false)
-    @NotNull(message = "please enter a age")
+    @NonNull
     @Min(value = 18, message = "only patients above 18 can register")
     private int age;
 
-    @Column(nullable = false)
-    @NotBlank(message = "please select a gender")
+    
+    @NotBlank
     private String gender;
 
-    @Column(nullable = false)
+    @NotBlank
     @Email(message = "please enter a valid email")
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank
     @Pattern(regexp="\\d{10}", message="please enter a valid phone number")
     private String contactNo;
 
-    @Column(nullable = false)
-    @NotBlank(message = "enter a state")
-    @NotNull
+    
+    @NotBlank
     private String state;
 
-    @Column(nullable = false)
-    @NotBlank(message = "enter a city")
-    @NotNull
+    @NotBlank
     private String city;
 
     @Column(nullable = false)
-    @NotNull
+    @NonNull
     private long zipcode;
 
-    @Column(nullable = false)
-    @NotBlank(message = "please enter a address")
+    @NotBlank
     private String address;
 
     @Id
-    @Column(nullable = false, unique = true)
-    @NotBlank
+    @Column( unique = true)
     @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
     private String patient_aadhar;
 
-    @Column(nullable = false, unique = true)
+    @Column( unique = true)
     @NotBlank
     private String username;
 
-    @Column(nullable = false)
     @Size(min = 6)
     @NotBlank
     private String password;
 
-    @Column(nullable = false)
+    
     @Size(min = 6)
     @NotBlank
     private String confirmPassword;  
