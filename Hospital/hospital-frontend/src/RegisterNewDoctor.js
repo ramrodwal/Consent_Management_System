@@ -19,32 +19,28 @@ function RegisterNewDoctor(){
     const [lname, setLname] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [number, setNumber] = useState('');
-    const [address, setAddress] = useState('');
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
+    const [address, setAddress] = useState('');
     const [zipcode, setZipcode] = useState('');
-    const [aadhar, setAadhar] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [practitioner_aadhar, setAadhar] = useState('');
     const [medical_license_id, setMedicalLicense] = useState('');
     const [specialisation, setSpecialisation] = useState('');
-    const [email, setEmail] = useState('');
     const [qualification, setQualification] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [hospital_id, setHospitalId] = useState('');
-
     
-
-
-    const [practioner_aadhar, setPractitionerAadhar] = useState('');
 
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      const patient = { fname: fname, mname: mname , lname: lname, age: age,gender:gender, username:username, number:number, address:address, state: state, city:city, zipcode:zipcode, 
-      aadhar:aadhar, password:password, confirmPassword:confirmPassword,medical_license_id: medical_license_id,specialisation: specialisation,qualification: qualification,hospital_id: hospital_id };
-      axios.post('http://localhost:9090/api/patients', patient)
+      const practitionerDetails = { fname: fname, mname: mname , lname: lname, age: age,gender:gender, email:email, username:username, number:number, state: state, city:city, address:address, 
+      zipcode:zipcode, practitioner_aadhar:practitioner_aadhar, medical_license_id:medical_license_id,specialisation: specialisation,qualification: qualification,password: password,confirmPassword: confirmPassword, hospital_id:hospital_id };
+      axios.post('http://localhost:9098/hospital/admin-login/signup', practitionerDetails)
           .then(response => console.log(response))
           .catch(error => console.log(error));
   }
@@ -107,7 +103,7 @@ return(
   
   <Form.Group className="mb-3" controlId="formBasicText" id="formsamerow">
   <Form.Label>Age</Form.Label>
-  <Form.Control type="text" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
+  <Form.Control type="number" placeholder="Age" value={age}  onChange={(event) => setAge(event.target.value)}/>
   </Form.Group>
   <Form.Group controlId="formBasicSelect">
         <Form.Label>Gender</Form.Label>
@@ -123,7 +119,7 @@ return(
      
   <Form.Group className="mb-3" controlId="formBasicEmail">
   <Form.Label>Email address</Form.Label>
-  <Form.Control type="text" placeholder="Email" value={email}  onChange={(event) => setEmail(event.target.value)}/>
+  <Form.Control type="text" placeholder="Email" value={email}  required="email" onChange={(event) => setEmail(event.target.value)}/>
   </Form.Group>
   
   <Form.Group className="mb-3" controlId="formBasicText">
@@ -136,24 +132,31 @@ return(
   <Form.Control type="text" placeholder="Phone Number" value={number}  onChange={(event) => setNumber(event.target.value)}/>
   </Form.Group>
   
-  <Form.Group className="mb-3" controlId="formBasicText">
-  <Form.Label>Address</Form.Label>
-  <Form.Control type="text" placeholder="Enter Address" value={address}  onChange={(event) => setAddress(event.target.value)}/>
-  </Form.Group>
+
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>State</Form.Label>
   <Form.Control type="text" placeholder="Enter State" value={state}  onChange={(event) => setState(event.target.value)}/>
   </Form.Group>
+
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>City</Form.Label>
   <Form.Control type="text" placeholder="Enter City" value={city}  onChange={(event) => setCity(event.target.value)}/>
   </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Address</Form.Label>
+  <Form.Control type="text" placeholder="Enter Address" value={address}  onChange={(event) => setAddress(event.target.value)}/>
+  </Form.Group>
+
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Zip Code</Form.Label>
   <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode}  onChange={(event) => setZipcode(event.target.value)}/>
   </Form.Group>
 
-
+  <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Aadhar Number</Form.Label>
+  <Form.Control type="text" placeholder="Enter Aadhar Card Number" value={practitioner_aadhar}  onChange={(event) => setAadhar(event.target.value)}/>
+  </Form.Group>
 
   <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Medical License id</Form.Label>
@@ -167,31 +170,28 @@ return(
           <option value="Gyna">Gyna</option>
           <option value="Uro">Uro</option>
         </Form.Control>
-      </Form.Group>
+  </Form.Group>
 
- 
-    
-
-      <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Group className="mb-3" controlId="formBasicText">
   <Form.Label>Qualification</Form.Label>
   <Form.Control type="text" placeholder="Qualification" value={qualification}  onChange={(event) => setQualification(event.target.value)}/>
   </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicText">
-  <Form.Label>Aadhar Number</Form.Label>
-  <Form.Control type="text" placeholder="Enter Aadhar Card Number" value={practioner_aadhar}  onChange={(event) => setPractitionerAadhar(event.target.value)}/>
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicText">
-  <Form.Label>Hospital Id</Form.Label>
-  <Form.Control type="text" placeholder="Hospital Id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)}/>
-  </Form.Group>
+  
   <Form.Group className="mb-3" controlId="formBasicPassword">
   <Form.Label>Password</Form.Label>
-  <Form.Control type="text" placeholder="Password" value={password}  onChange={(event) => setPassword(event.target.value)}/>
+  <Form.Control type="text" placeholder="Password" value={password}  onChange={(event) => setPassword(event.target.value)} required="password"/>
   </Form.Group>
+
   <Form.Group className="mb-3" controlId="formBasicPassword">
   <Form.Label>Confirm Password</Form.Label>
-  <Form.Control type="text" placeholder="Confirm Password" value={confirmPassword}  onChange={(event) => setConfirmPassword(event.target.value)}/>
+  <Form.Control type="text" placeholder="Confirm Password" value={confirmPassword}  onChange={(event) => setConfirmPassword(event.target.value)} required="password"/>
   </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicText">
+  <Form.Label>Hospital Id</Form.Label>
+  <Form.Control type="number" placeholder="Hospital Id" value={hospital_id}  onChange={(event) => setHospitalId(event.target.value)}/>
+  </Form.Group>
+
   <Button variant="primary" type="submit" >
     Submit
   </Button>

@@ -40,100 +40,68 @@ public class MedicalPractitioner {
     @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalRecords> medicalRecords=new ArrayList<>();
 
-    @Column(nullable = false)
-    @NonNull
     @NotBlank(message = "first name can not be empty")
     private String fname;
 
-    @Column
     private String mname;
 
-    @Column(nullable = false)
-    @NonNull
     @NotBlank(message = "last name can not be empty")
     private String lname;
 
-    @Min(value = 21)
     @Column(nullable = false)
+    @Min(value = 21)
     @NonNull
-    @NotBlank(message = "age can not be empty")
     private int age;
 
-    @Column(nullable = false)
-    @NonNull
     @NotBlank(message = "gender can not be empty")
     private String gender;
 
-    @Column(nullable = false)
-    @NonNull
     @NotBlank(message = "email can not be empty")
     @Email(message = "enter a valid email address")
     private String email;
 
-    @Pattern(regexp="\\d{10}", message="Invalid phone number")
-    @Column(nullable = false,unique = true)
-    @NonNull
-    @NotBlank(message = "contact number can not be empty")
-    private String number;
-
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "state can not be empty")
-    private String state;
-
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "city can not be empty")
-    private String city;
-
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "address can not be empty")
-    private String address;
-
-    @Pattern(regexp = "^\\d{6}$", message = "Zipcode must be 6 digits")
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "zipcode can not be empty")
-    private long zipcode;
-
-    @Id
-    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
-    @Column(nullable = false,unique = true)
-    @NonNull
-    @NotBlank(message = "aadhar number can not be empty")
-    private String practioner_aadhar;
-
-    @Column(nullable = false,unique = true)
-    @NonNull
-    @NotBlank(message = "medical license id can not be empty")
-    private String medical_license_id;
-
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "specialisation can not be empty")
-    private String specialisation;
-
-    @Column(nullable = false)
-    @NonNull
-    @NotBlank(message = "qualification can not be empty")
-    private String qualification;
-
-    @Column(nullable = false,unique = true)
-    @NonNull
+    @Column(unique = true)
     @NotBlank(message = "username can not be empty")
     private String username;
 
-    @Column(nullable = false)
+    @Pattern(regexp="\\d{10}", message="Invalid phone number")
+    @Column(unique = true)
+    @NotBlank(message = "contact number can not be empty")
+    private String number;
+
+    @NotBlank(message = "state can not be empty")
+    private String state;
+
+    @NotBlank(message = "city can not be empty")
+    private String city;
+
+    @NotBlank(message = "address can not be empty")
+    private String address;
+
+    @NotBlank(message = "zipcode can not be empty")
+    private String zipcode;
+
+    @Id
+    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
+    @Column(unique = true)
+    @NotBlank(message = "aadhar number can not be empty")
+    private String practitioner_aadhar;
+
+    @Column(unique = true)
+    @NotBlank(message = "medical license id can not be empty")
+    private String medical_license_id;
+
+    @NotBlank(message = "specialisation can not be empty")
+    private String specialisation;
+
+    @NotBlank(message = "qualification can not be empty")
+    private String qualification;
+
     @Size(min = 6)
-    @NonNull
     @NotBlank(message = "password can not be empty")
     private String password;
 
-    
-    @Column(nullable = false)
     @Size(min = 6)
-    @NonNull
     @NotBlank(message = "confirm password can not be empty")
     private String confirmPassword;
 
@@ -142,10 +110,6 @@ public class MedicalPractitioner {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
     private CentralHospital ch1;
-
-    
-    
-    
 
 
 }
