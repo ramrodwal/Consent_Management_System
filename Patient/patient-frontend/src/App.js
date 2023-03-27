@@ -14,6 +14,9 @@ import Appointments from './components/PatientDashboardComponents/Appointments';
 // import VerifyOTP from './components/VerifyOTP';
 import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-dom";
 import AllRequest from './AllRequest';
+import ViewUpdateProfile from './ViewUpdateProfile';
+import ViewRecords from './ViewRecords';
+
 
 function Home(){
   return (
@@ -86,6 +89,22 @@ function AllReq(){
     </>
   )
 }
+
+function ViewUpProf(){
+  return(
+    <>
+    <ViewUpdateProfile/>
+    </>
+  )
+}
+
+function ViewRecord(){
+  return(
+    <>
+      <ViewRecords/>
+    </>
+  )
+}
 function App() {
   return (
     <div className="App">
@@ -99,6 +118,10 @@ function App() {
         <Route exact path={"/Notification.js"} element={<Notifi />}></Route>
         <Route exact path={"/Profile.js"} element={<Prof />}></Route>
         <Route exact path={"/AllRequest.js"} element={<AllReq/>}></Route>
+        <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
+        <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
+
+
 
           {/* <Route exact path={"/VerifyOTP.js"} element={<VerifyOTP/>}></Route> */}
         {/* <Route exact path={"/PatientDetails.js"} element={<PatientDet />}></Route> */}

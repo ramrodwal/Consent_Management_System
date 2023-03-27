@@ -54,7 +54,7 @@ function PatientDashboard(){
        
       </Card>
       <Card >
-        <a className="patientdashboardcard">
+        <a className="patientdashboardcard" href="/ViewUpdateProfile.js">
         <Card.Img variant="top" src="/profile.png" />
         </a>
         <Card.Body>
@@ -64,7 +64,7 @@ function PatientDashboard(){
         
       </Card>
       <Card >
-        <a className="patientdashboardcard">
+        <a className="patientdashboardcard" href="/ViewRecords.js">
         <Card.Img variant="top" src="/records.jpg" />
         </a>
         <Card.Body>
