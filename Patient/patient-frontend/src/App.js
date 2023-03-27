@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-d
 import AllRequest from './AllRequest';
 import ViewUpdateProfile from './ViewUpdateProfile';
 import ViewRecords from './ViewRecords';
+import AllRecords from './AllRecords';
 
 
 function Home(){
@@ -105,6 +106,14 @@ function ViewRecord(){
     </>
   )
 }
+
+function AllRecord(){
+  return(
+    <>
+      <AllRecords/>
+    </>
+  )
+}
 function App() {
   return (
     <div className="App">
@@ -120,6 +129,8 @@ function App() {
         <Route exact path={"/AllRequest.js"} element={<AllReq/>}></Route>
         <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
         <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
+        <Route exact path={"/AllRecords.js"} element={<AllRecord/>}></Route>
+
 
 
 
