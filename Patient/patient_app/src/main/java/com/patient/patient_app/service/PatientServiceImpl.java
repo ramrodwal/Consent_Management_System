@@ -34,5 +34,10 @@ public class PatientServiceImpl implements PatientService{
         if (entity.isPresent()) return entity.get();
         else throw new EntityNotFoundException(patient_aadhar, Patient.class);
     }
+
+    @Override
+    public Patient updateProfile(Patient patient) {
+        return patientsRepository.save(patient);
+    }
     
 }
