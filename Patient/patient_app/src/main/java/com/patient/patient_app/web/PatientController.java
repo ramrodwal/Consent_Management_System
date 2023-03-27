@@ -1,5 +1,7 @@
 package com.patient.patient_app.web;
 
+import java.net.ResponseCache;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,34 +42,6 @@ public class PatientController {
 
     }
 
-    @PutMapping("/update/{patient_aadhar}")
-    public ResponseEntity<Patient> updateProfile(@Valid @RequestBody Patient updatedPatient, @PathVariable String patient_aadhar){
-
-        Patient existingPatient = patientService.getPatient(patient_aadhar);
-        if(existingPatient == null){
-            return ResponseEntity.notFound().build();
-        }
-
-    // existingPatient.setFname(updatedPatient.getFname());
-    // existingPatient.setMname(updatedPatient.getMname());
-    // existingPatient.setLname(updatedPatient.getLname());
-    // existingPatient.setAge(updatedPatient.getAge());
-    // existingPatient.setGender(updatedPatient.getGender());
-    // existingPatient.setEmail(updatedPatient.getEmail());
-    // existingPatient.setContactNo(updatedPatient.getContactNo());
-    // existingPatient.setState(updatedPatient.getState());
-    // existingPatient.setCity(updatedPatient.getCity());
-    // existingPatient.setZipcode(updatedPatient.getZipcode());
-    // existingPatient.setAddress(updatedPatient.getAddress());
-    // existingPatient.setUsername(updatedPatient.getUsername());
-    // existingPatient.setPassword(updatedPatient.getPassword());
-    // existingPatient.setConfirmPassword(updatedPatient.getConfirmPassword());
-
-    // Patient updated = patientService.updateProfile(existingPatient);
-    // return ResponseEntity.ok(updated);
-    return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.CREATED);
-
-    }
-
+    
     
 }
