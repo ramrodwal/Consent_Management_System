@@ -30,4 +30,5 @@ public class ConsentController {
         return new ResponseEntity<ConsentManager>(consentManagerService.requestConsent(consentManager), HttpStatus.CREATED);
     }
     
+    
 }
