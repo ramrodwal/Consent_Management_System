@@ -8,7 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +16,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,43 +35,30 @@ public class CentralHospital {
     @GenericGenerator( name = "native", strategy = "native" )
     private int hospital_id;
     
-    @NonNull
-    @NotBlank(message = "hospital name can not be empty")
     private String hospital_name;
 
-    @Pattern(regexp="\\d{10}", message="Invalid phone number")
     @Column(unique = true)
-    @NonNull
-    @NotBlank(message = "hospital contact number can not be empty")
     private String contactNumber;
 
-    @NonNull
-    @NotBlank(message = "state can not be empty")
     private String state;
 
-    @NonNull
-    @NotBlank(message = "city can not be empty")
     private String city;
 
-    @NonNull
-    @NotBlank(message = "address can not be empty")
     private String address;
 
-
-    @NotBlank(message = "zipcode can not be empty")
     private String zipcode;
 
     @JsonIgnore
     @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalPractitioner> mp1=new ArrayList<>();
+    private List<MedicalPractitioner> medicalPractitioner=new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "ch2" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> mr1=new ArrayList<>();
+    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "centralHospital1" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PatientList> pl1=new ArrayList<>();
+    private List<PatientList> patientLists=new ArrayList<>();
     
     
 }
