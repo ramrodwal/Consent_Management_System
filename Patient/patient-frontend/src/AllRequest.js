@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState , useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 
@@ -8,6 +8,13 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 function AllRequest(){
+  const [requests,setRequests]=useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:9092/hospital/admin-login/hospital-list").then((response) => {
+      setHospitals(response.data);
+    });
+  }, []);
 return(
 
     <>

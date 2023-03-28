@@ -37,6 +37,12 @@ import lombok.Setter;
 @Table(name = "MedicalPractitioner")
 public class MedicalPractitioner {
 
+    @Id
+    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
+    @Column(unique = true)
+    @NotBlank(message = "aadhar number can not be empty")
+    private String practitioner_aadhar;
+
     @NotBlank(message = "first name can not be empty")
     private String fname;
 
@@ -78,11 +84,7 @@ public class MedicalPractitioner {
     @NotBlank(message = "zipcode can not be empty")
     private String zipcode;
 
-    @Id
-    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
-    @Column(unique = true)
-    @NotBlank(message = "aadhar number can not be empty")
-    private String practitioner_aadhar;
+    
 
     @Column(unique = true)
     @NotBlank(message = "medical license id can not be empty")
@@ -102,6 +104,10 @@ public class MedicalPractitioner {
     @NotBlank(message = "confirm password can not be empty")
     private String confirmPassword;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords=new ArrayList<>();
+
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -109,9 +115,4 @@ public class MedicalPractitioner {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 }

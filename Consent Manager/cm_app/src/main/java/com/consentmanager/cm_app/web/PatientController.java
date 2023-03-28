@@ -17,6 +17,7 @@ import com.consentmanager.cm_app.service.ConsentManagerService;
 import com.consentmanager.cm_app.service.ConsentResponseService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.OverridesAttribute.List;
 
 @RestController
 @CrossOrigin(origins = "*")
