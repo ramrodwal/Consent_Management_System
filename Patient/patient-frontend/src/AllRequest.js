@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,7 +13,7 @@ function AllRequest(){
 
   useEffect(() => {
     axios.get("http://localhost:9092/hospital/admin-login/hospital-list").then((response) => {
-      setHospitals(response.data);
+      setRequests(response.data);
     });
   }, []);
 return(
