@@ -3,6 +3,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import axios from "axios";
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/esm/Container";
+
+
 
 function AdminLogin(){
 
@@ -47,40 +51,26 @@ function AdminLogin(){
             <div className='pageheading'>
             <center><h1 className='pageheading'>Admin Login</h1></center>
             </div>
+        <Container className='formcontainernew' > 
+            <Form className='formpad'>
 
-            <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Login</h3>
-          <div className="form-group mt-3">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control mt-1"
-              placeholder="Enter Username"
-              value={username}  onChange={(event) => setUsername(event.target.value)}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Enter password"
-              value={password}  onChange={(event) => setPassword(event.target.value)}
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            
-            <button type="submit" className="btn btn-primary">
-              Submit
+            <Form.Group className="mb-3" controlId="formBasicText" >
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Username"/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicText" >
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password"/>
+            </Form.Group>
+            </Form>
+            <br></br>
+            <center>
+        <button type="submit" className="btn btn-primary">
+              Login
             </button>
-            
-          </div>
-          
-        </div>
-      </form>
-    </div>
+            </center>
+
+            </Container>
         </>
     );
 }

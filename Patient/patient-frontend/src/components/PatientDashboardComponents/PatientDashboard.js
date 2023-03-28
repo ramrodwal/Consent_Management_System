@@ -54,11 +54,11 @@ function PatientDashboard(){
        
       </Card>
       <Card >
-        <a className="patientdashboardcard" href="/ViewUpdateProfile.js">
+        <a className="patientdashboardcard" href="/PatientProfileView.js">
         <Card.Img variant="top" src="/profile.png" />
         </a>
         <Card.Body>
-          <Card.Title>View/Update Profile</Card.Title>
+          <Card.Title>ViewProfile</Card.Title>
          
         </Card.Body>
         
