@@ -28,7 +28,7 @@ return(
           
         </Nav>
         <Nav pullRight>
-          <Nav.Link href="/HospitalHome" >Logout</Nav.Link>
+          <Nav.Link href="/" >Logout</Nav.Link>
          
         </Nav>
 

@@ -42,7 +42,7 @@ function ConsentRequest(){
           <Nav.Link href="/ViewConsent">View Consent</Nav.Link> 
         </Nav>
         <Nav pullRight>
-          <Nav.Link href="/HospitalHome" >Logout</Nav.Link>
+          <Nav.Link href="/" >Logout</Nav.Link>
          
         </Nav>
       </Navbar.Collapse>

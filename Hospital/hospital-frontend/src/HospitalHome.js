@@ -11,7 +11,7 @@ function HospitalHome(){
     return(
         <>
         <div className="pageheading">
-        <center><h1>Hospital Home</h1></center><br></br>
+        <center><h1 className="pageheading">Hospital Home</h1></center><br></br>
         </div>
         <Container>
             

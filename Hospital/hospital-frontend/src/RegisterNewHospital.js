@@ -51,7 +51,8 @@ function RegisterNewHospital(){
           
         </Nav>
         <Nav>
-          <Nav.Link href="/">Logout</Nav.Link>
+          
+          <Nav.Link href="/" className='navright'>Logout</Nav.Link>
          
         </Nav>
       </Navbar.Collapse>
@@ -59,7 +60,7 @@ function RegisterNewHospital(){
   </Navbar>
         
         <Container>
-                <h1>Register New Hospital:</h1>
+                <h1 className='pageheading'>Register New Hospital:</h1>
     <Container className='topCentre'>
     <center><Card className='toplogo'>
       <Card.Img src="https://i.pinimg.com/originals/ea/d0/a4/ead0a499fb2caba4fe1107c1c465bbc6.png" />

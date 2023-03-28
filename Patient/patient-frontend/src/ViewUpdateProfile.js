@@ -31,8 +31,8 @@ return(
       </Navbar.Collapse>
     
   </Navbar>
-        <center><h1>View/Update Profile</h1></center>
-        <Container>
+        <center><h1 className='pageheading'>View/Update Profile</h1></center>
+        <Container className='formcontainer'>
         <Form>
 
     
@@ -94,9 +94,11 @@ return(
 
   
 </Form>
+        <center>
         <button type="submit" className="btn btn-primary">
               Update
             </button>
+            </center>
             </Container>
     </>
 )
