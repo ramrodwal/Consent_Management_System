@@ -57,7 +57,7 @@ return(
       
       <Navbar.Brand href="/AdminPostLogin"><img
               alt=""
-              src="https://cdn.imgbin.com/21/4/22/imgbin-computer-icons-login-user-system-administrator-admin-L1LTfM47FsD3A2gus0rdy8WpJ.jpg"
+              src="/Admin.jpg"
               width="30"
               height="30"
               className="d-inline-block align-top"
@@ -83,7 +83,7 @@ return(
     <Container className='topCentre'>
         <center>
     <Card className='toplogo'>
-      <Card.Img src="https://cdn-icons-png.flaticon.com/512/3891/3891530.png" />
+      <Card.Img src="/NewDoctorSignup.jpg" />
   </Card>
   </center>
     </Container>

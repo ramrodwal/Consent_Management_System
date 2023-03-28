@@ -20,7 +20,7 @@ function HospitalHome(){
 <CardGroup  className='topgroup'>
   <Card>
     <a href='/BookAppointmentDoctor'>
-    <Card.Img variant="top" className='Images' src="https://media.istockphoto.com/id/1286487110/vector/appointment-booking-calendar-vector-illustration.jpg?s=612x612&w=0&k=20&c=K26phQ_nb0tu7Ezx9Fvf_43_5J-bOkufOUf_HfqNlXA=" />
+    <Card.Img variant="top" className='Images' src="/BookAppointment.jpg" />
     </a>
     <Card.Body>
       
@@ -33,7 +33,7 @@ function HospitalHome(){
   </Card>
   <Card>
     <a href='/DoctorLogin'>
-    <Card.Img variant="top" className='Images' src="https://img.freepik.com/premium-vector/doctor-icon-avatar-white_136162-58.jpg?w=2000" />
+    <Card.Img variant="top" className='Images' src="/DoctorLogin.jpg" />
     </a>
     <Card.Body>
       
@@ -47,7 +47,7 @@ function HospitalHome(){
 
   <Card>
     <a href='/AdminLogin'>
-    <Card.Img variant="top" className='Images' src="https://static.vecteezy.com/system/resources/previews/003/190/658/original/line-icon-for-back-office-vector.jpg" />
+    <Card.Img variant="top" className='Images' src="/AdminLogin.jpg" />
     </a>
     <Card.Body>
       
