@@ -17,6 +17,7 @@ import AllRequest from './AllRequest';
 import ViewUpdateProfile from './ViewUpdateProfile';
 import ViewRecords from './ViewRecords';
 import AllRecords from './AllRecords';
+import PatientProfileView from './components/PatientProfileView';
 
 
 function Home(){
@@ -130,7 +131,7 @@ function App() {
         <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
         <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
         <Route exact path={"/AllRecords.js"} element={<AllRecord/>}></Route>
-
+        <Route exact path={"/PatientProfileView.js"} element={<PatientProfileView/>}></Route>
 
 
 
