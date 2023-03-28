@@ -102,6 +102,10 @@ public class MedicalPractitioner {
     @NotBlank(message = "confirm password can not be empty")
     private String confirmPassword;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords=new ArrayList<>();
+
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -109,9 +113,4 @@ public class MedicalPractitioner {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> medicalRecords=new ArrayList<>();
 }
