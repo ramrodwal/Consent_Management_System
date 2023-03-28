@@ -52,6 +52,10 @@ return(
     </tr>
   </tbody>
 </Table>
+<center><button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+            </center>
     </>
 )
 }
