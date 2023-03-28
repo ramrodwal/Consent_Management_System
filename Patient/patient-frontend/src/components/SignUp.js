@@ -42,9 +42,7 @@ function SignUp() {
       .then(response => console.log(response))
       .catch(error => console.log("this is an error!!!"));
   }
-  // state = { otp: '' };
-
-  // const handleChange = (otp) => this.setState({ otp });
+  
   return (
     <Container>
       <Card>
@@ -52,7 +50,6 @@ function SignUp() {
       </Card>
       <h1 class="forgotpass">Sign-Up:</h1>
       <Form onSubmit={handleSubmit}>
-
         <Form.Group className="mb-3" controlId="formBasicText" >
           <Form.Label>First Name</Form.Label>
           <Form.Control type="text" placeholder="Enter First Name" value={fname} onChange={(event) => setFname(event.target.value)} />
@@ -79,12 +76,6 @@ function SignUp() {
             <Form.Label>Age</Form.Label>
             <Form.Control type="number" placeholder="Age" value={age} onChange={(event) => setAge(event.target.value)} />
           </Form.Group>
-
-
-          {/* <Form.Group className="mb-3" controlId="formBasicText">
-        <Form.Label>Gender</Form.Label>
-        <Form.Control type="text" placeholder="Male/Female/Other" />
-        </Form.Group> */}
         </Row>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -100,15 +91,6 @@ function SignUp() {
           <Form.Label>Phone Number</Form.Label>
           <Form.Control type="text" placeholder="Enter Phone Number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} />
         </Form.Group>
-        {/* <Button variant="primary" type="submit" >
-          Verify OTP
-        </Button>
-        <OtpInput
-        value={this.state.otp}
-        onChange={this.handleChange}
-        numInputs={6}
-        separator={<span>-</span>}
-      /> */}
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Enter Address</Form.Label>
           <Form.Control type="text" placeholder="Enter Apartment number" value={address} onChange={(event) => setAddress(event.target.value)} />
