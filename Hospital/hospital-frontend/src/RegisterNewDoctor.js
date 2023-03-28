@@ -97,6 +97,8 @@ function RegisterNewDoctor() {
             </Card>
           </center>
         </Container>
+        <br></br>
+        <br></br>
 
         <h1 class="forgotpass">Medical Practitioner's Sign-Up:</h1>
         <Form onSubmit={handleSubmit}>
@@ -208,11 +210,14 @@ function RegisterNewDoctor() {
               ))}
             </Form.Control>
           </Form.Group>
+          <br></br>
 
-          <Button variant="primary" type="submit" >
+          <Button variant="success" type="submit" >
             Submit
           </Button>
         </Form>
+        <br>
+        </br>
 
       </Container>
     </>
