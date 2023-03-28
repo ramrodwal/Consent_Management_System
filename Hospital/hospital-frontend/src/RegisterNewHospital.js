@@ -30,6 +30,15 @@ function RegisterNewHospital() {
       .catch(error => console.log("There is an error!!"));
   }
 
+  const isNotEmpty = (value) => {
+    return value.trim().length > 0;
+  }
+
+  const isValidZip = (zipcode) => {
+    const isValidRegex = /^[0-9]{6}$/; // regular expression to check if the zipcode has 6 digits
+    return isValidRegex.test(zipcode);
+  };
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -77,37 +86,63 @@ function RegisterNewHospital() {
           </Form.Group>
 
 
-          <Form.Group className="mb-3" controlId="formBasicText" >
+          <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Hospital Name</Form.Label>
-            <Form.Control type="text" placeholder="Hospital Name" value={hospital_name} onChange={(event) => setHospitalName(event.target.value)} required minLength={2} maxLength={50} />
+            <Form.Control type="text" placeholder="Enter Hospital Name" value={hospital_name} onChange={(event) => setHospitalName(event.target.value)} required minLength={2} maxLength={50} />
+            {!isNotEmpty(hospital_name) && <Form.Text className="text-danger">Please enter a hospital name</Form.Text>}
+            {isNotEmpty(hospital_name) && (hospital_name.length < 2 || hospital_name.length > 50) && <Form.Text className="text-danger">Hospital name should be between 2 to 50 characters long</Form.Text>}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicText" >
+
+
+          <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Contact Number</Form.Label>
-            <Form.Control type="text" placeholder="Contact Number" value={contactNumber} onChange={(event) => setContactNumber(event.target.value)} />
+            <Form.Control
+              type="tel"
+              placeholder="Enter Contact Number"
+              value={contactNumber}
+              onChange={(event) => setContactNumber(event.target.value)}
+              required
+              pattern="[0-9]{10}"
+              title="Please enter a valid 10-digit contact number"
+            />
+            {!isNotEmpty(contactNumber) && <Form.Text className="text-danger">Please enter a contact number</Form.Text>}
+            {isNotEmpty(contactNumber) && !/^[0-9]{10}$/.test(contactNumber) && <Form.Text className="text-danger">Please enter a valid 10-digit contact number</Form.Text>}
           </Form.Group>
-
-
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="Enter State" value={state} onChange={(event) => setState(event.target.value)} />
+            <Form.Control type="text" placeholder="Enter State" value={state} onChange={(event) => setState(event.target.value)} required={true} pattern="[A-Za-z ]+" title="Please enter a valid state name" />
+            {!isNotEmpty(state) && <Form.Text className="text-danger">Please enter a state name</Form.Text>}
+            {isNotEmpty(state) && !/^[A-Za-z ]+$/.test(state) && <Form.Text className="text-danger">Please enter a valid state name</Form.Text>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="Enter City" value={city} onChange={(event) => setCity(event.target.value)} />
+            <Form.Control type="text" placeholder="Enter City" value={city} onChange={(event) => setCity(event.target.value)} required={true} pattern="^[A-Za-z\s]+$" title="Please enter a valid city name" />
+            {!isNotEmpty(city) && <Form.Text className="text-danger">Please enter a city name</Form.Text>}
+            {isNotEmpty(city) && !/^[A-Za-z\s]+$/.test(city) && <Form.Text className="text-danger">Please enter a valid city name</Form.Text>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Address</Form.Label>
-            <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} />
+            <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} required = {true} />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicText">
+
+          {/* <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} />
-          </Form.Group>
+          </Form.Group> */}
+
+<Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Zip Code</Form.Label>
+          <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} />
+          {!isValidZip(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
+        </Form.Group>
+
           <Link to='/AdminPostLogin'>
             <Button variant="primary" type="submit"  >
               Submit
-            </Button> 
+            </Button>
           </Link>
 
         </Form>
