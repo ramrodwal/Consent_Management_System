@@ -65,10 +65,15 @@ function SignUp() {
           <Form.Label>Last Name</Form.Label>
           <Form.Control type="text" placeholder="Enter Last Name" value={lname} onChange={(event) => setLname(event.target.value)} />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicText" >
-          <Form.Label>Gender</Form.Label>
-          <Form.Control type="text" placeholder="Enter your gender" value={gender} onChange={(event) => setGender(event.target.value)} />
-        </Form.Group>
+        <Form.Group controlId="formBasicSelect">
+        <Form.Label>Gender</Form.Label>
+        <Form.Control as="select" value={gender} onChange={(event) => setGender(event.target.value)}>
+          <option value="none">select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
+        </Form.Control>
+      </Form.Group>
         <Row id="shiftright">
           <Form.Group className="mb-3" controlId="formBasicText" id="formsamerow">
             <Form.Label>Age</Form.Label>
@@ -132,7 +137,7 @@ function SignUp() {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control type="text" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit" >
+        <Button variant="primary" type="submit" href="/">
           Submit
         </Button>
       </Form>
