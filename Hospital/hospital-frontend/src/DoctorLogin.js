@@ -1,6 +1,8 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/esm/Container";
 
 import { useState } from 'react';
 import axios from "axios";
@@ -49,36 +51,26 @@ function DoctorLogin(){
             <center><h1>Doctor's Login</h1></center>
             </div>
 
-            <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Login</h3>
-          <div className="form-group mt-3">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control mt-1"
-              placeholder="Enter Username" value={username}  onChange={(event) => setUsername(event.target.value)}
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}  onChange={(event) => setPassword(event.target.value)}
-              className="form-control mt-1"
-              placeholder="Enter password"
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
+            <Container className='formcontainernew' > 
+            <Form className='formpad'>
+
+            <Form.Group className="mb-3" controlId="formBasicText" >
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Username"/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicText" >
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password"/>
+            </Form.Group>
+            </Form>
+            <br></br>
+            <center>
+        <button type="submit" className="btn btn-primary">
+              Login
             </button>
-          </div>
-          
-        </div>
-      </form>
-    </div>
+            </center>
+
+            </Container>
         </>
     );
 }

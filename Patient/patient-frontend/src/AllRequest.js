@@ -26,7 +26,7 @@ return(
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link href="/AllRequest.js">View All Requests</Nav.Link>
-          <Nav.Link href="/ViewUpdateProfile.js">View/Update Profile</Nav.Link>
+          <Nav.Link href="/PatientProfileView.js">View Profile</Nav.Link>
           <Nav.Link href="/ViewRecords.js">View Records</Nav.Link>
           
           
