@@ -107,4 +107,14 @@ display:'block';
     float: right;
   }
 
+  .admindashboardcard{
+    padding-right: 10px;
+    width: 128px;
+    height: 128px;
+  }
+
+  .admincontainer{
+    margin-top: 150px;
+  }
+
   

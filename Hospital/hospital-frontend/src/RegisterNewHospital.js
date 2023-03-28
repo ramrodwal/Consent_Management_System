@@ -45,7 +45,7 @@ function RegisterNewHospital() {
 
         <Navbar.Brand href="/AdminPostLogin"><img
           alt=""
-          src="https://cdn.imgbin.com/21/4/22/imgbin-computer-icons-login-user-system-administrator-admin-L1LTfM47FsD3A2gus0rdy8WpJ.jpg"
+          src="/Admin.jpg"
           width="30"
           height="30"
           className="d-inline-block align-top"
@@ -72,7 +72,7 @@ function RegisterNewHospital() {
         <h1 className='pageheading'>Register New Hospital:</h1>
         <Container className='topCentre'>
           <center><Card className='toplogo'>
-            <Card.Img src="https://i.pinimg.com/originals/ea/d0/a4/ead0a499fb2caba4fe1107c1c465bbc6.png" />
+            <Card.Img src="/RegNewHospSignup.jpg" />
           </Card>
           </center>
 
