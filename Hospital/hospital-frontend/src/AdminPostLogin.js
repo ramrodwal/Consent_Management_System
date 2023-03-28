@@ -8,7 +8,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 function AdminPostLogin() {
     return(
         <>
-        <center><h1>Welcome Admin</h1></center>
+        <center><h1 className='pageheading'>Welcome Admin</h1></center>
         
             <Container>
                 
@@ -17,7 +17,7 @@ function AdminPostLogin() {
 <CardGroup  className='topgroup'>
       <Card >
         <a href='/RegisterNewHospital'>
-        <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/746/746821.png" />
+        <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/4625/4625853.png" />
         </a>
         <Card.Body>
           
@@ -30,7 +30,7 @@ function AdminPostLogin() {
       </Card>
       <Card>
         <a href='/RegisterNewDoctor'>
-        <Card.Img variant="top" className='Images' src="https://img.freepik.com/premium-vector/doctor-nurse-with-patient-files_1639-36846.jpg?w=2000" />
+        <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/3774/3774293.png"  />
         </a>
         <Card.Body>
           
@@ -47,7 +47,7 @@ function AdminPostLogin() {
     <CardGroup className='topgroup'>
       <Card>
         <a href={'/HospitalList'}>
-         <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/4228/4228725.png" /> 
+         <Card.Img variant="top" className='Images' src="https://cdn-icons-png.flaticon.com/512/2840/2840428.png" /> 
          </a>
         <Card.Body>
          
@@ -60,7 +60,7 @@ function AdminPostLogin() {
       </Card>
       <Card>
         <a href="/DoctorList">
-        <Card.Img variant="top" className='Images' src="https://img.freepik.com/premium-vector/male-doctor-holding-clipboard_43633-7151.jpg?w=2000" /> 
+        <Card.Img variant="top" className='Images' src="https://www.iconbunny.com/icons/media/catalog/product/2/1/2131.12-doctor-icon-iconbunny.jpg" /> 
         </a>
         <Card.Body>
           

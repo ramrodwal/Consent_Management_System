@@ -37,13 +37,13 @@ function DoctorList() {
 
           </Nav>
           <Nav>
-            <Nav.Link href="/">Logout</Nav.Link>
+            <Nav.Link href="/" className="navbar-nav ml-auto">Logout</Nav.Link>
 
           </Nav>
         </Navbar.Collapse>
 
       </Navbar>
-      <center><h1>Practitioner's List</h1></center>
+      <center><h1 className="pageheading">Practitioner's List</h1></center>
 
       <Table stripped bordered hover variant="dark" size="sm">
         <thead>

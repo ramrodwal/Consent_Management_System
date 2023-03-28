@@ -49,7 +49,7 @@ function HospitalList() {
       </Navbar>
 
 
-      <center><h1>Hospital List</h1></center>
+      <center><h1 className='pageheading'>Hospital List</h1></center>
 
       <Table stripped bordered hover variant="dark" size="sm">
         <thead>

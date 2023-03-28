@@ -25,7 +25,7 @@ const PatientNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link href="#home"></Nav.Link>
             <Nav.Link href="#features"></Nav.Link>
-            <Nav.Link href="#pricing">Logout </Nav.Link>
+            <Nav.Link href="/">Logout </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

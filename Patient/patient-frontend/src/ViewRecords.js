@@ -29,7 +29,7 @@ function ViewRecords(){
       </Navbar.Collapse>
     
   </Navbar>
-            <center><h1>View Records</h1></center>
+            <center><h1 className='pageheading'>View Records</h1></center>
 
 
             <Table stripped bordered hover variant="dark" size="sm">

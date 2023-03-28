@@ -16,7 +16,7 @@ return(
       <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="me-auto">
           
-          <Nav.Link href="/ViewConsent">Request Consent</Nav.Link>
+          <Nav.Link href="/ConsentRequest">Request Consent</Nav.Link>
           
         </Nav>
         <Nav className="me-auto">
@@ -25,7 +25,7 @@ return(
           
         </Nav>
         <Nav pullRight>
-          <Nav.Link href="/HospitalHome" >Logout</Nav.Link>
+          <Nav.Link href="/" >Logout</Nav.Link>
          
         </Nav>
 
@@ -35,7 +35,7 @@ return(
     
   </Navbar>
 
-  <center><h1>Welcome Doctor</h1></center>
+  <center><h1 className='pageheading'>Welcome Doctor</h1></center>
 
   <Container className="mt-5">
       
@@ -52,6 +52,40 @@ return(
             </Button>
           </Form>
           <br></br>
+
+          <Table stripped bordered hover variant="dark" size="sm">
+        <thead>
+          <tr className='tablehead'>
+            <th>Patient Name</th>
+            <th>Patient Id</th>
+            
+
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr>
+         <td>Patient one</td>
+         <td>Id 1</td>
+         </tr>
+         <tr>
+         <td>Patient two</td>
+         <td>Id 2</td>
+         </tr>
+         <tr>
+         <td>Patient three</td>
+         <td>Id 3</td>
+         </tr>
+         <tr>
+         <td>Patient four</td>
+         <td>Id 4</td>
+         </tr>
+         <tr>
+         <td>Patient five</td>
+         <td>Id 5</td>
+         </tr>
+        </tbody>
+      </Table>
 
     <center><Button variant="primary" type="submit" >
     Submit

@@ -24,7 +24,7 @@ function AdminLogin(){
 
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-      <Navbar.Brand href="/HospitalHome"><img
+      <Navbar.Brand href="/"><img
               alt=""
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJGgyT3J650KbeCUJAxvyYv7xwkd_5F1i108zeySI&s"
               width="30"
@@ -45,7 +45,7 @@ function AdminLogin(){
     
   </Navbar>
             <div className='pageheading'>
-            <center><h1>Admin Login</h1></center>
+            <center><h1 className='pageheading'>Admin Login</h1></center>
             </div>
 
             <div className="Auth-form-container">

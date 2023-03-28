@@ -31,7 +31,7 @@ return(
     
   </Navbar>
 
-    <center><h1>View All Requests</h1></center>
+    <center><h1 className='pageheading'>View All Requests</h1></center>
 
     <Table stripped bordered hover variant="dark" size="sm">
   <thead>

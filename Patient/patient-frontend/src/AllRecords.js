@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 function AllRecords(){
 return(
     <>
-    <center><h1>List of all records</h1></center>
+    <center><h1 className='pageheading'>List of all records</h1></center>
     <Table stripped bordered hover variant="dark" size="sm">
   <thead>
     <tr className='tablehead'>
