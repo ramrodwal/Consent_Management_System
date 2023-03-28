@@ -231,7 +231,7 @@ function SignUp() {
           {isNotEmpty(confirmPassword) && password !== confirmPassword && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
         </Form.Group>
 
-        <Button variant="primary" type="submit" href="/">
+        <Button variant="primary" type="submit" >
           Submit
         </Button>
       </Form>
