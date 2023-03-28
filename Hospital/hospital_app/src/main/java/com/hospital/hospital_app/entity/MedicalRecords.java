@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,19 +35,6 @@ import lombok.Setter;
 public class MedicalRecords {
 
 
-    //hospital_id is foreign key refrencing centralhospital hospital_id with on delete cascade 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
-    private CentralHospital ch2;
-
-    //doctor_id is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "doctor_id", referencedColumnName = "practitioner_aadhar")
-    private MedicalPractitioner medicalPractitioner;
-
-
     @Column(name = "patient_id",unique = true)
     // @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
     @NotBlank(message = "patient aadhar number can not be empty")
@@ -66,5 +55,19 @@ public class MedicalRecords {
     @NotBlank(message = "patient record can not be empty")
     private String record;
 
+
+    //hospital_id is foreign key refrencing centralhospital hospital_id with on delete cascade 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "hospital_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private CentralHospital ch2;
+
+    //doctor_id is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "doctor_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private MedicalPractitioner medicalPractitioner;
    
 }
