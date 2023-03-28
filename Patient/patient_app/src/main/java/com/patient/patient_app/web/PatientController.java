@@ -42,6 +42,17 @@ public class PatientController {
 
     }
 
+    @PutMapping("/update/{patient_aadhar}")
+    public ResponseEntity<Patient> updateProfile(@Valid @RequestBody Patient updatedPatient, @PathVariable String patient_aadhar){
+        Patient existingPatient = patientService.getPatient(patient_aadhar);
+        if(existingPatient == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.CREATED);
+
+    }
+
     
     
 }
