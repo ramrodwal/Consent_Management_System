@@ -49,9 +49,7 @@ function RegisterNewDoctor(){
           .then(response => console.log(response))
           .catch(error => console.log("There is an error!!"));
   }
-  // state = { otp: '' };
-
-  // const handleChange = (otp) => this.setState({ otp });
+ 
 return(
     <>
 
@@ -119,14 +117,6 @@ return(
           <option value="Others">Others</option>
         </Form.Control>
       </Form.Group>
-
-{/* <Form.Group className="mb-3" controlId="formBasicText" >
-  <Form.Label>Gender</Form.Label>
-  <Form.Control type="text" placeholder="Gender" value={gender}  onChange={(event) => setGender(event.target.value)}/> 
-  </Form.Group> */}
-
-
-  
      
   <Form.Group className="mb-3" controlId="formBasicEmail">
   <Form.Label>Email address</Form.Label>
