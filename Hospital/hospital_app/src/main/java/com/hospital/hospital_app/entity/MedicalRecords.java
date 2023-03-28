@@ -8,7 +8,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +18,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,18 +33,17 @@ import lombok.Setter;
 public class MedicalRecords {
 
 
-    @Column(name = "patient_id",unique = true)
-    // @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
-    @NotBlank(message = "patient aadhar number can not be empty")
-    private String patient_aadhar;
-
     @Id 
     @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
     @Column(name = "record_id")
     private int record_id;
 
-    
+    @Column(name = "patient_id",unique = true)
+    // @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
+    @NotBlank(message = "patient aadhar number can not be empty")
+    private String patient_aadhar;
+
     
     @NotBlank(message = "disease name can not be empty")
     private String disease_name;

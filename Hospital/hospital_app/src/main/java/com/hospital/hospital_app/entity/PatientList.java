@@ -28,6 +28,13 @@ import lombok.Setter;
 public class PatientList {
 
 
+        @Id
+        @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
+        @Column(nullable = false,unique = true)
+        @NonNull
+        @NotBlank(message = "patient aadhar number can not be empty")
+        private String patient_aadhar;
+
         
         //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
         @ManyToOne(fetch = FetchType.LAZY)
@@ -36,11 +43,6 @@ public class PatientList {
         private CentralHospital centralHospital1;
 
 
-        @Id
-        @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
-        @Column(nullable = false,unique = true)
-        @NonNull
-        @NotBlank(message = "patient aadhar number can not be empty")
-        private String patient_aadhar;
+        
 
 }
