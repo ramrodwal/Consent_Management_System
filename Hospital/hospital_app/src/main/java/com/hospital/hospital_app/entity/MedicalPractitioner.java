@@ -37,6 +37,12 @@ import lombok.Setter;
 @Table(name = "MedicalPractitioner")
 public class MedicalPractitioner {
 
+    @Id
+    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
+    @Column(unique = true)
+    @NotBlank(message = "aadhar number can not be empty")
+    private String practitioner_aadhar;
+
     @NotBlank(message = "first name can not be empty")
     private String fname;
 
@@ -78,11 +84,7 @@ public class MedicalPractitioner {
     @NotBlank(message = "zipcode can not be empty")
     private String zipcode;
 
-    @Id
-    @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
-    @Column(unique = true)
-    @NotBlank(message = "aadhar number can not be empty")
-    private String practitioner_aadhar;
+    
 
     @Column(unique = true)
     @NotBlank(message = "medical license id can not be empty")
