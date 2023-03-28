@@ -25,4 +25,6 @@ public class HospitalServiceImpl implements HospitalService {
     public List<CentralHospital> getAllDetails(){
         return (List<CentralHospital>) hospitalRepository.findAll();
     }
+
+
 }
