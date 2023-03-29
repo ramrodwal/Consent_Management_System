@@ -33,11 +33,11 @@ function DoctorList() {
             <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
             <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
             <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
+            <Nav.Link href="/DoctorList">Practitioner's List</Nav.Link>
 
           </Nav>
           <Nav>
-            <Nav.Link href="/" className="navbar-nav ml-auto">Logout</Nav.Link>
+            <Nav.Link href="/AdminLogin" className="navbar-nav ml-auto">Logout</Nav.Link>
 
           </Nav>
         </Navbar.Collapse>
