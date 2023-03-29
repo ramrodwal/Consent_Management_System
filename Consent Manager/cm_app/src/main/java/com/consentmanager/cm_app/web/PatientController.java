@@ -41,7 +41,6 @@ public class PatientController {
         public ResponseEntity<ConsentManager> viewResponse(@PathVariable Integer consent_id) {
             System.out.println(consent_id);
             return new ResponseEntity<>(consentResponseService.getConsentManager(consent_id), HttpStatus.OK);
-            
         }
     
     
