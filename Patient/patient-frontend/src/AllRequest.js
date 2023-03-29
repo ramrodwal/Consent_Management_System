@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import axios from 'axios';
 
 
 
@@ -12,7 +13,7 @@ function AllRequest(){
   const [requests,setRequests]=useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:9092/hospital/admin-login/hospital-list").then((response) => {
+    axios.get("http://localhost:9092/hospital/login/view-consents").then((response) => {
       setRequests(response.data);
     });
   }, []);
@@ -39,7 +40,7 @@ return(
     
   </Navbar>
 
-    <center><h1 className='pageheading'>View All Requests</h1></center>
+    {/* <center><h1 className='pageheading'>View All Requests</h1></center>
 
     <Table stripped bordered hover variant="dark" size="sm">
   <thead>
@@ -90,7 +91,34 @@ return(
 
     </tr>
   </tbody>
-</Table>
+</Table> */}
+
+<center><h1 className='pageheading'>Consent List</h1></center>
+
+      <Table stripped bordered hover variant="dark" size="sm">
+        <thead>
+          <tr className='tablehead'>
+            <th>Consent ID</th>
+            <th>Disease_name </th>
+            <th>Hospital_id  </th>
+            <th>Patient_aadhar</th>
+            <th>Practitioner_aadhar</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requests.map((request)=>(
+            <tr key={request.consent_id}>
+              <td>{request.consent_id}</td>
+              <td>{request.disease_name}</td>
+              <td>{request.hospital_id}</td>
+              <td>{request.patient_aadhar}</td>
+              <td>{request.practitioner_aadhar}</td>
+              <td>{request.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </>
 )
 

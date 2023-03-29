@@ -1,5 +1,7 @@
 package com.consentmanager.cm_app.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.consentmanager.cm_app.entity.ConsentManager;
@@ -16,5 +18,12 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
     public ConsentManager requestConsent(ConsentManager consentManager){
         return consentManagerRepository.save(consentManager);
     }
+
+    @Override
+    public List<ConsentManager> getAllDetails(){
+        return (List<ConsentManager>)consentManagerRepository.findAll();
+    }
+
+   
     
 }

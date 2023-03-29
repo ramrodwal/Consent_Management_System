@@ -9,6 +9,6 @@ import com.patient.patient_app.entity.RecordMapping;
 
 public interface RecordService {
 
-    RecordMapping addData(MedicalRecords medicalRecords);
+    RecordMapping addData(RecordMapping recordMapping);
     
 }

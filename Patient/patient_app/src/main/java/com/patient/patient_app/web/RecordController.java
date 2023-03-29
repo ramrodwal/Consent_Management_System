@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patient.patient_app.entity.MedicalRecords;
+import com.patient.patient_app.entity.RecordMapping;
 import com.patient.patient_app.service.RecordService;
 
 import ch.qos.logback.core.status.Status;
@@ -23,8 +24,8 @@ public class RecordController {
     RecordService recordService;
     
     @PostMapping("/meta-data")
-    public ResponseEntity<Status> addMetaData(@RequestBody MedicalRecords medicalRecords){
-        recordService.addData(medicalRecords);
+    public ResponseEntity<Status> addMetaData(@RequestBody RecordMapping recordMapping){
+        recordService.addData(recordMapping);
         return new ResponseEntity<>( HttpStatus.CREATED);
 
     }
