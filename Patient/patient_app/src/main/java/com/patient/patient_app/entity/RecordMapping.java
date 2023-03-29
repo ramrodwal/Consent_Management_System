@@ -50,6 +50,7 @@ public class RecordMapping {
         this.Id = Id;
         this.hospital_id = hospital_id;
         this.patient = patient;
+        
     }
 
 

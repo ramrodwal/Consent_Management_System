@@ -33,6 +33,10 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public RecordMapping addData(RecordMapping recordMapping){
+        // Patient patient=new Patient(null, "ram", "", "rodwal", 23, 
+        // "male", "ram@gmail.com", "1234567896", "hello", "hello", "123456", "afdsf", "123456789456", "dfsdf", "fsdffsd", "fsdfs");
+        // patient.setPatient_aadhar(patient_aadhar);
+        // recordMapping=new RecordMapping()
         return recordMetaDataRepository.save(recordMapping);
     }
 
