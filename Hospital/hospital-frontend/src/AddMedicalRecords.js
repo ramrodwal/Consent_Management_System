@@ -58,8 +58,8 @@ function AddMedicalRecords() {
       .catch(error => console.log("There is an error!!"));
       const hid =  hospital_id.centralHospital.hospital_id;
       const patient={fname :"vartika", mname: " ",lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
-       contactNo: patient_aadhar, state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
-        patient_aadhar: "341234321234", username: "vartika", password: "qwerty12", confirmPassword: "qwerty12" };
+       contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
+        patient_aadhar: patient_aadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12" };
       const recordDetail = {hospital_id: hid, patient:patient};
       axios.post('http://localhost:8765/records/meta-data', recordDetail)
       .then(response => console.log(response))
