@@ -24,9 +24,9 @@ public class RecordController {
     RecordService recordService;
     
     @PostMapping("/meta-data")
-    public ResponseEntity<Status> addMetaData(@RequestBody RecordMapping recordMapping){
-        recordService.addData(recordMapping);
-        return new ResponseEntity<>( HttpStatus.CREATED);
+    public ResponseEntity<RecordMapping> addMetaData(@RequestBody RecordMapping recordMapping){
+        
+        return new ResponseEntity<>(recordService.addData(recordMapping), HttpStatus.CREATED);
 
     }
 

@@ -22,6 +22,12 @@ function AddMedicalRecords() {
     }
   });
 
+  const [patient_aadhar_id,setPatientAadharId]=useState({
+    patient:{
+      patient_aadhar2:''
+    }
+  });
+
   const [doctor_id, setDoctorId] = useState({
     medicalPractitioner: {
       practitioner_aadhar: ''
@@ -51,7 +57,10 @@ function AddMedicalRecords() {
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
       const hid =  hospital_id.centralHospital.hospital_id;
-      const recordDetail = { patient_aadhar: patient_aadhar, hospital_id: hid};
+      const patient={fname :"vartika", mname: " ",lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
+       contactNo: "8723123423", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
+        patient_aadhar: "341234321234", username: "vartika", password: "qwerty12", confirmPassword: "qwerty12" };
+      const recordDetail = {hospital_id: hid, patient:patient};
       axios.post('http://localhost:8765/records/meta-data', recordDetail)
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
