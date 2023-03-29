@@ -32,7 +32,7 @@ import lombok.Setter;
 public class Patient {
     
     @JsonIgnore
-    @OneToMany(mappedBy = "p1", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<RecordMapping> recordList = new ArrayList<>();
 
     @NotBlank

@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+// @AllArgsConstructor
 @Entity
 @Table(name="RecordMapping")
 public class RecordMapping {
@@ -35,14 +37,20 @@ public class RecordMapping {
     private int Id;
 
     @Column(nullable = false)
-    @NotBlank
     @NotNull
     private int hospital_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "patient_id", referencedColumnName = "patient_aadhar")
-    private Patient p1;
+    @JoinColumn(name = "patient_aadhar")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Patient patient;
+
+    public RecordMapping(int Id, int hospital_id, Patient patient) {
+        this.Id = Id;
+        this.hospital_id = hospital_id;
+        this.patient = patient;
+    }
 
 
 }

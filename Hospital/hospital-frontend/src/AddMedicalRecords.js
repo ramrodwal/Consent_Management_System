@@ -50,6 +50,11 @@ function AddMedicalRecords() {
     axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
+      const hid =  hospital_id.centralHospital.hospital_id;
+      const recordDetail = { record_id: record_id, patient_aadhar: patient_aadhar, disease_name: disease_name, record: record, hospital_id: hid, medicalPractitioner: { practitioner_aadhar: doctor_id.medicalPractitioner.practitioner_aadhar } };
+      axios.post('http://localhost:8765/records/meta-data', recordDetail)
+      .then(response => console.log(response))
+      .catch(error => console.log("There is an error!!"));
   }
 
 
