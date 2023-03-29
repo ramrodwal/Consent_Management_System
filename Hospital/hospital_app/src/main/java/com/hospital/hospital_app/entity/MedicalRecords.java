@@ -8,7 +8,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +16,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,20 +34,12 @@ public class MedicalRecords {
     @Id 
     @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "record_id")
     private int record_id;
 
-    @Column(name = "patient_id",unique = true)
-    // @Pattern(regexp = "^\\d{12}$", message = "aadhar number should be of 12 digits")
-    @NotBlank(message = "patient aadhar number can not be empty")
     private String patient_aadhar;
 
-    
-    @NotBlank(message = "disease name can not be empty")
     private String disease_name;
-    //yaha file ka dekhna hai
     
-    @NotBlank(message = "patient record can not be empty")
     private String record;
 
 
@@ -58,12 +48,12 @@ public class MedicalRecords {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "hospital_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private CentralHospital ch2;
+    private CentralHospital centralHospital;
 
-    //doctor_id is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
+    //practitioner_aadhar is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "practitioner_aadhar")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MedicalPractitioner medicalPractitioner;
    

@@ -26,7 +26,7 @@ function HospitalList() {
 
         <Navbar.Brand href="/AdminPostLogin"><img
           alt=""
-          src="https://cdn.imgbin.com/21/4/22/imgbin-computer-icons-login-user-system-administrator-admin-L1LTfM47FsD3A2gus0rdy8WpJ.jpg"
+          src="/Admin.jpg"
           width="30"
           height="30"
           className="d-inline-block align-top"

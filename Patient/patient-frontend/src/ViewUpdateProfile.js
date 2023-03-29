@@ -31,7 +31,7 @@ return(
       </Navbar.Collapse>
     
   </Navbar>
-        <center><h1 className='pageheading'>View/Update Profile</h1></center>
+        <center><h1 className='pageheading'>Update Profile</h1></center>
         <Container className='formcontainer'>
         <Form>
 
