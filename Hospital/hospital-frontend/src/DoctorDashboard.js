@@ -24,6 +24,11 @@ return(
           <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
           
         </Nav>
+        <Nav className="me-auto">
+          
+          <Nav.Link href="/AddMedicalRecords">Add Medical Records</Nav.Link>
+          
+        </Nav>
         <Nav pullRight>
           <Nav.Link href="/" >Logout</Nav.Link>
          
