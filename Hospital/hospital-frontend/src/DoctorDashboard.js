@@ -40,7 +40,7 @@ return(
     
   </Navbar>
 
-  <center><h1 className='pageheading'>Welcome Doctor</h1></center>
+  <center><h1 className='pageheading'>Welcome Practitioner</h1></center>
 
   <Container className="mt-5">
       

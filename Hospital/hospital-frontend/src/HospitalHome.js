@@ -40,7 +40,7 @@ function HospitalHome(){
       
     </Card.Body>
     <Card.Footer>
-      <h3><b>Doctor's Login</b></h3>
+      <h3><b>Practitioner's Login</b></h3>
     </Card.Footer>
    
   </Card>
