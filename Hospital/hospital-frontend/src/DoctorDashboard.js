@@ -24,6 +24,11 @@ return(
           <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
           
         </Nav>
+        <Nav className="me-auto">
+          
+          <Nav.Link href="/AddMedicalRecords">Add Medical Records</Nav.Link>
+          
+        </Nav>
         <Nav pullRight>
           <Nav.Link href="/" >Logout</Nav.Link>
          
@@ -35,7 +40,7 @@ return(
     
   </Navbar>
 
-  <center><h1 className='pageheading'>Welcome Doctor</h1></center>
+  <center><h1 className='pageheading'>Welcome Practitioner</h1></center>
 
   <Container className="mt-5">
       

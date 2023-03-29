@@ -54,14 +54,14 @@ function RegisterNewHospital() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
-            <Nav.Link href="/RegisterNewDoctor">Register New Doctor</Nav.Link>
+            <Nav.Link href="/RegisterNewDoctor">Register New Practitioner</Nav.Link>
             <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Doctors' List</Nav.Link>
+            <Nav.Link href="/DoctorList">Practitioner's List</Nav.Link>
 
           </Nav>
           <Nav>
 
-            <Nav.Link href="/" className='navright'>Logout</Nav.Link>
+            <Nav.Link href="/AdminLogin" className='navright'>Logout</Nav.Link>
 
           </Nav>
         </Navbar.Collapse>

@@ -12,6 +12,7 @@ return(
   <thead>
     <tr className='tablehead'>
       <th className='tabledata'>All Records</th>  
+      <th></th>
       
       
       
@@ -20,33 +21,39 @@ return(
   </thead>
   <tbody>
     <tr>
-        <td className='tabledata'>1 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>1</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
         
         
 
     </tr>
     <tr>
-        <td className='tabledata'>2 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>2</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
        
 
     </tr>
     <tr>
-        <td className='tabledata'>3 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>3</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
      
 
     </tr>
     <tr>
-        <td className='tabledata'>4 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>4</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
         
 
     </tr>
     <tr>
-        <td className='tabledata'>5 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>5</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
         
 
     </tr>
     <tr>
-        <td className='tabledata'>6 <div className='checkbox'><Form.Check aria-label="option 1" /></div></td>
+        <td className='tabledata'>6</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
        
 
     </tr>
