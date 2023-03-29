@@ -229,7 +229,7 @@ function RegisterNewDoctor() {
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Zip Code</Form.Label>
-            <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} pattern="^\d{5}(?:[-\s]\d{4})?$" title="Please enter a valid zip code" />
+            <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} pattern="^\d{6}(?:[-\s]\d{4})?$" title="Please enter a valid zip code" />
             {!isNotEmpty(zipcode) && <Form.Text className="text-danger">Please enter a zip code</Form.Text>}
             {isNotEmpty(zipcode) && !isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code</Form.Text>}
           </Form.Group>
