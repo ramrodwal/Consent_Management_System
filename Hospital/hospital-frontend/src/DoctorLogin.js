@@ -37,7 +37,7 @@ function DoctorLogin(){
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link href="/BookAppointmentDoctor">Book Appointment</Nav.Link>
-          <Nav.Link href="/DoctorLogin">Doctors' Login</Nav.Link>
+          <Nav.Link href="/DoctorLogin">Practitioner's Login</Nav.Link>
           <Nav.Link href="/AdminLogin">Admin Login</Nav.Link>
           
           
@@ -48,7 +48,7 @@ function DoctorLogin(){
   </Navbar>
 
             <div className='pageheading'>
-            <center><h1>Doctor's Login</h1></center>
+            <center><h1>Practitioner's Login</h1></center>
             </div>
 
             <Container className='formcontainernew' > 

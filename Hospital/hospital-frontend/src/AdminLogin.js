@@ -39,7 +39,7 @@ function AdminLogin(){
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link href="/BookAppointmentDoctor">Book Appointment</Nav.Link>
-          <Nav.Link href="/DoctorLogin">Doctors' Login</Nav.Link>
+          <Nav.Link href="/DoctorLogin">Practitioner's Login</Nav.Link>
           <Nav.Link href="/AdminLogin">Admin Login</Nav.Link>
           
           
