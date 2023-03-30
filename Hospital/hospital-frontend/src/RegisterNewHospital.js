@@ -175,13 +175,13 @@ function RegisterNewHospital() {
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Address</Form.Label>
-            <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} required = {true} />
+            <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} required={true} />
           </Form.Group>
 
 <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Zip Code</Form.Label>
           <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} />
-          {!isValidZip(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
+          {!isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
         </Form.Group>
 
        

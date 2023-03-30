@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.patient.patient_app.entity.MedicalRecords;
 import com.patient.patient_app.entity.RecordMapping;
 import com.patient.patient_app.service.RecordService;
-
-import ch.qos.logback.core.status.Status;
 
 @RestController
 @CrossOrigin(origins = "*")
