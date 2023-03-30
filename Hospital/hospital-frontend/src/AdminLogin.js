@@ -10,14 +10,15 @@ import Container from "react-bootstrap/esm/Container";
 
 function AdminLogin(){
 
+  const[admin_id,setAdminId]=useState('');
   const [username, setUsername]=useState('');
   const [password, setPassword] = useState('');
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const hospitalDetails = { username: username,password: password};
-    axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
+    const hospitalDetails = { admin_id:admin_id, username: username,password: password};
+    axios.post('http://localhost:9099/hospital/admin-login', hospitalDetails)
         .then(response => console.log(response))
         .catch(error => console.log(error));
 }
@@ -55,12 +56,16 @@ function AdminLogin(){
             <Form className='formpad'>
 
             <Form.Group className="mb-3" controlId="formBasicText" >
+            <Form.Control type="hidden" value={admin_id} onChange={(event)=>setAdminId(event.target.value)}/>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Username"/>
+            <Form.Control type="text" placeholder="Username" value={username} onChange={(event)=>setUsername(event.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password"/>
+            <Form.Control type="password" placeholder="Password" value={username} onChange={(event)=>setUsername(event.target.value)}/>
             </Form.Group>
             </Form>
             <br></br>
