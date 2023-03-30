@@ -6,13 +6,16 @@ import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 import { useState } from 'react';
 import axios from "axios";
 
 function RegisterNewHospital() {
-
+  
+  const navigate = useNavigate();
 
   const [hospital_id, setHospitalId] = useState('');
   const [hospital_name, setHospitalName] = useState('');
@@ -22,7 +25,7 @@ function RegisterNewHospital() {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
 
-  const handleSubmit = (event) => {
+  let handleSubmit = (event) => {
     event.preventDefault();
     const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
     axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
@@ -34,10 +37,56 @@ function RegisterNewHospital() {
     return value.trim().length > 0;
   }
 
-  const isValidZip = (zipcode) => {
-    const isValidRegex = /^[0-9]{6}$/; // regular expression to check if the zipcode has 6 digits
-    return isValidRegex.test(zipcode);
+  function containsOnlyLettersAndSpaces(str) {
+    return /^[A-Za-z\s]+$/.test(str);
+  }
+
+  function isValidZipCode(zip) {
+    const regex = /^\d{6}(?:[-\s]\d{4})?$/;
+    return regex.test(zip);
+  }
+  function isValidPhoneNumber(number) {
+    // Regular expression for matching 10-digit phone number format
+    const phoneNumberRegex = /^[0-9]{10}$/;
+    return phoneNumberRegex.test(number);
+  }
+  function containsOnlyLetters(str) {
+    return /^[A-Za-z]+$/.test(str);
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
+      && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
+      && containsOnlyLettersAndSpaces(city) ){
+        
+  const practitionerDetails = {
+    hospital_id: hospital_id, 
+    hospital_name: hospital_name,
+     contactNumber: contactNumber, 
+     state: state,
+      city: city, 
+     address: address, 
+     zipcode: zipcode
   };
+      
+
+
+      console.log(practitionerDetails);
+      // further code to submit the form data to the server
+      toast.success('Form submitted successfully!', {
+        onClose: () => {
+          navigate("/");
+        }
+      });
+      
+      } else {
+      toast.error('Please fill in all the required fields with valid input.',
+         { position: toast.POSITION.TOP_CENTER});
+      
+      }
+    };
+
 
   return (
     <>
@@ -69,6 +118,7 @@ function RegisterNewHospital() {
       </Navbar>
 
       <Container>
+        <ToastContainer />
         <h1 className='pageheading'>Register New Hospital:</h1>
         <Container className='topCentre'>
           <center><Card className='toplogo'>
@@ -79,7 +129,7 @@ function RegisterNewHospital() {
         </Container>
 
 
-        <Form onClick={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id} onChange={(event) => setHospitalId(event.target.value)} />
@@ -106,21 +156,21 @@ function RegisterNewHospital() {
               title="Please enter a valid 10-digit contact number"
             />
             {!isNotEmpty(contactNumber) && <Form.Text className="text-danger">Please enter a contact number</Form.Text>}
-            {isNotEmpty(contactNumber) && !/^[0-9]{10}$/.test(contactNumber) && <Form.Text className="text-danger">Please enter a valid 10-digit contact number</Form.Text>}
+            {isNotEmpty(contactNumber) && !isValidPhoneNumber(contactNumber) && <Form.Text className="text-danger">Please enter a valid 10-digit contact number</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>State</Form.Label>
             <Form.Control type="text" placeholder="Enter State" value={state} onChange={(event) => setState(event.target.value)} required={true} pattern="[A-Za-z ]+" title="Please enter a valid state name" />
             {!isNotEmpty(state) && <Form.Text className="text-danger">Please enter a state name</Form.Text>}
-            {isNotEmpty(state) && !/^[A-Za-z ]+$/.test(state) && <Form.Text className="text-danger">Please enter a valid state name</Form.Text>}
+            {isNotEmpty(state) && !containsOnlyLettersAndSpaces(state) && <Form.Text className="text-danger">Please enter a valid state name</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>City</Form.Label>
             <Form.Control type="text" placeholder="Enter City" value={city} onChange={(event) => setCity(event.target.value)} required={true} pattern="^[A-Za-z\s]+$" title="Please enter a valid city name" />
             {!isNotEmpty(city) && <Form.Text className="text-danger">Please enter a city name</Form.Text>}
-            {isNotEmpty(city) && !/^[A-Za-z\s]+$/.test(city) && <Form.Text className="text-danger">Please enter a valid city name</Form.Text>}
+            {isNotEmpty(city) && !containsOnlyLettersAndSpaces(city) && <Form.Text className="text-danger">Please enter a valid city name</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
@@ -128,22 +178,17 @@ function RegisterNewHospital() {
             <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} required = {true} />
           </Form.Group>
 
-          {/* <Form.Group className="mb-3" controlId="formBasicText">
-            <Form.Label>Zip Code</Form.Label>
-            <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} />
-          </Form.Group> */}
-
 <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Zip Code</Form.Label>
           <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} />
-          {!isValidZip(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
+          {!isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
         </Form.Group>
 
-          <Link to='/AdminPostLogin'>
+       
             <Button variant="primary" type="submit"  >
               Submit
             </Button>
-          </Link>
+   
 
         </Form>
 

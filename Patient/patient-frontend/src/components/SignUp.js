@@ -4,10 +4,13 @@ import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+
 
 import { useState } from 'react';
-import Col from 'react-bootstrap/Col';
+
 import axios from "axios";
 
 const validGenders = ["Male", "Female", "Others"];
@@ -16,7 +19,7 @@ const MIN_AGE = 18;
 
 function SignUp() {
 
-
+  const navigate = useNavigate();
 
   const [fname, setFname] = useState('');
   const [mname, setMname] = useState('');
@@ -36,14 +39,17 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
 
-  const handleSubmit = (event) => {
+  let handleSubmit = (event) => {
     event.preventDefault();
+
     const patient = {
       fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
       state: state, city: city, zipcode: zipcode, patient_aadhar: patient_aadhar, password: password, confirmPassword: confirmPassword
     };
     axios.post('http://localhost:8765/patient/register', patient)
-      .then(response => console.log(response))
+      // .then(response => console.log(response))
+      .then((res) => {alert(res.data);
+      })
       .catch(error => console.log("this is an error!!!"));
   }
 
@@ -58,6 +64,17 @@ function SignUp() {
   function containsOnlyLettersAndSpaces(str) {
     return /^[a-zA-Z\s]*$/.test(str);
   }
+  
+  const isValidAge = (value) => {
+    return value >= MIN_AGE;
+  }
+  const isValidEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  const isValidContactNo = (value) => {
+    return /^[0-9]{10}$/.test(value);
+  }
 
   const isValidZip = (zipcode) => {
     const isValidRegex = /^[0-9]{6}$/; // regular expression to check if the zipcode has 6 digits
@@ -69,15 +86,50 @@ function SignUp() {
     if (aadharNumber.length !== 12) {
       return false;
     }
-
-
     return true;
   }
+
+  
+  const isMatchingPassword = (password, confirmPassword) => {
+    return password === confirmPassword;
+  }
+
+   handleSubmit = (event) => {
+    event.preventDefault();
+    if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname) && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo) && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode) && isValidAadhar(patient_aadhar) && isMatchingPassword(password, confirmPassword)) {
+      const patient = {
+        firstName: fname,
+        lastName: lname,
+        age: age,
+        gender: gender,
+        email: email,
+        contactNo: contactNo,
+        city: city,
+        state: state,
+        zip: zipcode,
+        aadhar: patient_aadhar,
+        password: password
+        };
+      console.log(patient);
+      // further code to submit the form data to the server
+      toast.success('Form submitted successfully!', {
+        onClose: () => {
+          navigate("/");
+        }
+      });
+      
+      } else {
+      toast.error('Please fill in all the required fields with valid input.',
+         { position: toast.POSITION.TOP_CENTER});
+      
+      }
+    };
 
 
 
   return (
     <Container>
+      <ToastContainer />
       <Card>
         <Card.Img class="logo" src="logo.png" />
       </Card>
@@ -89,17 +141,20 @@ function SignUp() {
           {!isNotEmpty(fname) && <Form.Text className="text-danger">Please enter a first name</Form.Text>}
           {isNotEmpty(fname) && !containsOnlyLetters(fname) && <Form.Text className="text-danger">Please enter only letters for the first name</Form.Text>}
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Middle Name</Form.Label>
           <Form.Control type="text" placeholder="Enter Middle Name" value={mname} onChange={(event) => setMname(event.target.value)} pattern="[A-Za-z]+" title="Please enter only letters" />
           {mname.length > 0 && !containsOnlyLetters(mname) && <Form.Text className="text-danger">Please enter only letters for the middle name</Form.Text>}
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Last Name</Form.Label>
           <Form.Control type="text" placeholder="Enter Last Name" value={lname} onChange={(event) => setLname(event.target.value)} required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
           {!isNotEmpty(lname) && <Form.Text className="text-danger">Please enter a last name</Form.Text>}
           {isNotEmpty(lname) && !containsOnlyLetters(lname) && <Form.Text className="text-danger">Please enter only letters for the last name</Form.Text>}
         </Form.Group>
+
         <Form.Group controlId="formBasicSelect">
           <Form.Label>Gender</Form.Label>
           <Form.Control as="select" value={gender} onChange={(event) => {
@@ -114,6 +169,7 @@ function SignUp() {
             <option value="Others">Others</option>
           </Form.Control>
         </Form.Group>
+
         <Row id="shiftright">
           <Form.Group className="mb-3" controlId="formBasicText" id="formsamerow">
             <Form.Label>Age</Form.Label>
@@ -138,6 +194,7 @@ function SignUp() {
             <Form.Control.Feedback type="invalid">Please enter a valid age.</Form.Control.Feedback>
           </Form.Group>
         </Row>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -219,7 +276,7 @@ function SignUp() {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} required={true} minLength={8} />
           {!isNotEmpty(password) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
-          {isNotEmpty(password) && password.length < 6 && <Form.Text className="text-danger">Password must be at least 6 characters long</Form.Text>}
+          {isNotEmpty(password) && password.length < 8 && <Form.Text className="text-danger">Password must be at least 8 characters long</Form.Text>}
         </Form.Group>
 
 
@@ -230,10 +287,12 @@ function SignUp() {
           {!isNotEmpty(confirmPassword) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
           {isNotEmpty(confirmPassword) && password !== confirmPassword && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
         </Form.Group>
-
-        <Button variant="primary" type="submit" >
+         
+          <Button variant="primary" type="submit" >
           Submit
         </Button>
+  
+
       </Form>
 
     </Container>

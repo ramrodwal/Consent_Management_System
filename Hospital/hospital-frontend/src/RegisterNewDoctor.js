@@ -3,10 +3,12 @@ import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 import { useState, useEffect } from 'react';
 import axios from "axios";
@@ -15,6 +17,7 @@ import axios from "axios";
 
 function RegisterNewDoctor() {
 
+  const navigate = useNavigate();
 
   const [fname, setFname] = useState();
   const [mname, setMname] = useState('');
@@ -51,7 +54,7 @@ function RegisterNewDoctor() {
 
 
 
-  const handleSubmit = (event) => {
+  let handleSubmit = (event) => {
     event.preventDefault();
     const practitionerDetails = {
       fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, number: number, state: state, city: city, address: address,
@@ -77,7 +80,9 @@ function RegisterNewDoctor() {
   function isNotEmpty(str) {
     return str.trim() !== '';
   }
-
+  const isValidAge = (value) => {
+    return value >= 21 ;
+  }
   function containsOnlyLetters(str) {
     return /^[A-Za-z]+$/.test(str);
   }
@@ -87,7 +92,7 @@ function RegisterNewDoctor() {
   }
 
   function isValidZipCode(zip) {
-    const regex = /^\d{5}(?:[-\s]\d{4})?$/;
+    const regex = /^\d{6}(?:[-\s]\d{4})?$/;
     return regex.test(zip);
   }
 
@@ -97,15 +102,59 @@ function RegisterNewDoctor() {
   }
 
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if( isValidEmail(email) && isValidPhoneNumber(number) && isValidAadharNumber(practitioner_aadhar)
+     && (password === confirmPassword) && containsOnlyLetters(fname) && containsOnlyLetters(lname)
+      && containsOnlyLettersAndSpaces(specialisation) && isValidAge(age) && isValidZipCode(zipcode)&& containsOnlyLettersAndSpaces(state)
+      && containsOnlyLettersAndSpaces(city) ){
+        
+  const practitionerDetails = {
+    fname: fname,
+    mname: mname,
+    lname: lname,
+    age: age,
+    gender: gender,
+    email: email,
+    username: username,
+    number: number,
+    state: state,
+    city: city,
+    address: address,
+    zipcode: zipcode,
+    practitioner_aadhar: practitioner_aadhar,
+    medical_license_id: medical_license_id,
+    specialisation: specialisation,
+    qualification: qualification,
+    password: password,
+    confirmPassword: confirmPassword,
+    centralHospital: {
+      hospital_id: hospital_id.centralHospital.hospital_id,
+    },
+  };
+      
 
 
-
-
+      console.log(practitionerDetails);
+      // further code to submit the form data to the server
+      toast.success('Form submitted successfully!', {
+        onClose: () => {
+          navigate("/");
+        }
+      });
+      
+      } else {
+      toast.error('Please fill in all the required fields with valid input.',
+         { position: toast.POSITION.TOP_CENTER});
+      
+      }
+    };
 
 
 
   return (
     <>
+    <ToastContainer/>
 
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 
@@ -173,7 +222,7 @@ function RegisterNewDoctor() {
           <Form.Group className="mb-3" controlId="formBasicText" id="formsamerow">
             <Form.Label>Age</Form.Label>
             <Form.Control type="number" placeholder="Enter Age" value={age} onChange={(event) => setAge(event.target.value)} min={1} max={120} />
-            {(age < 21 || age > 120) && <Form.Text className="text-danger">Please enter a valid age between 21 and 120</Form.Text>}
+            {(age < 21 ) && <Form.Text className="text-danger">Please enter a valid age above 21 </Form.Text>}
           </Form.Group>
 
 
@@ -210,7 +259,7 @@ function RegisterNewDoctor() {
             <Form.Label>State</Form.Label>
             <Form.Control type="text" placeholder="Enter State" value={state} onChange={(event) => setState(event.target.value)} required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
             {!isNotEmpty(state) && <Form.Text className="text-danger">Please enter a state</Form.Text>}
-            {isNotEmpty(state) && !containsOnlyLetters(state) && <Form.Text className="text-danger">Please enter only letters for the state</Form.Text>}
+            {isNotEmpty(state) &&  !containsOnlyLettersAndSpaces(state) && <Form.Text className="text-danger">Please enter a valid state</Form.Text>}
           </Form.Group>
 
 
@@ -229,7 +278,7 @@ function RegisterNewDoctor() {
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Zip Code</Form.Label>
-            <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} pattern="^\d{5}(?:[-\s]\d{4})?$" title="Please enter a valid zip code" />
+            <Form.Control type="text" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} pattern="^\d{6}(?:[-\s]\d{4})?$" title="Please enter a valid zip code" />
             {!isNotEmpty(zipcode) && <Form.Text className="text-danger">Please enter a zip code</Form.Text>}
             {isNotEmpty(zipcode) && !isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code</Form.Text>}
           </Form.Group>
