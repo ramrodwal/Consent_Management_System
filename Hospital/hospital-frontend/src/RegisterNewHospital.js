@@ -25,14 +25,6 @@ function RegisterNewHospital() {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
 
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
-    axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
-      .then(response => console.log(response))
-      .catch(error =>   console.log(error));
-  }
-
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
   }
@@ -54,21 +46,16 @@ function RegisterNewHospital() {
     return /^[A-Za-z]+$/.test(str);
   }
 
-   handleSubmit = (event) => {
+   const handleSubmit = (event) => {
     event.preventDefault();
-    if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
+    const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
+    if( containsOnlyLetters(hospital_name) && isValidPhoneNumber(contactNumber)
       && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
       && containsOnlyLettersAndSpaces(city) ){
+        axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
+        .then(response => console.log(response))
+      .catch(error =>   console.log(error));
         
-  const hospitalDetails = {
-    hospital_id: hospital_id, 
-    hospital_name: hospital_name,
-     contactNumber: contactNumber, 
-     state: state,
-      city: city, 
-     address: address, 
-     zipcode: zipcode
-  };
       navigate("/");
       
       } else {

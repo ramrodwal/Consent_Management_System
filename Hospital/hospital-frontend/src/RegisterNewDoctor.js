@@ -53,18 +53,6 @@ function RegisterNewDoctor() {
   }, []);
 
 
-
-  let handleSubmit = (event) => {
-    event.preventDefault();
-    const practitionerDetails = {
-      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, number: number, state: state, city: city, address: address,
-      zipcode: zipcode, practitioner_aadhar: practitioner_aadhar, medical_license_id: medical_license_id, specialisation: specialisation, qualification: qualification, password: password, confirmPassword: confirmPassword, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }
-    };
-    axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
-      .then(response => console.log(response))
-      .catch(error => console.log("There is an error!!"));
-  }
-
   function isValidEmail(email) {
     // Regular expression for matching email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -102,47 +90,22 @@ function RegisterNewDoctor() {
   }
 
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    const practitionerDetails = {
+      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, number: number, state: state, city: city, address: address,
+      zipcode: zipcode, practitioner_aadhar: practitioner_aadhar, medical_license_id: medical_license_id, specialisation: specialisation, qualification: qualification, password: password, confirmPassword: confirmPassword, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }
+    };
     if( isValidEmail(email) && isValidPhoneNumber(number) && isValidAadharNumber(practitioner_aadhar)
      && (password === confirmPassword) && containsOnlyLetters(fname) && containsOnlyLetters(lname)
       && containsOnlyLettersAndSpaces(specialisation) && isValidAge(age) && isValidZipCode(zipcode)&& containsOnlyLettersAndSpaces(state)
       && containsOnlyLettersAndSpaces(city) ){
-        
-  const practitionerDetails = {
-    fname: fname,
-    mname: mname,
-    lname: lname,
-    age: age,
-    gender: gender,
-    email: email,
-    username: username,
-    number: number,
-    state: state,
-    city: city,
-    address: address,
-    zipcode: zipcode,
-    practitioner_aadhar: practitioner_aadhar,
-    medical_license_id: medical_license_id,
-    specialisation: specialisation,
-    qualification: qualification,
-    password: password,
-    confirmPassword: confirmPassword,
-    centralHospital: {
-      hospital_id: hospital_id.centralHospital.hospital_id,
-    },
-  };
-      
 
+        axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
+          .then(response => console.log(response))
+          .catch(error => console.log("There is an error!!"));
 
-      console.log(practitionerDetails);
-      // further code to submit the form data to the server
-      toast.success('Form submitted successfully!', {
-        onClose: () => {
           navigate("/");
-        }
-      });
-      
       } else {
       toast.error('Please fill in all the required fields with valid input.',
          { position: toast.POSITION.TOP_CENTER});

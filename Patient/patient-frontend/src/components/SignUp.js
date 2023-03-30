@@ -38,21 +38,6 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-
-  let handleSubmit = (event) => {
-    event.preventDefault();
-
-    const patient = {
-      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
-      state: state, city: city, zipcode: zipcode, patient_aadhar: patient_aadhar, password: password, confirmPassword: confirmPassword
-    };
-    axios.post('http://localhost:8765/patient/register', patient)
-      // .then(response => console.log(response))
-      .then((res) => {alert(res.data);
-      })
-      .catch(error => console.log("this is an error!!!"));
-  }
-
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
   }
@@ -94,29 +79,19 @@ function SignUp() {
     return password === confirmPassword;
   }
 
-   handleSubmit = (event) => {
+   const handleSubmit = (event) => {
     event.preventDefault();
+    const patient = {
+      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
+      state: state, city: city, zipcode: zipcode, patient_aadhar: patient_aadhar, password: password, confirmPassword: confirmPassword
+    };
     if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname) && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo) && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode) && isValidAadhar(patient_aadhar) && isMatchingPassword(password, confirmPassword)) {
-      const patient = {
-        firstName: fname,
-        lastName: lname,
-        age: age,
-        gender: gender,
-        email: email,
-        contactNo: contactNo,
-        city: city,
-        state: state,
-        zip: zipcode,
-        aadhar: patient_aadhar,
-        password: password
-        };
-      console.log(patient);
-      // further code to submit the form data to the server
-      toast.success('Form submitted successfully!', {
-        onClose: () => {
-          navigate("/");
-        }
-      });
+   
+      axios.post('http://localhost:8765/patient/register', patient)
+      .then(response => console.log(response))
+      .catch(error => console.log("this is an error!!!"));
+      navigate("/");
+    
       
       } else {
       toast.error('Please fill in all the required fields with valid input.',
