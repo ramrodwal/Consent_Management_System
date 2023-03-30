@@ -1,36 +1,27 @@
 import React from 'react';
 import Container from "react-bootstrap/esm/Container";
-import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 
-function BookAppointmentDoctor(){const [fname, setFname ]= useState();
-    const [mname, setMname] = useState('');
-    const [lname, setLname] = useState('');
-    const [dob, setDob] = useState('');
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
-    const [state, setState] = useState('');
-    const [city, setCity] = useState('');
-    const [zip, setZip] = useState('');
-    const [aadhar, setAadhar] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [gender, setGender] = useState('');
+function BookAppointmentDoctor(){
+  const [patient_id, setPatientId] = useState('');
+  const [hospital_id, setHospitalId] = useState({hospital_id: ''});
+  const [hospitals, setHospitals] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
+      setHospitals(response.data);
+    });
+  }, []);
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      const patient = { fname: fname, mname: mname , lname: lname, dob: dob,email:email, username:username, phone:phone, address:address, state: state, city:city, zip:zip, 
-      aadhar:aadhar, password:password, confirmPassword:confirmPassword };
+      const patient = { hospital_id: hospital_id };
       axios.post('http://localhost:9090/api/patients', patient)
           .then(response => console.log(response))
           .catch(error => console.log(error));
@@ -69,18 +60,20 @@ function BookAppointmentDoctor(){const [fname, setFname ]= useState();
         
         <Container>
 
-            <Form.Group controlId="formBasicSelect">
-        <Form.Label>Hospital List</Form.Label>
-        <Form.Control as="select" value={gender} onChange={(event) => setDob(event.target.value)}>
-          <option value="Male">Hospital One</option>
-          <option value="Female">Hospital Two</option>
-          <option value="Others">Hospital Three</option>
-        </Form.Control>
-      </Form.Group><br></br>
+        <Form.Group controlId="formBasicSelect">
+            <Form.Label>Select Hospital Id</Form.Label>
+            <Form.Control as="select" value={hospital_id} onChange={(event) => setHospitalId({ hospital_id: event.target.value } )} >
+              <option value="">Hospital Id</option>
+              {hospitals.map((hospital) => (
+                <option key={hospital.id}>{hospital_id}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+      <br></br>
 
             <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Patient Id</Form.Label>
-  <Form.Control type="text" placeholder="Enter Patient Id" value={fname}  onChange={(event) => setFname(event.target.value)}/>
+  <Form.Control type="text" placeholder="Enter Patient Id" value={patient_id}  onChange={(event) => setPatientId(event.target.value)}/>
   </Form.Group>
   
   <Button variant="primary" type="submit" >

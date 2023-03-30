@@ -25,12 +25,12 @@ function RegisterNewHospital() {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
 
-  let handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
     axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
       .then(response => console.log(response))
-      .catch(error => console.log("There is an error!!"));
+      .catch(error =>   console.log(error));
   }
 
   const isNotEmpty = (value) => {
@@ -54,38 +54,38 @@ function RegisterNewHospital() {
     return /^[A-Za-z]+$/.test(str);
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
-      && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
-      && containsOnlyLettersAndSpaces(city) ){
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
+  //     && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
+  //     && containsOnlyLettersAndSpaces(city) ){
         
-  const practitionerDetails = {
-    hospital_id: hospital_id, 
-    hospital_name: hospital_name,
-     contactNumber: contactNumber, 
-     state: state,
-      city: city, 
-     address: address, 
-     zipcode: zipcode
-  };
+  // const hospitalDetails = {
+  //   hospital_id: hospital_id, 
+  //   hospital_name: hospital_name,
+  //    contactNumber: contactNumber, 
+  //    state: state,
+  //     city: city, 
+  //    address: address, 
+  //    zipcode: zipcode
+  // };
       
-
-
-      console.log(practitionerDetails);
-      // further code to submit the form data to the server
-      toast.success('Form submitted successfully!', {
-        onClose: () => {
-          navigate("/");
-        }
-      });
+  // axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
+  // .then((res) => {
+  //     alert(res.data);
+  //     navigate("/");
+    
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
       
-      } else {
-      toast.error('Please fill in all the required fields with valid input.',
-         { position: toast.POSITION.TOP_CENTER});
+  //     } else {
+  //     toast.error('Please fill in all the required fields with valid input.',
+  //        { position: toast.POSITION.TOP_CENTER});
       
-      }
-    };
+  //     }
+  //   };
 
 
   return (
