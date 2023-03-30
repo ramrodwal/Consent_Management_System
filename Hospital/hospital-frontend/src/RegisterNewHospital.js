@@ -25,7 +25,7 @@ function RegisterNewHospital() {
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
 
-  const handleSubmit = (event) => {
+  let handleSubmit = (event) => {
     event.preventDefault();
     const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
     axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
@@ -54,38 +54,29 @@ function RegisterNewHospital() {
     return /^[A-Za-z]+$/.test(str);
   }
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
-  //     && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
-  //     && containsOnlyLettersAndSpaces(city) ){
+   handleSubmit = (event) => {
+    event.preventDefault();
+    if( isValidPhoneNumber(contactNumber) && containsOnlyLetters(hospital_name) 
+      && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
+      && containsOnlyLettersAndSpaces(city) ){
         
-  // const hospitalDetails = {
-  //   hospital_id: hospital_id, 
-  //   hospital_name: hospital_name,
-  //    contactNumber: contactNumber, 
-  //    state: state,
-  //     city: city, 
-  //    address: address, 
-  //    zipcode: zipcode
-  // };
+  const hospitalDetails = {
+    hospital_id: hospital_id, 
+    hospital_name: hospital_name,
+     contactNumber: contactNumber, 
+     state: state,
+      city: city, 
+     address: address, 
+     zipcode: zipcode
+  };
+      navigate("/");
       
-  // axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
-  // .then((res) => {
-  //     alert(res.data);
-  //     navigate("/");
-    
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
+      } else {
+      toast.error('Please fill in all the required fields with valid input.',
+         { position: toast.POSITION.TOP_CENTER});
       
-  //     } else {
-  //     toast.error('Please fill in all the required fields with valid input.',
-  //        { position: toast.POSITION.TOP_CENTER});
-      
-  //     }
-  //   };
+      }
+    };
 
 
   return (
