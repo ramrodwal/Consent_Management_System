@@ -19,6 +19,8 @@ import com.hospital.hospital_app.entity.PatientList;
 import com.hospital.hospital_app.service.HospitalService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -56,5 +58,9 @@ public class HospitalController {
         return new ResponseEntity<>(hospitalService.addPatient(patientList), HttpStatus.CREATED);
 
     }
-   
+
+    @GetMapping("/get-patients")
+    public List<PatientList> getAllPatients(){
+        return hospitalService.getAllPatientsDetails();
+    }
 }

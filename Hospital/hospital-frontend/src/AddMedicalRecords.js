@@ -31,6 +31,7 @@ function AddMedicalRecords() {
 
   const [hospitals, setHospitals] = useState([]);
   const [doctors, setDoctors] = useState([]);
+  const [patients, setPatient]=useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
@@ -41,6 +42,12 @@ function AddMedicalRecords() {
   useEffect(() => {
     axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
       setDoctors(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:9099/hospital/get-patients").then((response) => {
+      setPatient(response.data);
     });
   }, []);
 
@@ -104,10 +111,15 @@ function AddMedicalRecords() {
             <Form.Control type="hidden" placeholder="Record Id" value={record_id} onChange={(event) => setRecordId(event.target.value)} />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicText">
-            <Form.Label>Patient Id</Form.Label>
-            <Form.Control type="text" placeholder="Patient Id" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)} required = {true} />
-          </Form.Group>
+          <Form.Group controlId="formBasicSelect">
+            <Form.Label>Select Patient Id</Form.Label>
+            <Form.Control as="select" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
+              <option value="">Patient Id</option>
+              {patients.map((patient) => (
+                <option key={patient.id}>{patient.patient_aadhar}</option>
+              ))}
+            </Form.Control>
+            </Form.Group>
 
 
           <Form.Group className="mb-3" controlId="formBasicText">

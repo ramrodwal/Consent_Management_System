@@ -11,5 +11,6 @@ public interface HospitalService {
     CentralHospital registerHospital(CentralHospital centralHospital);
     List<CentralHospital> getAllDetails();
     PatientList addPatient(PatientList patientList);
+    List<PatientList> getAllPatientsDetails();
 
 }

@@ -35,5 +35,10 @@ public class HospitalServiceImpl implements HospitalService {
         return patientRepository.save(patientList);
     }
 
+    @Override
+    public List<PatientList> getAllPatientsDetails() {
+        return (List<PatientList>) patientRepository.findAll();
+    }
+
 
 }
