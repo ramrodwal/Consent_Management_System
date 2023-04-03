@@ -3,6 +3,8 @@ package com.hospital.hospital_app.entity;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,9 +31,7 @@ public class PatientList {
 
 
         @Id
-        @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
-        @Column(nullable = false,unique = true)
-        @NonNull
+        // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
         @NotBlank(message = "patient aadhar number can not be empty")
         private String patient_aadhar;
 
@@ -39,7 +39,8 @@ public class PatientList {
         //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
         @ManyToOne(fetch = FetchType.LAZY)
         @OnDelete(action = OnDeleteAction.CASCADE)
-        @JoinColumn(name = "hospital_id", referencedColumnName = "hospital_id")
+        @JoinColumn(name = "hospital_id")
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         private CentralHospital centralHospital1;
 
 

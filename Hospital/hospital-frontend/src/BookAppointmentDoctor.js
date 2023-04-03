@@ -10,8 +10,13 @@ import axios from "axios";
 
 function BookAppointmentDoctor(){
   const [patient_id, setPatientId] = useState('');
-  const [hospital_id, setHospitalId] = useState({hospital_id: ''});
+  const [hospital_name, setHospitalName] = useState('');
   const [hospitals, setHospitals] = useState([]);
+  const [hospital_id, setHospitalId] = useState({
+    centralHospital: {
+      hospital_id: ''
+    }
+  });
 
   useEffect(() => {
     axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
@@ -19,13 +24,13 @@ function BookAppointmentDoctor(){
     });
   }, []);
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      const patient = { hospital_id: hospital_id };
-      axios.post('http://localhost:9090/api/patients', patient)
-          .then(response => console.log(response))
-          .catch(error => console.log(error));
-  }
+  //   const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     const patient = { hospital_id: hospital_id };
+  //     axios.post('http://localhost:9090/api/patients', patient)
+  //         .then(response => console.log(response))
+  //         .catch(error => console.log(error));
+  // }
 
 
 
@@ -61,11 +66,11 @@ function BookAppointmentDoctor(){
         <Container>
 
         <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Hospital Id</Form.Label>
-            <Form.Control as="select" value={hospital_id} onChange={(event) => setHospitalId({ hospital_id: event.target.value } )} >
-              <option value="">Hospital Id</option>
+            <Form.Label>Select Hospital Name</Form.Label>
+            <Form.Control as="select" >
+              <option value="">Hospital Name</option>
               {hospitals.map((hospital) => (
-                <option key={hospital.id}>{hospital_id}</option>
+                <option key={hospital.hospital_name} value={hospital_id.centralHospital.hospital_id} onChange={(event) => setHospitalId({ centralHospital: { hospital_id: hospital.hospital_id } })}>{hospital.hospital_name}</option>
               ))}
             </Form.Control>
           </Form.Group>
