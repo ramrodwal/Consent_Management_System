@@ -30,12 +30,6 @@ import lombok.Setter;
 public class PatientList {
 
 
-        @Id
-        // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
-        @NotBlank(message = "patient aadhar number can not be empty")
-        private String patient_aadhar;
-
-        
         //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
         @ManyToOne(fetch = FetchType.LAZY)
         @OnDelete(action = OnDeleteAction.CASCADE)
@@ -43,6 +37,10 @@ public class PatientList {
         @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         private CentralHospital centralHospital1;
 
+        @Id
+        // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
+        @NotBlank(message = "patient aadhar number can not be empty")
+        private String patient_aadhar;
 
         
 
