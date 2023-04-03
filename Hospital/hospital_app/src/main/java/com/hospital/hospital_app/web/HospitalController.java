@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.CentralHospital;
+import com.hospital.hospital_app.entity.PatientList;
 import com.hospital.hospital_app.service.HospitalService;
 
 import jakarta.validation.Valid;
@@ -49,4 +50,5 @@ public class HospitalController {
         return hospitalService.getAllDetails();
     }
 
+   
 }
