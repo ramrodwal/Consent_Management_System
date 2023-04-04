@@ -37,7 +37,7 @@ public class PatientList {
         @Id
         // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
         @NotBlank(message = "patient aadhar number can not be empty")
-        private String patient_aadhar;
+        private String patientAadhar;
 
         
 

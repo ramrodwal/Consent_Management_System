@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 function BookAppointmentDoctor() {
-  const [patient_id, setPatientId] = useState('');
+  const [patientAadhar, setPatientId] = useState('');
   const [hospitals, setHospitals] = useState([]);
   const [hospital_id, setHospitalId] = useState({
     centralHospital1: {
@@ -25,7 +25,7 @@ function BookAppointmentDoctor() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patient_aadhar: patient_id };
+    const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
     axios.post('http://localhost:9099/hospital/add-patient', patient)
       .then(response => console.log(response))
       .catch(error => console.log(error));
@@ -79,7 +79,7 @@ function BookAppointmentDoctor() {
 
           <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Label>Patient Id</Form.Label>
-            <Form.Control type="text" placeholder="Enter Patient Id" value={patient_id} onChange={(event) => setPatientId(event.target.value)} />
+            <Form.Control type="text" placeholder="Enter Patient Id" value={patientAadhar} onChange={(event) => setPatientId(event.target.value)} />
           </Form.Group>
 
           <Button variant="primary" type="submit" >

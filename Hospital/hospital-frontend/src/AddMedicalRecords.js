@@ -12,7 +12,7 @@ import axios from "axios";
 function AddMedicalRecords() {
 
   const [record_id, setRecordId] = useState('');
-  const [patient_aadhar, setPatientAadhar] = useState('');
+  const [patientAadhar, setPatientAadhar] = useState('');
   const [disease_name, setDiseaseName] = useState('');
   const [record, setRecord] = useState('');
   const [hospital_id, setHospitalId] = useState({
@@ -54,7 +54,7 @@ function AddMedicalRecords() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const recordDetails = { record_id: record_id, patient_aadhar: patient_aadhar, disease_name: disease_name, record: record, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }, medicalPractitioner: { practitioner_aadhar: doctor_id.medicalPractitioner.practitioner_aadhar } };
+    const recordDetails = { record_id: record_id, patientAadhar: patientAadhar, disease_name: disease_name, record: record, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }, medicalPractitioner: { practitioner_aadhar: doctor_id.medicalPractitioner.practitioner_aadhar } };
     axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
@@ -62,7 +62,7 @@ function AddMedicalRecords() {
     const patient = {
       fname: "vartika", mname: " ", lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
       contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
-      patient_aadhar: patient_aadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
+      patient_aadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
     };
     const recordDetail = { hospital_id: hid, patient: patient };
     axios.post('http://localhost:8765/records/meta-data', recordDetail)
@@ -113,10 +113,10 @@ function AddMedicalRecords() {
 
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Patient Id</Form.Label>
-            <Form.Control as="select" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
+            <Form.Control as="select" value={patientAadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
               <option value="">Patient Id</option>
               {patients.map((patient) => (
-                <option key={patient.id}>{patient.patient_aadhar}</option>
+                <option key={patient.id}>{patient.patientAadhar}</option>
               ))}
             </Form.Control>
             </Form.Group>

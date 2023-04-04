@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +37,8 @@ public class MedicalRecords {
     @GenericGenerator( name = "native", strategy = "native" )
     private int record_id;
 
-    private String patient_aadhar;
+    @Column(name="patient_aadhar")
+    private String patientAadhar;
 
     private String disease_name;
     
