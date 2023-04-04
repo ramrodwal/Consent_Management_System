@@ -2,10 +2,27 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
 function ViewRecords(){
+
+  const [records,setRecords]=useState([]);
+
+  let patient_aadhar="666666666666";
+
+  useEffect(() => {
+    axios.get(`http://localhost:9099/hospital/record-mapping/${patient_aadhar}`).then((response) => {
+      console.log(response);
+      setRecords(response.data);
+      console.log(records)
+    });
+  }, []);
+
+
+  
 
     return(
         <>
@@ -35,38 +52,26 @@ function ViewRecords(){
             <Table stripped bordered hover variant="dark" size="sm">
   <thead>
     <tr className='tablehead'>
-      <th className='tabledata'>Record List</th>  
+      <th className='tabledata'>Record Id</th>
+      <th className='tabledata'>Disease Name</th>  
+      <th className='tabledata'>Patient Aadhar</th>
+      <th className='tabledata'>Priescription</th>
+      <th className='tabledata'>Hospital Id</th>
+      <th className='tabledata'>Practitioners Aadhar</th>
       
-      
-      
- 
     </tr>
   </thead>
   <tbody>
-    <tr>
-        <td className='tabledata'>Record 1</td>
-
+  {records.map((record) => (
+    <tr key={record.id}>
+        <td className='tabledata'>{record.record_id}</td>
+        <td className='tabledata'>{record.disease_name}</td>
+        <td className='tabledata'>{record.patientAadhar}</td>
+        <td className='tabledata'>{record.record}</td>
+        <td className='tabledata'>{record.centralHospital.hospital_id}</td>
+        <td className='tabledata'>{record.medicalPractitioner.practitioner_aadhar}</td>
     </tr>
-    <tr>
-        <td className='tabledata'>Record 2</td>
-
-    </tr>
-    <tr>
-        <td className='tabledata'>Record 3</td>
-
-    </tr>
-    <tr>
-        <td className='tabledata'>Record 4</td>
-
-    </tr>
-    <tr>
-        <td className='tabledata'>Record 5</td>
-
-    </tr>
-    <tr>
-        <td className='tabledata'>Record 6</td>
-
-    </tr>
+  ))}
   </tbody>
 </Table>
         </>
