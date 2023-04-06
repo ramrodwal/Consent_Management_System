@@ -6,7 +6,7 @@ import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import axios from "axios";
 
 
@@ -19,6 +19,13 @@ function ConsentRequest() {
   const [patient_aadhar, setPatientAadhar] = useState('');
   const [disease_name, setDiseaseName] = useState('');
   const [status, setStatus] = useState('pending');
+  const [patientDetails, setDetails]=useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:9099/hospital/get-patients").then((response) => {
+      setDetails(response.data);
+    });
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -78,10 +85,15 @@ function ConsentRequest() {
             <Form.Label>Practitioner Aadhar</Form.Label>
             <Form.Control type="text" placeholder="Practitioner Aadhar" value={practitioner_aadhar} onChange={(event) => setPractitionerAadhar(event.target.value)} />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicText">
-            <Form.Label>Patient Aadhar</Form.Label>
-            <Form.Control type="text" placeholder="Patient Aadhar" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)} />
-          </Form.Group>
+          <Form.Group controlId="formBasicSelect">
+            <Form.Label>Select Patient Id</Form.Label>
+            <Form.Control as="select" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
+              <option value="">Patient Id</option>
+              {patientDetails.map((patient) => (
+                <option key={patient.id}>{patient.patientAadhar}</option>
+              ))}
+            </Form.Control>
+            </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Disease Name</Form.Label>
         <Form.Control 
