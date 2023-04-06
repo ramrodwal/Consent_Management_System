@@ -30,8 +30,18 @@ function BookAppointmentDoctor() {
       .then(response => console.log(response))
       .catch(error => console.log(error));
   }
-  
 
+  const isNotEmpty = (value) => {
+    return value.trim().length > 0;
+  }
+
+  function isValidAadhar(aadharNumber) {
+    // Validate length
+    if (aadharNumber.length !== 12) {
+      return false;
+    }
+    return true;
+  }
 
 
   return (
@@ -67,7 +77,7 @@ function BookAppointmentDoctor() {
         <form onClick={handleSubmit}>
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select" value = {hospital_id.centralHospital1.hospital_id} onChange={(event) => setHospitalId({ centralHospital1: { hospital_id: event.target.value } })}>
+            <Form.Control as="select" value={hospital_id.centralHospital1.hospital_id} onChange={(event) => setHospitalId({ centralHospital1: { hospital_id: event.target.value } })}>
               <option>Hospital Name</option>
               {hospitals.map((hospital) => (
                 <option value={hospital.hospital_id}>{hospital.hospital_name}</option>
@@ -77,9 +87,21 @@ function BookAppointmentDoctor() {
 
           <br></br>
 
-          <Form.Group className="mb-3" controlId="formBasicText" >
+          <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Patient Id</Form.Label>
-            <Form.Control type="text" placeholder="Enter Patient Id" value={patientAadhar} onChange={(event) => setPatientId(event.target.value)} />
+            <Form.Control
+              type="text"
+              placeholder="Enter Aadhar Card Number"
+              value={patientAadhar}
+              onChange={(event) => setPatientId(event.target.value)}
+              required={true}
+              pattern="[0-9]{12}"
+              title="Please enter a valid patient Id"
+            />
+            {!isNotEmpty(patientAadhar) && <Form.Text className="text-danger">Please enter an Patient Idr</Form.Text>}
+            {isNotEmpty(patientAadhar) && !isValidAadhar(patientAadhar) && (
+              <Form.Text className="text-danger">Please enter a valid patient Id</Form.Text>
+            )}
           </Form.Group>
 
           <Button variant="primary" type="submit" >
