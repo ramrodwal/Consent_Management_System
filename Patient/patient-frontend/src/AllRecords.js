@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form';
+import axios from 'react';
 
 
 
 function AllRecords(){
+
+  
+
 return(
     <>
     <center><h1 className='pageheading'>List of all records</h1></center>

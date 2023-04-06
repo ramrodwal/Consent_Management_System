@@ -8,7 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 const PatientProfileView = ({ match }) => {
   const [patient, setPatient] = useState(null);
 
-  const patient_aadhar = "147852369845";
+  const patient_aadhar = "666666666666";
 
   useEffect(() => {
     const fetchPatient = async () => {

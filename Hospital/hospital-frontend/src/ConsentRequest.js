@@ -9,6 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import axios from "axios";
 
+
 function ConsentRequest() {
 
 
@@ -29,6 +30,7 @@ function ConsentRequest() {
 
   function isNotEmpty(str) {
     return str.trim().length !== 0;
+
   }
   
 
@@ -65,8 +67,8 @@ function ConsentRequest() {
         <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3" controlId="formBasicText" >
-            <Form.Label>Consent Id</Form.Label>
-            <Form.Control type="text" placeholder="Consent Id" value={consent_id} onChange={(event) => setConsentId(event.target.value)} />
+             {/* <Form.Label>Consent Id</Form.Label> */}
+  <Form.Control type="hidden"  placeholder="Consent Id" value={consent_id}  onChange={(event) => setConsentId(event.target.value)}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Label>Hospital Id</Form.Label>
@@ -107,7 +109,9 @@ function ConsentRequest() {
       </Container>
     </>
 
+
   )
+
 }
 
 export default ConsentRequest;

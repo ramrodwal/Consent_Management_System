@@ -1,5 +1,7 @@
 package com.patient.patient_app.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.patient.patient_app.entity.RecordMapping;
@@ -18,6 +20,7 @@ public class RecordServiceImpl implements RecordService{
     public RecordMapping addData(RecordMapping recordMapping){
         return recordMetaDataRepository.save(recordMapping);
     }
+
 
     
 }

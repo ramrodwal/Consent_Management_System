@@ -6,6 +6,7 @@ package com.consentmanager.cm_app.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +15,8 @@ import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -41,8 +44,9 @@ public class ConsentManager {
     private List<ApprovedRecords> approvedRecords=new ArrayList<>(); 
 
     @Id
+    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
+    @GenericGenerator( name = "native", strategy = "native" )
     @Column(name = "consent_id",nullable = false)
-    @NonNull
     private int consent_id;
 
     @Column(name = "hospital_id",nullable = false)
