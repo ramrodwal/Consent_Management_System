@@ -9,7 +9,6 @@ import com.consentmanager.cm_app.entity.ConsentManager;
 import com.consentmanager.cm_app.repository.ConsentManagerRepository;
 import com.consentmanager.exception.EntityNotFoundException;
 
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 import lombok.AllArgsConstructor;
 
 @Service
