@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.consentmanager.cm_app.entity.ConsentManager;
-import com.consentmanager.cm_app.service.ConsentManagerService;
 import com.consentmanager.cm_app.service.ConsentResponseService;
 
 import jakarta.validation.Valid;
-import jakarta.validation.OverridesAttribute.List;
 
 @RestController
 @CrossOrigin(origins = "*")

@@ -11,7 +11,7 @@ import axios from "axios";
 
 function ConsentRequest(){
 
-    
+  
     const [consent_id, setConsentId]=useState('');
     const [hospital_id, setHospitalId] = useState('');
     const [practitioner_aadhar, setPractitionerAadhar] = useState('');
@@ -59,9 +59,9 @@ function ConsentRequest(){
 
   <Form onSubmit={handleSubmit}>
 
-  <Form.Group className="mb-3" controlId="formBasicText" >
-  <Form.Label>Consent Id</Form.Label>
-  <Form.Control type="text" placeholder="Consent Id" value={consent_id}  onChange={(event) => setConsentId(event.target.value)}/>
+  <Form.Group className="mb-3" controlId="formBasicText"  >
+  {/* <Form.Label>Consent Id</Form.Label> */}
+  <Form.Control type="hidden"  placeholder="Consent Id" value={consent_id}  onChange={(event) => setConsentId(event.target.value)}/>
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicText" >
   <Form.Label>Hospital Id</Form.Label>
