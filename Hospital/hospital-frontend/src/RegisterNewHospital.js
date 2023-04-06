@@ -117,8 +117,8 @@ function RegisterNewHospital() {
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Hospital Name</Form.Label>
             <Form.Control type="text" placeholder="Enter Hospital Name" value={hospital_name} onChange={(event) => setHospitalName(event.target.value)} required minLength={2} maxLength={50} />
-            {!isNotEmpty(hospital_name) && <Form.Text className="text-danger">Please enter a hospital name</Form.Text>}
-            {isNotEmpty(hospital_name) && (hospital_name.length < 2 || hospital_name.length > 50) && <Form.Text className="text-danger">Hospital name should be between 2 to 50 characters long</Form.Text>}
+            {!containsOnlyLettersAndSpaces(hospital_name) && <Form.Text className="text-danger">Please enter a hospital name</Form.Text>}
+            {containsOnlyLettersAndSpaces(hospital_name) && (hospital_name.length < 2 || hospital_name.length > 50) && <Form.Text className="text-danger">Hospital name should be between 2 to 50 characters long</Form.Text>}
           </Form.Group>
 
 

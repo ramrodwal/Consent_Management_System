@@ -1,18 +1,19 @@
-import React from 'react';
+import React,{ useState ,useEffect} from 'react';
 import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
-import { useState ,useEffect} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 function ConsentRequest() {
 
-
+  const navigate = useNavigate();
   const [consent_id, setConsentId] = useState('');
   const [hospital_id, setHospitalId] = useState('');
   const [practitioner_aadhar, setPractitionerAadhar] = useState('');
@@ -27,18 +28,31 @@ function ConsentRequest() {
     });
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const consentDetails = { consent_id: consent_id, hospital_id: hospital_id, practitioner_aadhar: practitioner_aadhar, patient_aadhar: patient_aadhar, disease_name: disease_name, status: status };
-    axios.post('http://localhost:9092/hospital/practitioner-login/view-patient/consent', consentDetails)
-      .then(response => console.log(response))
-      .catch(error => console.log("this is an error!"));
-  }
-
   function isNotEmpty(str) {
     return str.trim().length !== 0;
 
   }
+  function containsOnlyLettersAndSpaces(str) {
+    return /^[A-Za-z\s]+$/.test(str);
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const consentDetails = { consent_id: consent_id, hospital_id: hospital_id, practitioner_aadhar: practitioner_aadhar, patient_aadhar: patient_aadhar, disease_name: disease_name, status: status };
+   if(isNotEmpty(hospital_id) && isNotEmpty(practitioner_aadhar) && isNotEmpty(patient_aadhar) && containsOnlyLettersAndSpaces(disease_name)){
+    axios.post('http://localhost:9092/hospital/practitioner-login/view-patient/consent', consentDetails)
+    .then(response => console.log(response))
+    .catch(error => console.log("this is an error!"));
+    navigate("/DoctorDashboard");
+   }
+   else {
+    toast.error('Please fill in all the required fields with valid input.',
+       { position: toast.POSITION.TOP_CENTER});
+    
+    }
+   
+  };
+
+  
   
 
   return (
@@ -69,6 +83,7 @@ function ConsentRequest() {
       </Navbar>
 
       <Container>
+        <ToastContainer />
         <center><h1 className='pageheading'>Request Consent</h1></center>
 
         <Form onSubmit={handleSubmit}>

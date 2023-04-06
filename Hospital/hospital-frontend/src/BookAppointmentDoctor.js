@@ -5,10 +5,15 @@ import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function BookAppointmentDoctor() {
+  const navigate = useNavigate();
+
   const [patientAadhar, setPatientId] = useState('');
   const [hospitals, setHospitals] = useState([]);
   const [hospital_id, setHospitalId] = useState({
@@ -23,13 +28,7 @@ function BookAppointmentDoctor() {
     });
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
-    axios.post('http://localhost:9099/hospital/add-patient', patient)
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
-  }
+ 
 
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
@@ -43,6 +42,21 @@ function BookAppointmentDoctor() {
     return true;
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
+    if(isNotEmpty(hospital_id.centralHospital1.hospital_id) && isValidAadhar(patientAadhar)){
+      axios.post('http://localhost:9099/hospital/add-patient', patient)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+      navigate("/");
+    }
+   else {
+    toast.error('Please fill in all the required fields with valid input.',
+       { position: toast.POSITION.TOP_CENTER});
+    
+    }
+  };
 
   return (
     <>
@@ -74,7 +88,8 @@ function BookAppointmentDoctor() {
       </div>
 
       <Container>
-        <form onClick={handleSubmit}>
+        <ToastContainer />
+        <form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
             <Form.Control as="select" value={hospital_id.centralHospital1.hospital_id} onChange={(event) => setHospitalId({ centralHospital1: { hospital_id: event.target.value } })}>

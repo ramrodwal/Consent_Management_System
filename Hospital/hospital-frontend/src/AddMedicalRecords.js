@@ -5,11 +5,14 @@ import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
 
 function AddMedicalRecords() {
+  const navigate = useNavigate();
 
   const [record_id, setRecordId] = useState('');
   const [patientAadhar, setPatientAadhar] = useState('');
@@ -33,6 +36,19 @@ function AddMedicalRecords() {
   const [doctors, setDoctors] = useState([]);
   const [patients, setPatient]=useState([]);
 
+  function isValidAadhar(aadharNumber) {
+    // Validate length
+    if (aadharNumber.length !== 12) {
+      return false;
+    }
+    return true;
+  }
+  function containsOnlyLettersAndSpaces(str) {
+    return /^[A-Za-z\s]+$/.test(str);
+  }
+  function isNotEmpty(value) {
+    return value.trim().length !== 0;
+  }
   useEffect(() => {
     axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
       setHospitals(response.data);
@@ -55,7 +71,8 @@ function AddMedicalRecords() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const recordDetails = { record_id: record_id, patientAadhar: patientAadhar, disease_name: disease_name, record: record, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }, medicalPractitioner: { practitioner_aadhar: doctor_id.medicalPractitioner.practitioner_aadhar } };
-    axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
+    if(isValidAadhar(patientAadhar) && isNotEmpty(disease_name) && containsOnlyLettersAndSpaces(disease_name) && isNotEmpty(record)){
+      axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
     const hid = hospital_id.centralHospital.hospital_id;
@@ -68,11 +85,18 @@ function AddMedicalRecords() {
     axios.post('http://localhost:8765/records/meta-data', recordDetail)
       .then(response => console.log(response))
       .catch(error => console.log("There is an error!!"));
-  }
 
-  function isNotEmpty(value) {
-    return value.trim().length !== 0;
-  }
+      navigate("/DoctorDashboard");
+    }
+    else {
+      toast.error('Please fill in all the required fields with valid input.',
+         { position: toast.POSITION.TOP_CENTER});
+      
+      }
+    
+  };
+
+ 
 
 
   return (
@@ -105,6 +129,7 @@ function AddMedicalRecords() {
 
       <center><h1 className='pageheading'>Add Medical Records</h1></center>
       <Container className='formcontainer'>
+        <ToastContainer />
         <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3" controlId="formBasicText" >
