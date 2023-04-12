@@ -32,7 +32,7 @@ import lombok.Setter;
 public class MedicalPractitioner {
 
     @Id
-    private String practitioner_aadhar;
+    private String practitionerAadhar;
 
     private String fname;
 
