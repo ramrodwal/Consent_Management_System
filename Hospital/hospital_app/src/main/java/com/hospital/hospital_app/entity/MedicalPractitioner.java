@@ -83,4 +83,8 @@ public class MedicalPractitioner {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "medicalPractitioner" , cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientList> patientLists=new ArrayList<>();
+
 }

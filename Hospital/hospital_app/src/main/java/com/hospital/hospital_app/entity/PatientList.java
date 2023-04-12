@@ -37,8 +37,18 @@ public class PatientList {
         @Id
         // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
         @NotBlank(message = "patient aadhar number can not be empty")
-        private String patientAadhar;
+        private String patient_aadhar;
 
+        @NotBlank(message = "please enter a valid name")
+        private String patientName;
+
+
+        //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
+        @ManyToOne(fetch = FetchType.LAZY)
+        @OnDelete(action = OnDeleteAction.CASCADE)
+        @JoinColumn(name = "practitioner_aadhar")
+        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+        private MedicalPractitioner medicalPractitioner;
         
 
 }
