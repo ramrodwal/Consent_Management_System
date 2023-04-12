@@ -11,10 +11,10 @@ function ViewRecords(){
 
   const [records,setRecords]=useState([]);
 
-  let patient_aadhar="666666666666";
+  let patientAadhar="666666666666";
 
   useEffect(() => {
-    axios.get(`http://localhost:9099/hospital/record-mapping/${patient_aadhar}`).then((response) => {
+    axios.get(`http://localhost:9099/hospital/record-mapping/${patientAadhar}`).then((response) => {
       console.log(response);
       setRecords(response.data);
       console.log(records)
@@ -68,8 +68,8 @@ function ViewRecords(){
         <td className='tabledata'>{record.disease_name}</td>
         <td className='tabledata'>{record.patientAadhar}</td>
         <td className='tabledata'>{record.record}</td>
-        <td className='tabledata'>{record.centralHospital.hospital_id}</td>
-        <td className='tabledata'>{record.medicalPractitioner.practitioner_aadhar}</td>
+        <td className='tabledata'>{record.centralHospital.hospitalId}</td>
+        <td className='tabledata'>{record.medicalPractitioner.practitionerAadhar}</td>
     </tr>
   ))}
   </tbody>

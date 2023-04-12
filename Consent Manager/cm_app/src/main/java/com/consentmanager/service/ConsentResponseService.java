@@ -1,6 +1,6 @@
-package com.consentmanager.cm_app.service;
+package com.consentmanager.service;
 
-import com.consentmanager.cm_app.entity.ConsentManager;
+import com.consentmanager.entity.ConsentManager;
 
 public interface ConsentResponseService {
 

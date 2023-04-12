@@ -5,7 +5,7 @@ import com.patient.patient_app.entity.Patient;
 public interface PatientService {
 
     Patient registerPatient(Patient patient);
-    Patient getPatient(String patient_aadhar);
+    Patient getPatient(String patientAadhar);
     Patient updateProfile(Patient patient);
     
 }

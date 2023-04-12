@@ -1,8 +1,8 @@
-package com.consentmanager.cm_app.repository;
+package com.consentmanager.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.consentmanager.cm_app.entity.ConsentManager;
+import com.consentmanager.entity.ConsentManager;
 
 public interface ConsentManagerRepository extends CrudRepository<ConsentManager,Integer> {
     

@@ -1,8 +1,8 @@
-package com.consentmanager.cm_app.service;
+package com.consentmanager.service;
 
 import java.util.List;
 
-import com.consentmanager.cm_app.entity.ConsentManager;
+import com.consentmanager.entity.ConsentManager;
 
 public interface ConsentManagerService {
     ConsentManager requestConsent(ConsentManager consentManager);
