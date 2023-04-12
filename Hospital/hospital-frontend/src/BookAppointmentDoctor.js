@@ -18,9 +18,9 @@ function BookAppointmentDoctor() {
   const [patientName,setPatientName]=useState('');
   const [practitionerName,setPractitionerName]=useState('');
   const [hospitals, setHospitals] = useState([]);
-  const [hospital_id, setHospitalId] = useState({
+  const [hospitalId, setHospitalId] = useState({
     centralHospital1: {
-      hospital_id: ''
+      hospitalId: ''
     }
   });
 
@@ -51,9 +51,11 @@ function BookAppointmentDoctor() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
     if(isNotEmpty(hospital_id.centralHospital1.hospital_id) && isValidAadhar(patientAadhar) &&containsOnlyLettersAndSpaces(patientName) 
     && containsOnlyLettersAndSpaces(practitionerName)){
+
       axios.post('http://localhost:9099/hospital/add-patient', patient)
       .then(response => console.log(response))
       .catch(error => console.log(error));
@@ -100,10 +102,10 @@ function BookAppointmentDoctor() {
         <form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select" value={hospital_id.centralHospital1.hospital_id} onChange={(event) => setHospitalId({ centralHospital1: { hospital_id: event.target.value } })}>
+            <Form.Control as="select" value={hospitalId.centralHospital1.hospitalId} onChange={(event) => setHospitalId({ centralHospital1: { hospitalId: event.target.value } })}>
               <option>Hospital Name</option>
               {hospitals.map((hospital) => (
-                <option value={hospital.hospital_id}>{hospital.hospital_name}</option>
+                <option value={hospital.hospitalId}>{hospital.hospitalName}</option>
               ))}
             </Form.Control>
           </Form.Group>

@@ -14,11 +14,11 @@ import axios from "axios";
 function ConsentRequest() {
 
   const navigate = useNavigate();
-  const [consent_id, setConsentId] = useState('');
-  const [hospital_id, setHospitalId] = useState('');
-  const [practitioner_aadhar, setPractitionerAadhar] = useState('');
-  const [patient_aadhar, setPatientAadhar] = useState('');
-  const [disease_name, setDiseaseName] = useState('');
+  const [consentId, setConsentId] = useState('');
+  const [hospitalId, setHospitalId] = useState('');
+  const [practitionerAadhar, setPractitionerAadhar] = useState('');
+  const [patientAadhar, setPatientAadhar] = useState('');
+  const [diseaseName, setDiseaseName] = useState('');
   const [status, setStatus] = useState('pending');
   const [patientDetails, setDetails]=useState([]);
 
@@ -37,8 +37,8 @@ function ConsentRequest() {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const consentDetails = { consent_id: consent_id, hospital_id: hospital_id, practitioner_aadhar: practitioner_aadhar, patient_aadhar: patient_aadhar, disease_name: disease_name, status: status };
-   if(isNotEmpty(hospital_id) && isNotEmpty(practitioner_aadhar) && isNotEmpty(patient_aadhar) && containsOnlyLettersAndSpaces(disease_name)){
+    const consentDetails = { consentId: consentId, hospitalId: hospitalId, practitionerAadhar: practitionerAadhar, patientAadhar: patientAadhar, diseaseName: diseaseName, status: status };
+   if(isNotEmpty(hospitalId) && isNotEmpty(practitionerAadhar) && isNotEmpty(patientAadhar) && containsOnlyLettersAndSpaces(diseaseName)){
     axios.post('http://localhost:9092/hospital/practitioner-login/view-patient/consent', consentDetails)
     .then(response => console.log(response))
     .catch(error => console.log("this is an error!"));
@@ -90,19 +90,19 @@ function ConsentRequest() {
 
           <Form.Group className="mb-3" controlId="formBasicText" >
              {/* <Form.Label>Consent Id</Form.Label> */}
-  <Form.Control type="hidden"  placeholder="Consent Id" value={consent_id}  onChange={(event) => setConsentId(event.target.value)}/>
+  <Form.Control type="hidden"  placeholder="Consent Id" value={consentId}  onChange={(event) => setConsentId(event.target.value)}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText" >
             <Form.Label>Hospital Id</Form.Label>
-            <Form.Control type="text" placeholder="Hospital Id" value={hospital_id} onChange={(event) => setHospitalId(event.target.value)} />
+            <Form.Control type="text" placeholder="Hospital Id" value={hospitalId} onChange={(event) => setHospitalId(event.target.value)} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Practitioner Aadhar</Form.Label>
-            <Form.Control type="text" placeholder="Practitioner Aadhar" value={practitioner_aadhar} onChange={(event) => setPractitionerAadhar(event.target.value)} />
+            <Form.Control type="text" placeholder="Practitioner Aadhar" value={practitionerAadhar} onChange={(event) => setPractitionerAadhar(event.target.value)} />
           </Form.Group>
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Patient Id</Form.Label>
-            <Form.Control as="select" value={patient_aadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
+            <Form.Control as="select" value={patientAadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
               <option value="">Patient Id</option>
               {patientDetails.map((patient) => (
                 <option key={patient.id}>{patient.patientAadhar}</option>
@@ -114,14 +114,14 @@ function ConsentRequest() {
         <Form.Control 
           type="text" 
           placeholder="Disease Name" 
-          value={disease_name} 
+          value={diseaseName} 
           onChange={(event) => setDiseaseName(event.target.value)}
           required={true}
           minLength={3}
           maxLength={50}
         />
-        {!isNotEmpty(disease_name) && <Form.Text className="text-danger">Please enter a disease name</Form.Text>}
-        {isNotEmpty(disease_name) && (disease_name.length < 3 || disease_name.length > 50) && <Form.Text className="text-danger">Disease name must be between 3 and 50 characters long</Form.Text>}
+        {!isNotEmpty(diseaseName) && <Form.Text className="text-danger">Please enter a disease name</Form.Text>}
+        {isNotEmpty(diseaseName) && (diseaseName.length < 3 || diseaseName.length > 50) && <Form.Text className="text-danger">Disease name must be between 3 and 50 characters long</Form.Text>}
       </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Status</Form.Label>

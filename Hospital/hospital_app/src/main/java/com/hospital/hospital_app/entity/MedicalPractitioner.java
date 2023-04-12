@@ -62,7 +62,7 @@ public class MedicalPractitioner {
     private String zipcode;
 
     @Column(unique = true)
-    private String medical_license_id;
+    private String medicalLicenseId;
 
     private String specialisation;
 
@@ -79,7 +79,7 @@ public class MedicalPractitioner {
     //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hospital_id")
+    @JoinColumn(name = "hospitalId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 

@@ -67,8 +67,8 @@ function HospitalList() {
         <tbody>
           {hospitals.map((hospital)=>(
             <tr key={hospital.id}>
-              <td>{hospital.hospital_id}</td>
-              <td>{hospital.hospital_name}</td>
+              <td>{hospital.hospitalId}</td>
+              <td>{hospital.hospitalName}</td>
               <td>{hospital.contactNumber}</td>
               <td>{hospital.state}</td>
               <td>{hospital.city}</td>

@@ -35,12 +35,12 @@ public class MedicalRecords {
     @Id 
     @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    private int record_id;
+    private int recordId;
 
-    @Column(name="patient_aadhar")
+    @Column(name="patientAadhar")
     private String patientAadhar;
 
-    private String disease_name;
+    private String diseaseName;
     
     private String record;
 
@@ -48,14 +48,14 @@ public class MedicalRecords {
     //hospital_id is foreign key refrencing centralhospital hospital_id with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "hospital_id")
+    @JoinColumn(name = "hospitalId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private CentralHospital centralHospital;
 
     //practitioner_aadhar is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "practitioner_aadhar")
+    @JoinColumn(name = "practitionerAadhar")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private MedicalPractitioner medicalPractitioner;
    

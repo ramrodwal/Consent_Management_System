@@ -10,14 +10,14 @@ import Container from "react-bootstrap/esm/Container";
 
 function AdminLogin(){
 
-  const[admin_id,setAdminId]=useState('');
+  const[adminId,setAdminId]=useState('');
   const [username, setUsername]=useState('');
   const [password, setPassword] = useState('');
   
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const hospitalDetails = { admin_id:admin_id, username: username,password: password};
+    const hospitalDetails = { adminId:adminId, username: username,password: password};
     axios.post('http://localhost:9099/hospital/admin-login', hospitalDetails)
         .then(response => console.log(response))
         .catch(error => console.log(error));
@@ -56,7 +56,7 @@ function AdminLogin(){
             <Form className='formpad'>
 
             <Form.Group className="mb-3" controlId="formBasicText" >
-            <Form.Control type="hidden" value={admin_id} onChange={(event)=>setAdminId(event.target.value)}/>
+            <Form.Control type="hidden" value={adminId} onChange={(event)=>setAdminId(event.target.value)}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicText" >
