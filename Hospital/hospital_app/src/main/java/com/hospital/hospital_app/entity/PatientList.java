@@ -5,7 +5,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -31,14 +30,14 @@ public class PatientList {
         //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
         @ManyToOne(fetch = FetchType.LAZY)
         @OnDelete(action = OnDeleteAction.CASCADE)
-        @JoinColumn(name = "hospital_id")
+        @JoinColumn(name = "hospitalId")
         @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
         private CentralHospital centralHospital1;
 
         @Id
         // @Pattern(regexp = "^\\d{12}$", message = "Please enter a valid aadhar number")
         @NotBlank(message = "patient aadhar number can not be empty")
-        private String patient_aadhar;
+        private String patientAadhar;
 
         @NotBlank(message = "please enter a valid name")
         private String patientName;

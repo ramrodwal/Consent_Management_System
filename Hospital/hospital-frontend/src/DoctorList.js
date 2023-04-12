@@ -81,11 +81,11 @@ function DoctorList() {
               <td>{practitioner.state}</td>
               <td>{practitioner.city}</td>
               <td>{practitioner.zipcode}</td>
-              <td>{practitioner.practitioner_aadhar}</td>
-              <td>{practitioner.medical_license_id}</td>
+              <td>{practitioner.practitionerAadhar}</td>
+              <td>{practitioner.medicalLicenseId}</td>
               <td>{practitioner.specialisation}</td>
               <td>{practitioner.qualification}</td>
-              <td>{practitioner.centralHospital.hospital_id}</td>
+              <td>{practitioner.centralHospital.hospitalId}</td>
             </tr>
           ))}
         </tbody>

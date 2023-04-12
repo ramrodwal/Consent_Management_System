@@ -41,8 +41,8 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public List<PatientList> getPatientsByPractitionerAadhar(String practitioner_aadhar) {
-        return (List<PatientList>) patientRepository.findByMedicalPractitioner_practitionerAadhar(practitioner_aadhar);
+    public List<PatientList> getPatientsByPractitionerAadhar(String practitionerAadhar) {
+        return (List<PatientList>) patientRepository.findByMedicalPractitioner_practitionerAadhar(practitionerAadhar);
     }
 
 
