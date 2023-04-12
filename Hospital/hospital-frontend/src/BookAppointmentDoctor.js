@@ -15,6 +15,8 @@ function BookAppointmentDoctor() {
   const navigate = useNavigate();
 
   const [patientAadhar, setPatientId] = useState('');
+  const [patientName,setPatientName]=useState('');
+  const [practitionerName,setPractitionerName]=useState('');
   const [hospitals, setHospitals] = useState([]);
   const [hospital_id, setHospitalId] = useState({
     centralHospital1: {
@@ -42,10 +44,16 @@ function BookAppointmentDoctor() {
     return true;
   }
 
+  function containsOnlyLettersAndSpaces(str) {
+    return /^[A-Za-z\s]+$/.test(str);
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
-    if(isNotEmpty(hospital_id.centralHospital1.hospital_id) && isValidAadhar(patientAadhar)){
+    if(isNotEmpty(hospital_id.centralHospital1.hospital_id) && isValidAadhar(patientAadhar) &&containsOnlyLettersAndSpaces(patientName) 
+    && containsOnlyLettersAndSpaces(practitionerName)){
       axios.post('http://localhost:9099/hospital/add-patient', patient)
       .then(response => console.log(response))
       .catch(error => console.log(error));
@@ -113,10 +121,34 @@ function BookAppointmentDoctor() {
               pattern="[0-9]{12}"
               title="Please enter a valid patient Id"
             />
-            {!isNotEmpty(patientAadhar) && <Form.Text className="text-danger">Please enter an Patient Idr</Form.Text>}
+            {!isNotEmpty(patientAadhar) && <Form.Text className="text-danger">Please enter a Patient Id</Form.Text>}
             {isNotEmpty(patientAadhar) && !isValidAadhar(patientAadhar) && (
               <Form.Text className="text-danger">Please enter a valid patient Id</Form.Text>
             )}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicText">
+            <Form.Label>Patient Name</Form.Label>
+          <Form.Control
+              type="text"
+              placeholder="Enter Patient Name"
+              value={patientName}
+              onChange={(event) => setPatientName(event.target.value)}
+              required={true}
+              title="Please enter a valid patient Id"
+            />
+            {!isNotEmpty(patientName) && <Form.Text className="text-danger">Please enter a Patient Name</Form.Text>}
+            {isNotEmpty(patientName) && !isValidAadhar(patientName) && !containsOnlyLettersAndSpaces(patientName) && (
+              <Form.Text className="text-danger">Please enter a valid patient Name</Form.Text>
+            )}
+            </Form.Group>
+          <Form.Group controlId="formBasicSelect">
+            <Form.Label>Select Practitioner Name</Form.Label>
+            <Form.Control as="select" value={practitionerName} onChange={(event) => setPractitionerName(event.target.value)}>
+              <option>Practitioner Name</option>
+              {/* {practioners.map((practitionerName) => (
+                <option value={practionerAadhar}>{practitionerName}</option>
+              ))} */}
+            </Form.Control>
           </Form.Group>
 
           <Button variant="primary" type="submit" >
