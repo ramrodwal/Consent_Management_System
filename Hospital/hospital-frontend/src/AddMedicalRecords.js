@@ -137,11 +137,11 @@ function AddMedicalRecords() {
           </Form.Group>
 
           <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Patient Id</Form.Label>
+            <Form.Label>Select Patient Name</Form.Label>
             <Form.Control as="select" value={patientAadhar} onChange={(event) => setPatientAadhar(event.target.value)}>
-              <option value="">Patient Id</option>
+              <option>Patient Name</option>
               {patients.map((patient) => (
-                <option key={patient.id}>{patient.patientAadhar}</option>
+                <option value={patient.patient_aadhar}>{patient.patientName}</option>
               ))}
             </Form.Control>
             </Form.Group>
