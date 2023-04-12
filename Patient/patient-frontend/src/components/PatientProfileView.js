@@ -8,16 +8,16 @@ import Navbar from 'react-bootstrap/Navbar';
 const PatientProfileView = ({ match }) => {
   const [patient, setPatient] = useState(null);
 
-  const patient_aadhar = "666666666666";
+  const patientAadhar = "666666666666";
 
   useEffect(() => {
     const fetchPatient = async () => {
-      const { data } = await axios.get(`http://localhost:8765/patient/register/${patient_aadhar}`);
+      const { data } = await axios.get(`http://localhost:8765/patient/register/${patientAadhar}`);
       setPatient(data);
     };
 
     fetchPatient();
-  }, [patient_aadhar]);
+  }, [patientAadhar]);
 
  
 
@@ -89,7 +89,7 @@ const PatientProfileView = ({ match }) => {
         </div>
         <div className="profile-section">
           <h3>Aadhar Number:</h3>
-          <p>{patient.patient_aadhar}</p>
+          <p>{patient.patientAadhar}</p>
         </div>
         <div className="profile-footer">
             <Link to="/ViewUpdateProfile.js">

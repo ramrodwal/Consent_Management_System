@@ -36,17 +36,17 @@ public class RecordMapping {
 
     @Column(nullable = false)
     @NotNull
-    private int hospital_id;
+    private int hospitalId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "patient_aadhar")
+    @JoinColumn(name = "patientAadhar")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Patient patient;
 
-    public RecordMapping(int Id, int hospital_id, Patient patient) {
+    public RecordMapping(int Id, int hospitalId, Patient patient) {
         this.Id = Id;
-        this.hospital_id = hospital_id;
+        this.hospitalId = hospitalId;
         this.patient = patient;
         
     }

@@ -1,8 +1,8 @@
-package com.consentmanager.cm_app.web;
+package com.consentmanager.web;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HospitalController {
+public class DoctorController {
     
 }

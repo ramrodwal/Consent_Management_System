@@ -106,12 +106,12 @@ return(
         </thead>
         <tbody>
           {requests.map((request)=>(
-            <tr key={request.consent_id}>
-              <td>{request.consent_id}</td>
-              <td>{request.disease_name}</td>
-              <td>{request.hospital_id}</td>
-              <td>{request.patient_aadhar}</td>
-              <td>{request.practitioner_aadhar}</td>
+            <tr key={request.consentId}>
+              <td>{request.consentId}</td>
+              <td>{request.diseaseName}</td>
+              <td>{request.hospitalId}</td>
+              <td>{request.patientAadhar}</td>
+              <td>{request.practitionerAadhar}</td>
               <td>{request.status}</td>
             </tr>
           ))}

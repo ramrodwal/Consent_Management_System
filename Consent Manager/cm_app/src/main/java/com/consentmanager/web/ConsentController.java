@@ -1,4 +1,4 @@
-package com.consentmanager.cm_app.web;
+package com.consentmanager.web;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.consentmanager.cm_app.entity.ConsentManager;
-import com.consentmanager.cm_app.service.ConsentManagerService;
+import com.consentmanager.entity.ConsentManager;
+import com.consentmanager.service.ConsentManagerService;
 
 import jakarta.validation.Valid;
 
@@ -27,7 +27,7 @@ public class ConsentController {
 
     @PostMapping("/practitioner-login/view-patient/consent")
     public ResponseEntity<ConsentManager> requestingConsent(@Valid @RequestBody ConsentManager consentManager){
-        System.out.println(consentManager.getDisease_name());
+        System.out.println(consentManager.getDiseaseName());
         return new ResponseEntity<ConsentManager>(consentManagerService.requestConsent(consentManager), HttpStatus.CREATED);
     }
 

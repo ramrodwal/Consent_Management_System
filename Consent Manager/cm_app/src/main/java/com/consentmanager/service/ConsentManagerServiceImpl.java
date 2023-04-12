@@ -1,11 +1,11 @@
-package com.consentmanager.cm_app.service;
+package com.consentmanager.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.consentmanager.cm_app.entity.ConsentManager;
-import com.consentmanager.cm_app.repository.ConsentManagerRepository;
+import com.consentmanager.repository.ConsentManagerRepository;
+import com.consentmanager.entity.ConsentManager;
 
 import lombok.AllArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.consentmanager.cm_app.entity;
+package com.consentmanager.entity;
 
 
 
@@ -46,27 +46,27 @@ public class ConsentManager {
     @Id
     @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "consent_id",nullable = false)
-    private int consent_id;
+    @Column(name = "consentId",nullable = false)
+    private int consentId;
 
-    @Column(name = "hospital_id",nullable = false)
+    @Column(name = "hospitalId",nullable = false)
     @NonNull
-    private int hospital_id;
+    private int hospitalId;
 
     
-    @Column(name = "practitioner_aadhar")
+    @Column(name = "practitionerAadhar")
     @NotBlank(message = "practitioner aadhar cannot be blank")
-    private String practitioner_aadhar;
+    private String practitionerAadhar;
 
     
-    @Column(name = "patient_aadhar")
+    @Column(name = "patientAadhar")
     @NotBlank(message = "Patient aadhar can not be empty")
-    private String patient_aadhar;
+    private String patientAadhar;
 
     
-    @Column(name = "disease_name")
+    @Column(name = "diseaseName")
     @NotBlank(message = "disease name cannot be blank")
-    private String disease_name;
+    private String diseaseName;
 
 
     @Column(name = "status")

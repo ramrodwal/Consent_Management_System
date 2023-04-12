@@ -33,7 +33,7 @@ function SignUp() {
   const [city, setCity] = useState('');
   const [zipcode, setZip] = useState('');
   const [address, setAddress] = useState('');
-  const [patient_aadhar, setAadhar] = useState('');
+  const [patientAadhar, setAadhar] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -83,9 +83,12 @@ function SignUp() {
     event.preventDefault();
     const patient = {
       fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
-      state: state, city: city, zipcode: zipcode, patient_aadhar: patient_aadhar, password: password, confirmPassword: confirmPassword
+      state: state, city: city, zipcode: zipcode, patientAadhar: patientAadhar, password: password, confirmPassword: confirmPassword
     };
-    if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname) && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo) && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode) && isValidAadhar(patient_aadhar) && isMatchingPassword(password, confirmPassword)) {
+    if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname)
+     && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo)
+      && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode)
+       && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword)) {
    
       axios.post('http://localhost:8765/patient/register', patient)
       .then(response => console.log(response))
@@ -234,14 +237,14 @@ function SignUp() {
           <Form.Control
             type="text"
             placeholder="Enter Aadhar Card Number"
-            value={patient_aadhar}
+            value={patientAadhar}
             onChange={(event) => setAadhar(event.target.value)}
             required={true}
             pattern="[0-9]{12}"
             title="Please enter a valid Aadhar Card number"
           />
-          {!isNotEmpty(patient_aadhar) && <Form.Text className="text-danger">Please enter an Aadhar Card number</Form.Text>}
-          {isNotEmpty(patient_aadhar) && !isValidAadhar(patient_aadhar) && (
+          {!isNotEmpty(patientAadhar) && <Form.Text className="text-danger">Please enter an Aadhar Card number</Form.Text>}
+          {isNotEmpty(patientAadhar) && !isValidAadhar(patientAadhar) && (
             <Form.Text className="text-danger">Please enter a valid Aadhar Card number</Form.Text>
           )}
         </Form.Group>

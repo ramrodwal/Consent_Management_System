@@ -25,21 +25,21 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient getPatient(String patient_aadhar) {
-        Optional<Patient> patient = patientsRepository.findById(patient_aadhar);
-        return unwrapPatient(patient, patient_aadhar);
+    public Patient getPatient(String patientAadhar) {
+        Optional<Patient> patient = patientsRepository.findById(patientAadhar);
+        return unwrapPatient(patient, patientAadhar);
 
     }
 
-    static Patient unwrapPatient(Optional<Patient> entity, String patient_aadhar) {
+    static Patient unwrapPatient(Optional<Patient> entity, String patientAadhar) {
         if (entity.isPresent()) return entity.get();
-        else throw new EntityNotFoundException(patient_aadhar, Patient.class);
+        else throw new EntityNotFoundException(patientAadhar, Patient.class);
     }
 
     @Override
     public Patient updateProfile(Patient updatedPatient) {
 
-        Optional<Patient> patientOptional = patientsRepository.findById(updatedPatient.getPatient_aadhar());
+        Optional<Patient> patientOptional = patientsRepository.findById(updatedPatient.getPatientAadhar());
         if (!patientOptional.isPresent()) {
             return null;
         }

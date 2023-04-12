@@ -1,4 +1,4 @@
-package com.consentmanager.cm_app.entity;
+package com.consentmanager.entity;
 
 import java.time.LocalDate;
 
@@ -31,35 +31,35 @@ public class ApprovedRecords {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "consent_id", referencedColumnName = "consent_id")
+    @JoinColumn(name = "consentId", referencedColumnName = "consentId")
     private ConsentManager cm;
 
     @Id
-    @Column(name = "approved_id",nullable = false)
+    @Column(name = "approvedId",nullable = false)
     @NonNull
     @NotBlank(message = "Approved id cannot be blank")
-    private int approved_id;
+    private int approvedId;
 
-    @Column(name = "record_id",nullable = false)
+    @Column(name = "recordId",nullable = false)
     @NonNull
     @NotBlank(message = "record id cannot be blank")
-    private int record_id;
+    private int recordId;
 
     @Column(name = "practitioner_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
-    private String practioner_aadhar;
+    private String practionerAadhar;
 
     
-    @Column(name = "patient_aadhar",nullable = false)
+    @Column(name = "patientAadhar",nullable = false)
     @NonNull
     @NotBlank(message = "patient aadhar cannot be blank")
-    private String patient_aadhar;
+    private String patientAadhar;
     
-    @Column(name = "disease_name",nullable = false)
+    @Column(name = "diseaseName",nullable = false)
     @NonNull
     @NotBlank(message = "disease name cannot be blank")
-    private String disease_name;
+    private String diseaseName;
 
     
     @Column(name = "record",nullable = false)
@@ -68,10 +68,10 @@ public class ApprovedRecords {
     private String record;
 
     
-    @Column(name = "approved_date",nullable = false)
+    @Column(name = "approvedDate",nullable = false)
     @NonNull
     @NotBlank(message = "approved date cannot be blank")
-    private LocalDate approved_date;
+    private LocalDate approvedDate;
 
     
     @Column(name = "validity",nullable = false)
