@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PatientRepository extends CrudRepository<PatientList, String>{
     
-     List<PatientList> findByMedicalPractitioner_practitionerAadhar(String practitioner_aadhar);
+     List<PatientList> findByMedicalPractitioner_practitionerAadhar(String practitionerAadhar);
 
 }

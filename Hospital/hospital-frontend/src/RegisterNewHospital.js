@@ -17,8 +17,8 @@ function RegisterNewHospital() {
   
   const navigate = useNavigate();
 
-  const [hospital_id, setHospitalId] = useState('');
-  const [hospital_name, setHospitalName] = useState('');
+  const [hospitalId, setHospitalId] = useState('');
+  const [hospitalName, setHospitalName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [state, setState] = useState('');
   const [city, setCity] = useState('');
@@ -48,8 +48,8 @@ function RegisterNewHospital() {
 
    const handleSubmit = (event) => {
     event.preventDefault();
-    const hospitalDetails = { hospital_id: hospital_id, hospital_name: hospital_name, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
-    if( containsOnlyLetters(hospital_name) && isValidPhoneNumber(contactNumber)
+    const hospitalDetails = { hospitalId: hospitalId, hospitalName: hospitalName, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
+    if( containsOnlyLetters(hospitalName) && isValidPhoneNumber(contactNumber)
       && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
       && containsOnlyLettersAndSpaces(city) ){
         axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
@@ -110,15 +110,15 @@ function RegisterNewHospital() {
         <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3" controlId="formBasicText" >
-            <Form.Control type="hidden" placeholder="Hospital id" value={hospital_id} onChange={(event) => setHospitalId(event.target.value)} />
+            <Form.Control type="hidden" placeholder="Hospital id" value={hospitalId} onChange={(event) => setHospitalId(event.target.value)} />
           </Form.Group>
 
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Hospital Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Hospital Name" value={hospital_name} onChange={(event) => setHospitalName(event.target.value)} required minLength={2} maxLength={50} />
-            {!containsOnlyLettersAndSpaces(hospital_name) && <Form.Text className="text-danger">Please enter a hospital name</Form.Text>}
-            {containsOnlyLettersAndSpaces(hospital_name) && (hospital_name.length < 2 || hospital_name.length > 50) && <Form.Text className="text-danger">Hospital name should be between 2 to 50 characters long</Form.Text>}
+            <Form.Control type="text" placeholder="Enter Hospital Name" value={hospitalName} onChange={(event) => setHospitalName(event.target.value)} required minLength={2} maxLength={50} />
+            {!containsOnlyLettersAndSpaces(hospitalName) && <Form.Text className="text-danger">Please enter a hospital name</Form.Text>}
+            {containsOnlyLettersAndSpaces(hospitalName) && (hospitalName.length < 2 || hospitalName.length > 50) && <Form.Text className="text-danger">Hospital name should be between 2 to 50 characters long</Form.Text>}
           </Form.Group>
 
 

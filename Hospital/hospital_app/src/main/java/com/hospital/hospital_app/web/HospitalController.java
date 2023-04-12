@@ -41,7 +41,7 @@ public class HospitalController {
     // hospital registratrion
     @PostMapping("/admin-login/register-hospital")
     public ResponseEntity<CentralHospital> hospitalRegistration(@Valid @RequestBody CentralHospital central_hospital) {
-        System.out.println(central_hospital.getHospital_name());
+        System.out.println(central_hospital.getHospitalName());
         return new ResponseEntity<CentralHospital>(hospitalService.registerHospital(central_hospital),
                 HttpStatus.CREATED);
     }
@@ -64,9 +64,9 @@ public class HospitalController {
         return hospitalService.getAllPatientsDetails();
     }
 
-    @GetMapping("/getPatientsByPractitionerAadhar/{practitioner_aadhar}")
-    public List<PatientList> getPatientsByDoctor(@PathVariable String practitioner_aadhar){
-        return hospitalService.getPatientsByPractitionerAadhar(practitioner_aadhar);
+    @GetMapping("/getPatientsByPractitionerAadhar/{practitionerAadhar}")
+    public List<PatientList> getPatientsByDoctor(@PathVariable String practitionerAadhar){
+        return hospitalService.getPatientsByPractitionerAadhar(practitionerAadhar);
     }
 
 }

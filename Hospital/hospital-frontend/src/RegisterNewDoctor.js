@@ -31,15 +31,15 @@ function RegisterNewDoctor() {
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
-  const [practitioner_aadhar, setAadhar] = useState('');
-  const [medical_license_id, setMedicalLicense] = useState('');
+  const [practitionerAadhar, setAadhar] = useState('');
+  const [medicalLicenseId, setMedicalLicense] = useState('');
   const [specialisation, setSpecialisation] = useState('');
   const [qualification, setQualification] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [hospital_id, setHospitalId] = useState({
+  const [hospitalId, setHospitalId] = useState({
     centralHospital: {
-      hospital_id: ''
+      hospitalId: ''
     }
   });
 
@@ -94,9 +94,9 @@ function RegisterNewDoctor() {
     event.preventDefault();
     const practitionerDetails = {
       fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, number: number, state: state, city: city, address: address,
-      zipcode: zipcode, practitioner_aadhar: practitioner_aadhar, medical_license_id: medical_license_id, specialisation: specialisation, qualification: qualification, password: password, confirmPassword: confirmPassword, centralHospital: { hospital_id: hospital_id.centralHospital.hospital_id }
+      zipcode: zipcode, practitionerAadhar: practitionerAadhar, medicalLicenseId: medicalLicenseId, specialisation: specialisation, qualification: qualification, password: password, confirmPassword: confirmPassword, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }
     };
-    if( isValidEmail(email) && isValidPhoneNumber(number) && isValidAadharNumber(practitioner_aadhar)
+    if( isValidEmail(email) && isValidPhoneNumber(number) && isValidAadharNumber(practitionerAadhar)
      && (password === confirmPassword) && containsOnlyLetters(fname) && containsOnlyLetters(lname)
       && containsOnlyLettersAndSpaces(specialisation) && isValidAge(age) && isValidZipCode(zipcode)&& containsOnlyLettersAndSpaces(state)
       && containsOnlyLettersAndSpaces(city) ){
@@ -248,15 +248,15 @@ function RegisterNewDoctor() {
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Aadhar Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter Aadhar Card Number" value={practitioner_aadhar} onChange={(event) => setAadhar(event.target.value)} />
-            {!isNotEmpty(practitioner_aadhar) && <Form.Text className="text-danger">Please enter an Aadhar card number</Form.Text>}
-            {isNotEmpty(practitioner_aadhar) && !isValidAadharNumber(practitioner_aadhar) && <Form.Text className="text-danger">Please enter a valid Aadhar card number</Form.Text>}
+            <Form.Control type="text" placeholder="Enter Aadhar Card Number" value={practitionerAadhar} onChange={(event) => setAadhar(event.target.value)} />
+            {!isNotEmpty(practitionerAadhar) && <Form.Text className="text-danger">Please enter an Aadhar card number</Form.Text>}
+            {isNotEmpty(practitionerAadhar) && !isValidAadharNumber(practitionerAadhar) && <Form.Text className="text-danger">Please enter a valid Aadhar card number</Form.Text>}
           </Form.Group>
 
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Medical License id</Form.Label>
-            <Form.Control type="text" placeholder="Medical License Id" value={medical_license_id} onChange={(event) => setMedicalLicense(event.target.value)} required={true} />
+            <Form.Control type="text" placeholder="Medical License Id" value={medicalLicenseId} onChange={(event) => setMedicalLicense(event.target.value)} required={true} />
           </Form.Group>
 
           <Form.Group controlId="formBasicSelect">
@@ -292,10 +292,10 @@ function RegisterNewDoctor() {
 
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Id</Form.Label>
-            <Form.Control as="select" value={hospital_id.centralHospital.hospital_id} onChange={(event) => setHospitalId({ centralHospital: { hospital_id: event.target.value } })} >
+            <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} >
               <option value="">Hospital Id</option>
               {hospitals.map((hospital) => (
-                <option key={hospital.id}>{hospital.hospital_id}</option>
+                <option key={hospital.id}>{hospital.hospitalId}</option>
               ))}
             </Form.Control>
           </Form.Group>

@@ -33,9 +33,9 @@ public class CentralHospital {
     @Id 
     @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
     @GenericGenerator( name = "native", strategy = "native" )
-    private int hospital_id;
+    private int hospitalId;
     
-    private String hospital_name;
+    private String hospitalName;
 
     @Column(unique = true)
     private String contactNumber;

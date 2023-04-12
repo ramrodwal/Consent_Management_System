@@ -12,6 +12,6 @@ public interface HospitalService {
     List<CentralHospital> getAllDetails();
     PatientList addPatient(PatientList patientList);
     List<PatientList> getAllPatientsDetails();
-    List<PatientList> getPatientsByPractitionerAadhar(String practitioner_aadhar);
+    List<PatientList> getPatientsByPractitionerAadhar(String practitionerAadhar);
 
 }
