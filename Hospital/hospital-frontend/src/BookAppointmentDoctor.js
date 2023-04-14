@@ -14,10 +14,16 @@ import axios from "axios";
 function BookAppointmentDoctor() {
   const navigate = useNavigate();
 
-  const [patientAadhar, setPatientId] = useState('');
-  const [patientName,setPatientName]=useState('');
-  const [practitionerName,setPractitionerName]=useState('');
   const [hospitals, setHospitals] = useState([]);
+  const [practitioners, setPractitioners] = useState([]);
+
+  const [patientAadhar, setPatientId] = useState('');
+  const [patientName, setPatientName] = useState('');
+  const [practitionerAadhar, setPractitionerAadhar] = useState({
+    medicalPractitioner: {
+      practitionerAadhar: ''
+    }
+  });
   const [hospitalId, setHospitalId] = useState({
     centralHospital1: {
       hospitalId: ''
@@ -30,7 +36,13 @@ function BookAppointmentDoctor() {
     });
   }, []);
 
- 
+  useEffect(() => {
+    axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
+      setPractitioners(response.data);
+    });
+  }, []);
+
+
 
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
@@ -52,19 +64,18 @@ function BookAppointmentDoctor() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const patient = { centralHospital1: { hospital_id: hospital_id.centralHospital1.hospital_id }, patientAadhar: patientAadhar };
-    if(isNotEmpty(hospital_id.centralHospital1.hospital_id) && isValidAadhar(patientAadhar) &&containsOnlyLettersAndSpaces(patientName) 
-    && containsOnlyLettersAndSpaces(practitionerName)){
+    const patient = { patientAadhar: patientAadhar, patientName: patientName, medicalPractitioner: { practitionerAadhar: practitionerAadhar.medicalPractitioner.practitionerAadhar }, centralHospital1: { hospitalId: hospitalId.centralHospital1.hospitalId } };
+    if (isNotEmpty(hospitalId.centralHospital1.hospitalId) && isValidAadhar(patientAadhar) && containsOnlyLettersAndSpaces(patientName)) {
 
       axios.post('http://localhost:9099/hospital/add-patient', patient)
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+        .then(response => console.log(response))
+        .catch(error => console.log(error));
       navigate("/");
     }
-   else {
-    toast.error('Please fill in all the required fields with valid input.',
-       { position: toast.POSITION.TOP_CENTER});
-    
+    else {
+      toast.error('Please fill in all the required fields with valid input.',
+        { position: toast.POSITION.TOP_CENTER });
+
     }
   };
 
@@ -130,7 +141,7 @@ function BookAppointmentDoctor() {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Patient Name</Form.Label>
-          <Form.Control
+            <Form.Control
               type="text"
               placeholder="Enter Patient Name"
               value={patientName}
@@ -143,19 +154,28 @@ function BookAppointmentDoctor() {
               <Form.Text className="text-danger">Please enter a valid patient Name</Form.Text>
             )}
             </Form.Group>
-          <Form.Group controlId="formBasicSelect">
+
+          {/* <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Practitioner Name</Form.Label>
             <Form.Control as="select" value={practitionerName} onChange={(event) => setPractitionerName(event.target.value)}>
               <option>Practitioner Name</option>
-              {/* {practioners.map((practitionerName) => (
-                <option value={practionerAadhar}>{practitionerName}</option>
-              ))} */}
+              
             </Form.Control>
-          </Form.Group>
+          </Form.Group>  */}
 
-          <Button variant="primary" type="submit" >
-            Book
-          </Button>
+            <Form.Group controlId="formBasicSelect">
+              <Form.Label>Select Practitioner </Form.Label>
+              <Form.Control as="select" value={practitionerAadhar.medicalPractitioner.practitionerAadhar} onChange={(event) => setPractitionerAadhar({ medicalPractitioner: { practitionerAadhar: event.target.value } })}>
+                <option>Select Name</option>
+                {practitioners.map((practitioner) => (
+                  <option value={practitioner.practitionerAadhar}>{practitioner.fname} {practitioner.lname}</option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+
+            <Button variant="primary" type="submit" >
+              Book
+            </Button>
         </form>
       </Container>
 
