@@ -291,16 +291,16 @@ function RegisterNewDoctor() {
 
 
           <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Hospital Id</Form.Label>
+            <Form.Label>Select Hospital Name</Form.Label>
             <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} >
-              <option value="">Hospital Id</option>
+              <option value="">Hospital Name</option>
               {hospitals.map((hospital) => (
-                <option key={hospital.id}>{hospital.hospitalId}</option>
+                <option key={hospital.id} value={hospital.hospitalId}>{hospital.hospitalName}</option>
               ))}
             </Form.Control>
           </Form.Group>
           <br></br>
-
+          <br></br> 
           <Button variant="success" type="submit" >
             Submit
           </Button>
