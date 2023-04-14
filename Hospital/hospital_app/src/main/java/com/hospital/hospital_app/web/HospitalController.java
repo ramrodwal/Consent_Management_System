@@ -64,9 +64,6 @@ public class HospitalController {
         return hospitalService.getAllPatientsDetails();
     }
 
-    @GetMapping("/getPatientsByPractitionerAadhar/{practitionerAadhar}")
-    public List<PatientList> getPatientsByDoctor(@PathVariable String practitionerAadhar){
-        return hospitalService.getPatientsByPractitionerAadhar(practitionerAadhar);
-    }
+   
 
 }

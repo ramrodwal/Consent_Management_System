@@ -1,11 +1,26 @@
-import React from 'react'
+import React , {useState,useEffect} from 'react'
 import "./HospitalComponents/HospitalStyle.css"
 import Table from 'react-bootstrap/Table'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import axios from 'axios';
+
+
+
 
 function DoctorDashboard(){
+
+  const [patientDetails,setPatient]=useState([]);
+
+  useEffect(() => {
+  
+    let practitionerAadhar='123412341234'
+    axios.get(`http://localhost:9099/hospital/getPatientsByPractitionerAadhar/${practitionerAadhar}`).then((response) => {
+      setPatient(response.data);
+    });
+  }, []);
+
 
 return(
     <>
@@ -62,40 +77,20 @@ return(
         <thead>
           <tr className='tablehead'>
             <th>Patient Name</th>
-            <th>Patient Id</th>
-            
 
           </tr>
 
         </thead>
         <tbody>
-          <tr>
-         <td>Patient one</td>
-         <td>Id 1</td>
-         </tr>
-         <tr>
-         <td>Patient two</td>
-         <td>Id 2</td>
-         </tr>
-         <tr>
-         <td>Patient three</td>
-         <td>Id 3</td>
-         </tr>
-         <tr>
-         <td>Patient four</td>
-         <td>Id 4</td>
-         </tr>
-         <tr>
-         <td>Patient five</td>
-         <td>Id 5</td>
-         </tr>
+          {patientDetails.map((patient) => (
+            <tr key={patient.id}>
+              <td>{patient.patientName}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
 
-    <center><Button variant="primary" type="submit" >
-    Submit
-  </Button>
-  </center>
+ 
         
       
     </Container>

@@ -40,10 +40,6 @@ public class HospitalServiceImpl implements HospitalService {
         return (List<PatientList>) patientRepository.findAll();
     }
 
-    @Override
-    public List<PatientList> getPatientsByPractitionerAadhar(String practitionerAadhar) {
-        return (List<PatientList>) patientRepository.findByMedicalPractitioner_practitionerAadhar(practitionerAadhar);
-    }
-
+   
 
 }
