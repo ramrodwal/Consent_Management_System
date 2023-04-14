@@ -78,7 +78,7 @@ public class Patient {
     @Id
     @Column( unique = true)
     @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
-    private String patient_aadhar;
+    private String patientAadhar;
 
     @Column( unique = true)
     @NotBlank
