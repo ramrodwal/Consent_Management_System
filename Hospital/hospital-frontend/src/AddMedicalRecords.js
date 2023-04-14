@@ -165,11 +165,11 @@ function AddMedicalRecords() {
 
 
           <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Hospital Id</Form.Label>
+            <Form.Label>Select Hospital Name</Form.Label>
             <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
-              <option value="">Hospital Id</option>
+              <option value="">Hospital Name</option>
               {hospitals.map((hospital) => (
-                <option key={hospital.id}>{hospital.hospitalId}</option>
+                <option key={hospital.id} value={hospital.hospitalID}>{hospital.hospitalName}</option>
               ))}
             </Form.Control>
             {hospitalId.centralHospital.hospitalId === "" && <Form.Text className="text-danger">Please select a hospital id</Form.Text>}
