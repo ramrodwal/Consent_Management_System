@@ -44,9 +44,12 @@ public class PatientController {
         if(existingPatient == null){
             return ResponseEntity.notFound().build();
         }
-
         return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.CREATED);
+    }
 
+    @GetMapping("/view-dashboard/{patient_aadhar}")
+    public ResponseEntity<Patient> viewDashboard(@PathVariable String patient_aadhar){
+        return new ResponseEntity<>(patientService.getPatient(patient_aadhar), HttpStatus.OK);
     }
 
   
