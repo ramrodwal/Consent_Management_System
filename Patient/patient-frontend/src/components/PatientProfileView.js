@@ -17,7 +17,7 @@ const PatientProfileView = ({ match }) => {
     };
   
     fetchPatient();
-  }, [patientAadhar]);
+  });
 
  
 
