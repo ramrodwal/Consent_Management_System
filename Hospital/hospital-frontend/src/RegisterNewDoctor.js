@@ -71,9 +71,10 @@ function RegisterNewDoctor() {
     signInWithPhoneNumber(auth,formatPh,appVerifier)
       .then((confirmationResult)=>{
         window.confirmationResult=confirmationResult;
-        toast("Otp send successfull")
+        toast.success("Otp send successfull",{ position: toast.POSITION.TOP_CENTER })
       })
       .catch((error)=>{
+        toast.error("Something went wrong , try again later",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
     }
@@ -85,8 +86,10 @@ function RegisterNewDoctor() {
       .then(async (res)=>{
         console.log(res);
         setVerified(true);
+        toast.success("Otp verified successfull",{ position: toast.POSITION.TOP_CENTER })
       })
       .catch((error)=>{
+        toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
   }
