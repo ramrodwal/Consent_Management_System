@@ -1,11 +1,13 @@
 package com.patient.patient_app.repository;
 
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.patient.patient_app.entity.Patient;
 
-public interface PatientsRepository extends CrudRepository<Patient, String>{
+public interface PatientsRepository extends JpaRepository<Patient, String>{
     
+    Optional<Patient> findByEmail(String email);
 
 }

@@ -1,34 +1,37 @@
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-const PatientNavbar = () => {
+import { useNavigate } from 'react-router-dom';
+
+  const PatientNavbar = () => {
+    const navigate = useNavigate();
+    const handleLogout=() =>{
+      console.log("ho raha hai call")
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('id');
+      navigate("/");
+    }
+
   return (
     <>
-      {/* <PrimaryNav>
-        <Hamburger />
-        <Menu>
-          <MenuLink to="/Profile.js" activeStyle>
-            Profile
-          </MenuLink>
-          <MenuLink to="/Notification.js" activeStyle>
-            Notifications
-          </MenuLink>
-          <MenuLink to="/Appointments.js" activeStyle>
-            Appointments
-          </MenuLink>
-        </Menu>
-      </PrimaryNav> */}
-     <Navbar className='patientnavbar' variant="dark">
-        <Container>
-          <Navbar.Brand href="#home" >Consent Management Portal</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home"></Nav.Link>
-            <Nav.Link href="#features"></Nav.Link>
-            <Nav.Link href="/">Logout </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      
+      <Navbar.Brand href="/PatientDashboard.js">Patient</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="/AllRequest.js">View All Requests</Nav.Link>
+          <Nav.Link href="/PatientProfileView.js">View Profile</Nav.Link>
+          <Nav.Link href="/ViewRecords.js">View Records</Nav.Link>
+          
+          
+        </Nav>
+        <Nav>
+          <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+         
+        </Nav>
+      </Navbar.Collapse>
+    
+  </Navbar>
     </>
   )
 }
