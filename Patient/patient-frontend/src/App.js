@@ -119,7 +119,6 @@ function App() {
     <div className="App">
       <Router>
       <Routes>
-      {/* <Route exact path={"/"} element={<Home />}></Route>  */}
         <Route exact path={"/"} element={<LoginPage />}></Route>
         <Route exact path={"/ForgotPassword.js"} element={<ForgotPass />}></Route>
         <Route exact path={"/SignUp.js"} element={<SignUpPage />}></Route>
@@ -131,11 +130,6 @@ function App() {
         <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
         <Route exact path={"/AllRecords.js"} element={<AllRecord/>}></Route>
         <Route exact path={"/PatientProfileView.js"} element={<PatientProfileViews/>}></Route>
-
-
-
-          {/* <Route exact path={"/VerifyOTP.js"} element={<VerifyOTP/>}></Route> */}
-        {/* <Route exact path={"/PatientDetails.js"} element={<PatientDet />}></Route> */}
       </Routes>
       </Router>
     </div>
