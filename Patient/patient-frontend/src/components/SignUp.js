@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
+import { auth } from '../firebase.config';
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 
 
 import { useState } from 'react';
@@ -38,6 +40,55 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  // otp
+  const [otp, setOTP] = useState();
+
+  const [verified, setVerified] = useState(false);
+
+
+  const onCaptchVerify = () => {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          handleOTP();
+        },
+        'expired-callback': () => { },
+      }, auth
+      );
+    }
+  }
+
+  const handleOTP = () => {
+    onCaptchVerify();
+
+    const appVerifier = window.recaptchaVerifier;
+    const formatPh = "+91" + contactNo;
+    signInWithPhoneNumber(auth, formatPh, appVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        toast.success("Otp send successfull",{ position: toast.POSITION.TOP_CENTER })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+
+  const onSubmitOTP = () => {
+    window.confirmationResult
+      .confirm(otp)
+      .then(async (res) => {
+        console.log(res);
+        setVerified(true);
+        toast.success("Otp verified successfull",{ position: toast.POSITION.TOP_CENTER })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+  //otp
+
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
   }
@@ -49,7 +100,7 @@ function SignUp() {
   function containsOnlyLettersAndSpaces(str) {
     return /^[a-zA-Z\s]*$/.test(str);
   }
-  
+
   const isValidAge = (value) => {
     return value >= MIN_AGE;
   }
@@ -74,34 +125,34 @@ function SignUp() {
     return true;
   }
 
-  
+
   const isMatchingPassword = (password, confirmPassword) => {
     return password === confirmPassword;
   }
 
-   const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const patient = {
       fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
       state: state, city: city, zipcode: zipcode, patientAadhar: patientAadhar, password: password, confirmPassword: confirmPassword
     };
     if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname)
-     && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo)
+      && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo)
       && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode)
-       && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword)) {
-   
+      && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword)) {
+
       axios.post('http://localhost:8765/patient/register', patient)
-      .then(response => console.log(response))
-      .catch(error => console.log("this is an error!!!"));
+        .then(response => console.log(response))
+        .catch(error => console.log("this is an error!!!"));
       navigate("/");
-    
-      
-      } else {
+
+
+    } else {
       toast.error('Please fill in all the required fields with valid input.',
-         { position: toast.POSITION.TOP_CENTER});
-      
-      }
-    };
+        { position: toast.POSITION.TOP_CENTER });
+
+    }
+  };
 
 
 
@@ -196,12 +247,27 @@ function SignUp() {
           <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(event) => setUsername(event.target.value)} required={true} />
         </Form.Group>
 
+
+        
         <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control type="tel" placeholder="Enter Phone Number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} required={true} pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" />
-          {!isNotEmpty(contactNo) && <Form.Text className="text-danger">Please enter a phone number</Form.Text>}
-          {isNotEmpty(contactNo) && !/^[0-9]{10}$/.test(contactNo) && <Form.Text className="text-danger">Please enter a valid 10-digit phone number</Form.Text>}
+        
+          <Form.Label>Enter Phone Number</Form.Label>
+          <Form.Control type="text" placeholder="Enter Phone Number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} pattern="[0-9]{10}" title="Please enter a 10-digit phone number without any spaces or special characters" />
+          <br />
+          <Button variant="primary" type="submit" onClick={handleOTP}>Generate Otp</Button>
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Enter Otp</Form.Label>
+          <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)} required={true}/>
+          <br />
+          <Button variant="primary" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
+          
+          {verified ? <h3 style={{ color: "green" }}>verified</h3> :<h4 style={{ color: "red" }}>Verification Required</h4>}
+        </Form.Group>
+
+        <div id="recaptcha-container"></div>
+       
 
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Enter Address</Form.Label>
@@ -265,12 +331,14 @@ function SignUp() {
           {!isNotEmpty(confirmPassword) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
           {isNotEmpty(confirmPassword) && password !== confirmPassword && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
         </Form.Group>
-         
-          <Button variant="primary" type="submit" >
+            {verified?
+        <Button variant="primary" type="submit" >
           Submit
         </Button>
-  
-
+        :<Button variant="primary">Mobile Number verification required</Button>
+            }
+      <br/>
+      <br/>
       </Form>
 
     </Container>

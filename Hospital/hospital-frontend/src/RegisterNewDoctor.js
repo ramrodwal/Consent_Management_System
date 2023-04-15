@@ -275,7 +275,7 @@ function RegisterNewDoctor() {
 
             <Form.Group className="mb-3" controlId="formBasicText">
               <Form.Label>Enter Otp</Form.Label>
-              <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)}/>
+              <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)} required={true}/>
               <br/>
               <Button variant="success" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
               {verified ? <h3 style={{ color: "green" }}>verified</h3> : <h3 style={{ color: "red" }}>Not verified</h3>}
