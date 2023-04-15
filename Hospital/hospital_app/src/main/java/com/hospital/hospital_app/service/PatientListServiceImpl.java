@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class HospitalServiceImpl implements HospitalService {
+public class PatientListServiceImpl implements PatientListService {
 
     //method to save the hospital details
     private PatientListRepository patientListRepository;

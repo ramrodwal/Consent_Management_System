@@ -8,7 +8,7 @@
 		<version>3.0.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.hospital</groupId>
+	<groupId>com.patient</groupId>
 	<artifactId>patient_app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>patient_app</name>
