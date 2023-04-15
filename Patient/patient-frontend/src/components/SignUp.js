@@ -70,6 +70,7 @@ function SignUp() {
         toast.success("Otp send successfull",{ position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
+        toast.error("Something went wrong , try again later",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
   }
@@ -84,6 +85,7 @@ function SignUp() {
         toast.success("Otp verified successfull",{ position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
+        toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
   }
