@@ -212,7 +212,7 @@ function RegisterNewDoctor() {
 
            
 
-            <div id="recaptcha-container"></div>
+            
 
             <Form.Group className="mb-3" controlId="formBasicText">
               <Form.Label>First Name</Form.Label>
@@ -276,10 +276,12 @@ function RegisterNewDoctor() {
             <Form.Group className="mb-3" controlId="formBasicText">
               <Form.Label>Enter Otp</Form.Label>
               <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)}/>
-              <Button variant="success" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
               <br/>
+              <Button variant="success" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
               {verified ? <h3 style={{ color: "green" }}>verified</h3> : <h3 style={{ color: "red" }}>Not verified</h3>}
             </Form.Group>
+
+            <div id="recaptcha-container"></div>
 
             <Form.Group className="mb-3" controlId="formBasicText">
               <Form.Label>State</Form.Label>
