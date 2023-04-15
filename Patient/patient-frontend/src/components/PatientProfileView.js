@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 
 
 const PatientProfileView = ({ match }) => {
@@ -12,10 +10,14 @@ const PatientProfileView = ({ match }) => {
 
   useEffect(() => {
     const fetchPatient = async () => {
-      const { data } = await axios.get(`http://localhost:8765/patient/register/${patientAadhar}`);
-      setPatient(data);
+      const token = localStorage.getItem('authToken'); // get token from localStorage
+      const id = localStorage.getItem('id');
+      const headers = { Authorization: `Bearer ${token}` }; // add token to headers
+      const { data } = await axios.get(`http://localhost:8765/patient/register/${id}`, { headers });
+      console.log(data);
+      setPatient(data); 
     };
-
+  
     fetchPatient();
   }, [patientAadhar]);
 
@@ -27,25 +29,6 @@ const PatientProfileView = ({ match }) => {
 
   return (
     <>
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      
-      <Navbar.Brand href="/PatientDashboard.js">Patient</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="/AllRequest.js">View All Requests</Nav.Link>
-          <Nav.Link href="/PatientProfileView.js">View Profile</Nav.Link>
-          <Nav.Link href="/ViewRecords.js">View Records</Nav.Link>
-          
-          
-        </Nav>
-        <Nav>
-          <Nav.Link href="/">Logout</Nav.Link>
-         
-        </Nav>
-      </Navbar.Collapse>
-    
-  </Navbar>
     <div className="profile-card">
       <div className="profile-header">
         <h2>Your Profile</h2>

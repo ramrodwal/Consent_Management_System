@@ -1,18 +1,16 @@
-import logo from './logo.svg';
-import React, { Fragment } from 'react';
+import React from 'react';
 import Header from "./components/Header";
-import Homepage from './components/Homepage';
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
 import SignUp from './components/SignUp';
-// import './App.css';
+
 import PatientDashboard from './components/PatientDashboardComponents/PatientDashboard';
 import PatientNavbar from './components/PatientDashboardComponents/PatientNavbar';
 import Notification from './components/PatientDashboardComponents/Notification';
 import Profile from './components/PatientDashboardComponents/Profile';
 import Appointments from './components/PatientDashboardComponents/Appointments';
-// import VerifyOTP from './components/VerifyOTP';
-import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-dom";
+
+import { BrowserRouter as Router, Routes, Route,} from "react-router-dom";
 import AllRequest from './AllRequest';
 import ViewUpdateProfile from './ViewUpdateProfile';
 import ViewRecords from './ViewRecords';
@@ -20,14 +18,7 @@ import AllRecords from './AllRecords';
 import PatientProfileView from './components/PatientProfileView';
 
 
-function Home(){
-  return (
-    <>
-      <Header />
-      <Homepage />
-    </>
-  );
-}
+
 function LoginPage(){
 return (
   <>
@@ -115,6 +106,14 @@ function AllRecord(){
     </>
   )
 }
+function PatientProfileViews(){
+  return(
+    <>
+    <PatientNavbar/>
+    <PatientProfileView/>
+    </>
+  )
+}
 function App() {
   return (
     <div className="App">
@@ -131,7 +130,7 @@ function App() {
         <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
         <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
         <Route exact path={"/AllRecords.js"} element={<AllRecord/>}></Route>
-        <Route exact path={"/PatientProfileView.js"} element={<PatientProfileView/>}></Route>
+        <Route exact path={"/PatientProfileView.js"} element={<PatientProfileViews/>}></Route>
 
 
 

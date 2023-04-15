@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
@@ -36,7 +36,6 @@ function SignUp() {
   const [zipcode, setZip] = useState('');
   const [address, setAddress] = useState('');
   const [patientAadhar, setAadhar] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -67,7 +66,7 @@ function SignUp() {
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
-        toast.success("Otp send successfull",{ position: toast.POSITION.TOP_CENTER })
+        toast.success("Otp send successfull", { position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
         console.log(error);
@@ -81,7 +80,7 @@ function SignUp() {
       .then(async (res) => {
         console.log(res);
         setVerified(true);
-        toast.success("Otp verified successfull",{ position: toast.POSITION.TOP_CENTER })
+        toast.success("Otp verified successfull", { position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
         console.log(error);
@@ -133,7 +132,7 @@ function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const patient = {
-      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, username: username, contactNo: contactNo, address: address,
+      fname: fname, mname: mname, lname: lname, age: age, gender: gender, email: email, contactNo: contactNo, address: address,
       state: state, city: city, zipcode: zipcode, patientAadhar: patientAadhar, password: password, confirmPassword: confirmPassword
     };
     if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname)
@@ -141,7 +140,7 @@ function SignUp() {
       && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode)
       && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword)) {
 
-      axios.post('http://localhost:8765/patient/register', patient)
+        axios.post('http://localhost:8765/api/auth/register', patient)
         .then(response => console.log(response))
         .catch(error => console.log("this is an error!!!"));
       navigate("/");
@@ -240,17 +239,8 @@ function SignUp() {
 
         </Form.Group>
 
-
-
         <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter Username" value={username} onChange={(event) => setUsername(event.target.value)} required={true} />
-        </Form.Group>
 
-
-        
-        <Form.Group className="mb-3" controlId="formBasicText">
-        
           <Form.Label>Enter Phone Number</Form.Label>
           <Form.Control type="text" placeholder="Enter Phone Number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} pattern="[0-9]{10}" title="Please enter a 10-digit phone number without any spaces or special characters" />
           <br />
@@ -259,15 +249,15 @@ function SignUp() {
 
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Enter Otp</Form.Label>
-          <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)} required={true}/>
+          <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)} required={true} />
           <br />
           <Button variant="primary" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
-          
-          {verified ? <h3 style={{ color: "green" }}>verified</h3> :<h4 style={{ color: "red" }}>Verification Required</h4>}
+
+          {verified ? <h3 style={{ color: "green" }}>verified</h3> : <h4 style={{ color: "red" }}>Verification Required</h4>}
         </Form.Group>
 
         <div id="recaptcha-container"></div>
-       
+
 
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Enter Address</Form.Label>
@@ -331,14 +321,14 @@ function SignUp() {
           {!isNotEmpty(confirmPassword) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
           {isNotEmpty(confirmPassword) && password !== confirmPassword && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
         </Form.Group>
-            {verified?
-        <Button variant="primary" type="submit" >
-          Submit
-        </Button>
-        :<Button variant="primary">Mobile Number verification required</Button>
-            }
-      <br/>
-      <br/>
+        {verified ?
+          <Button variant="primary" type="submit" >
+            Submit
+          </Button>
+          : <Button variant="primary">Mobile Number verification required</Button>
+        }
+        <br />
+        <br />
       </Form>
 
     </Container>
