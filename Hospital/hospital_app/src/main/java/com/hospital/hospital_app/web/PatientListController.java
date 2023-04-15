@@ -17,6 +17,7 @@ import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.CentralHospital;
 import com.hospital.hospital_app.entity.PatientList;
 import com.hospital.hospital_app.service.HospitalService;
+import com.hospital.hospital_app.service.PatientListService;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +35,7 @@ public class PatientListController {
 
     @GetMapping("/getPatientsByPractitionerAadhar/{practitionerAadhar}")
     public List<PatientList> getPatientsByDoctor(@PathVariable String practitionerAadhar){
-        return hospitalService.getPatientsByPractitionerAadhar(practitionerAadhar);
+        return patientList.getPatientsByPractitionerAadhar(practitionerAadhar);
     }
 
 }
