@@ -6,8 +6,6 @@ import axios from 'axios';
 const PatientProfileView = ({ match }) => {
   const [patient, setPatient] = useState(null);
 
-  const patientAadhar = "666666666666";
-
   useEffect(() => {
     const fetchPatient = async () => {
       const token = localStorage.getItem('authToken'); // get token from localStorage
