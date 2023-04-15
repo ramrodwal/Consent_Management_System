@@ -1,18 +1,39 @@
-import React from "react";
-import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import React,{useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import { IconName } from "react-icons/fa";
+import axios from 'axios';
 
 function PatientDashboard(){
+  const [patient, setPatient] = useState(null);
+
+  useEffect(() => {
+    const fetchPatient = async () => {
+      const token = localStorage.getItem('authToken'); // get token from localStorage
+      const id = localStorage.getItem('id');
+      const headers = { Authorization: `Bearer ${token}` }; // add token to headers
+      const { data } = await axios.get(`http://localhost:8765/patient/view-dashboard/${id}`, { headers });
+      console.log(data);
+      setPatient(data); 
+    };
+  
+    fetchPatient();
+  },[]);
+
+  if (!patient) {
+    return <div>
+      <h1 style={{textAlign:"center"}}>
+        Cannot Access The Page!
+      </h1>
+      <h2 style={{textAlign:"center"}}>
+        Login First!!
+      </h2>
+    </div>;
+  }
     return (
         <>
         <Container>
-            <h1 className="patientdashboard">Welcome!</h1>
+            <h1 className="patientdashboard">Welcome {patient.fname} {patient.lname} !</h1>
             
                 {/* <h3>Your records</h3>
                 <br>
