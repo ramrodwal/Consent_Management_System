@@ -2,6 +2,8 @@ import React,{useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import axios from 'axios';
 
 function PatientDashboard(){
@@ -25,9 +27,18 @@ function PatientDashboard(){
       <h1 style={{textAlign:"center"}}>
         Cannot Access The Page!
       </h1>
-      <h2 style={{textAlign:"center"}}>
-        Login First!!
-      </h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Button href="/">Login</Button>
+      </div>
+      <h5 style={{textAlign:"center"}}>Don't have an account? <a href="/SignUp.js"> Sign Up</a></h5>
+    
+      
     </div>;
   }
     return (
