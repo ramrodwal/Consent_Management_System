@@ -3,9 +3,12 @@ import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 
 function ApprovedRecords() {
+  const navigate = useNavigate();
+
   const [records, setRecords] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -29,26 +32,9 @@ function ApprovedRecords() {
       setSelectedRows(selectedRows.filter(rowId => rowId !== recordId));
     }
   };
+
   const location = useLocation();
   const consentId = new URLSearchParams(location.search).get("consentId");
-
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   console.log('Selected rows:', selectedRows);
-
-  //   // Create an array of arrays that represents the selected rows
-  //   const selectedRecords = records
-  //     .filter(record => selectedRows.includes(record.recordId))
-  //     .map(record => [record.recordId, record.diseaseName, record.patientAadhar, record.record, record.centralHospital.hospitalId, record.medicalPractitioner.practitionerAadhar]);
-  //     try {
-  //       const response = await axios.post(`http://localhost:9092/hospital/consent/approve-records/${consentId}`, selectedRecords);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   console.log('Selected records:', selectedRecords);
-  //   console.log('Consent ID:', consentId);
-  // };
 
 
   const [consent, setConsent] = useState({
@@ -65,18 +51,17 @@ function ApprovedRecords() {
 
     // Create an array of arrays that represents the selected rows
     const selectedRecords = records
-    .filter(record => selectedRows.includes(record.recordId))
-    .map(record => ({
-      cm: { consentId: consent.cm.consentId },
-      recordId: record.recordId,
-      practitionerAadhar: record.medicalPractitioner.practitionerAadhar,
-      patientAadhar: record.patientAadhar,
-      diseaseName: record.diseaseName,
-      record: record.record,
-      approvedDate: today.toISOString(),
-      validity: dateAfterTenDays.toISOString()
-    }));
-
+      .filter(record => selectedRows.includes(record.recordId))
+      .map(record => ({
+        cm: { consentId: consent.cm.consentId },
+        recordId: record.recordId,
+        practitionerAadhar: record.medicalPractitioner.practitionerAadhar,
+        patientAadhar: record.patientAadhar,
+        diseaseName: record.diseaseName,
+        record: record.record,
+        approvedDate: today.toISOString(),
+        validity: dateAfterTenDays.toISOString()
+      }));
 
     try {
       const response = await axios.post(
@@ -84,39 +69,17 @@ function ApprovedRecords() {
         JSON.stringify(selectedRecords), // Serialize the data as a JSON array
         { headers: { 'Content-Type': 'application/json' } } // Set the content type to application/json
       );
-      console.log(response.data);
+      console.log("hello");
+ 
     } catch (error) {
       console.error(error);
     }
     console.log('Selected records:', selectedRecords);
-    // console.log('Consent ID:', consentId);
+    
+
+      navigate(`/ConsentResponse.js`);
+
   };
-
-
-
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   // console.log('Selected rows:', selectedRows);
-
-  //   // Create an array of arrays that represents the selected rows
-  //   const today = new Date();
-  //   const dateAfterTenDays = new Date();
-  //   dateAfterTenDays.setDate(today.getDate() + 10);
-  //   const selectedRecords = [{cm : {consentId: consent.cm.consentId}},1, "cancer", "123412341234", "okay", 1, "123412341234", today.toISOString(),dateAfterTenDays.toISOString()]
-
-  //   try {
-  //     const response = await axios.post(`http://localhost:9092/hospital/consent/approve-records`, selectedRecords);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-
-  //   console.log('Selected Records:', selectedRecords);
-  //   console.log('Consent ID:', consentId);
-  // };
-
-
-
 
 
 
