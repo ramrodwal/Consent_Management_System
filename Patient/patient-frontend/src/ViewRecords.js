@@ -31,6 +31,7 @@ function ViewRecords() {
 
   return (
     <>
+
       <center><h1 className='pageheading'>View Records</h1></center>
 
 
