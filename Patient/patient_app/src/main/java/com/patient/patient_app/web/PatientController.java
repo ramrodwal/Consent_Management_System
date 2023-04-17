@@ -27,24 +27,24 @@ public class PatientController {
 
     @PostMapping("/register")
     public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
-        System.out.println(patient.getFname());
+        // System.out.println(patient.getFname());
         return new ResponseEntity<>(patientService.registerPatient(patient), HttpStatus.CREATED);
     }
 
     @GetMapping("/register/{patient_aadhar}")
     public ResponseEntity<Patient> viewProfile(@PathVariable String patient_aadhar){
-        System.out.println(patient_aadhar);
+        // System.out.println(patient_aadhar);
         return new ResponseEntity<>(patientService.getPatient(patient_aadhar), HttpStatus.OK);
 
     }
 
-    @PutMapping("/update/{patient_aadhar}")
+    @PostMapping("/update/{patient_aadhar}")
     public ResponseEntity<Patient> updateProfile(@Valid @RequestBody Patient updatedPatient, @PathVariable String patient_aadhar){
         Patient existingPatient = patientService.getPatient(patient_aadhar);
         if(existingPatient == null){
             return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.CREATED);
+        return new ResponseEntity<>(patientService.updateProfile(updatedPatient), HttpStatus.OK);
     }
 
     @GetMapping("/view-dashboard/{patient_aadhar}")
