@@ -33,6 +33,7 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
     }
 
     @Override
+
     public Boolean savingApprovedRecords(List<ApprovedRecords> approvedRecords) {
 
         if (approvedRecords.size() == 0) {
@@ -49,11 +50,10 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
 
     }
 
-    // @Override
-    // public ApprovedRecords saveRecord(ApprovedRecords approvedRecords) {
 
-    // return approvedRecordsRepository.save(approvedRecords);
 
-    // }
+    public List<ConsentManager> getConsents(String practitionerAadhar) {
+        return consentManagerRepository.findByPractitionerAadhar(practitionerAadhar);
+    }
 
 }

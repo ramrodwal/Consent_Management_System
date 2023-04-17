@@ -11,6 +11,11 @@ public interface ConsentManagerService {
 
     List<ConsentManager> getConsentByPatientAadhar(String patientAadhar);
 
+
     Boolean savingApprovedRecords(List<ApprovedRecords> approvedRecords);
+
+
+    List<ConsentManager> getConsents(String practitionerAadhar);
+    
 
 }

@@ -54,7 +54,7 @@ public class ConsentManager {
     private int hospitalId;
 
     
-    @Column(name = "practitionerAadhar")
+    
     @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practitionerAadhar;
 
