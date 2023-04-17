@@ -3,6 +3,7 @@ package com.hospital.hospital_app.service;
 import org.springframework.stereotype.Service;
 
 import com.hospital.hospital_app.entity.MedicalPractitioner;
+import com.hospital.hospital_app.repository.HospitalRepository;
 import com.hospital.hospital_app.repository.PractitionerRepository;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 public class PractitionerServiceImpl implements PractitionerService{
     
     private PractitionerRepository practitionerRepository;
+    private HospitalRepository hospitalRepository;
 
     //method to sav practitiones details
     @Override
@@ -25,4 +27,5 @@ public class PractitionerServiceImpl implements PractitionerService{
     public List<MedicalPractitioner> getAllDetails(){
         return (List<MedicalPractitioner>) practitionerRepository.findAll();
     }
+
 }

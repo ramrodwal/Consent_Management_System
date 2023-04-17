@@ -24,5 +24,6 @@ public class PatientListServiceImpl implements PatientListService {
         return (List<PatientList>) patientListRepository.findByMedicalPractitioner_practitionerAadhar(practitionerAadhar);
     }
 
+   
 
 }
