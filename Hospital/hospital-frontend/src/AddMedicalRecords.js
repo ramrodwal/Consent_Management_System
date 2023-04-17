@@ -26,7 +26,7 @@ function AddMedicalRecords() {
 
 
 
-  const [doctorId, setDoctorId] = useState({
+  const [practitionerAadhar, setDoctorId] = useState({
     medicalPractitioner: {
       practitionerAadhar: ''
     }
@@ -70,7 +70,7 @@ function AddMedicalRecords() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const recordDetails = { recordId: recordId, patientAadhar: patientAadhar, diseaseName: diseaseName, record: record, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }, medicalPractitioner: { practitionerAadhar: doctorId.medicalPractitioner.practitionerAadhar } };
+    const recordDetails = { recordId: recordId, patientAadhar: patientAadhar, diseaseName: diseaseName, record: record, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }, medicalPractitioner: { practitionerAadhar: practitionerAadhar.medicalPractitioner.practitionerAadhar } };
     if(isValidAadhar(patientAadhar) && isNotEmpty(diseaseName) && containsOnlyLettersAndSpaces(diseaseName) && isNotEmpty(record)){
       axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
       .then(response => console.log(response))
@@ -166,10 +166,10 @@ function AddMedicalRecords() {
 
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
+            <Form.Control as="select"  value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
               <option value="">Hospital Name</option>
               {hospitals.map((hospital) => (
-                <option key={hospital.id} value={hospital.hospitalID}>{hospital.hospitalName}</option>
+                <option key={hospital.id} value={hospital.hospitalId}>{hospital.hospitalName}</option>
               ))}
             </Form.Control>
             {hospitalId.centralHospital.hospitalId === "" && <Form.Text className="text-danger">Please select a hospital id</Form.Text>}
@@ -178,13 +178,13 @@ function AddMedicalRecords() {
 
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Doctor Id</Form.Label>
-            <Form.Control as="select" value={doctorId.medicalPractitioner.practitionerAadhar} onChange={(event) => setDoctorId({ medicalPractitioner: { practitionerAadhar: event.target.value } })} required={true}>
+            <Form.Control as="select" value={practitionerAadhar.medicalPractitioner.practitionerAadhar} onChange={(event) => setDoctorId({ medicalPractitioner: { practitionerAadhar: event.target.value } })} required={true}>
               <option value="">Doctor Id</option>
               {doctors.map((doctor) => (
                 <option key={doctor.id}>{doctor.practitionerAadhar}</option>
               ))}
             </Form.Control>
-            {!doctorId.medicalPractitioner.practitionerAadhar && (
+            {!practitionerAadhar.medicalPractitioner.practitionerAadhar && (
               <Form.Text className="text-danger">
                 Please select a doctor id
               </Form.Text>
