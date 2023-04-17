@@ -32,7 +32,7 @@ public class ConsentController {
 
     @PostMapping("/practitioner-login/view-patient/consent")
     public ResponseEntity<ConsentManager> requestingConsent(@Valid @RequestBody ConsentManager consentManager) {
-        System.out.println(consentManager.getDiseaseName());
+        //System.out.println(consentManager.getDiseaseName());
         return new ResponseEntity<ConsentManager>(consentManagerService.requestConsent(consentManager),
                 HttpStatus.CREATED);
     }
@@ -58,8 +58,14 @@ public class ConsentController {
 
     @GetMapping("/practitioner-login/view-consent/{practitionerAadhar}")
     public ResponseEntity<List<ConsentManager>> viewConsent(@Valid @PathVariable String practitionerAadhar){
-        System.out.println(practitionerAadhar);
+        //System.out.println(practitionerAadhar);
         return new ResponseEntity<List<ConsentManager>>(consentManagerService.getConsents(practitionerAadhar), HttpStatus.OK);
+    }
+
+    @GetMapping("/approved-records/{consentId}")
+    public List<ApprovedRecords> getRecords(@Valid @PathVariable Integer consentId){
+        System.out.println(consentId);
+        return consentManagerService.getRecordsById(consentId);
     }
 
     

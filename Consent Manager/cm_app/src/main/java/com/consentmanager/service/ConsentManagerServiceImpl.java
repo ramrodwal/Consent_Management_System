@@ -51,9 +51,21 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
     }
 
 
-
+    @Override
     public List<ConsentManager> getConsents(String practitionerAadhar) {
         return consentManagerRepository.findByPractitionerAadhar(practitionerAadhar);
+    }
+
+    @Override
+    public List<ApprovedRecords> getRecordsById(Integer consentId) {
+
+        List<ApprovedRecords> records = approvedRecordsRepository.findByCm_consentId(consentId);
+        if(records.size() == 0){
+            System.out.println("kuch ni");
+            return null;
+        }
+
+        return records;
     }
 
 }

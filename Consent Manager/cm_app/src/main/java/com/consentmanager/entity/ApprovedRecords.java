@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,7 +36,8 @@ public class ApprovedRecords {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "consentId", referencedColumnName = "consentId")
+    @JoinColumn(name = "consentId")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ConsentManager cm;
 
     @Id
