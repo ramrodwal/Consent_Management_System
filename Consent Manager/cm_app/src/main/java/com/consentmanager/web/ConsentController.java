@@ -31,10 +31,6 @@ public class ConsentController {
         return new ResponseEntity<ConsentManager>(consentManagerService.requestConsent(consentManager), HttpStatus.CREATED);
     }
 
-    @GetMapping("/login/view-consents")
-    public List<ConsentManager> getConsents(){
-        return consentManagerService.getAllDetails();
-    }
     
     
 }
