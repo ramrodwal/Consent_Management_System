@@ -16,6 +16,7 @@ import DoctorDashboard from './DoctorDashboard';
 import AddMedicalRecords from './AddMedicalRecords';
 import ViewConsent from './ViewConsent';
 import ConsentRequest from './ConsentRequest';
+import DoctorNavbar from './HospitalComponents/DoctorNavbar';
 
 function HospHome(){
   return(
@@ -93,6 +94,7 @@ function DocList(){
 function DocDash(){
   return(
     <>
+    <DoctorNavbar/>
       <DoctorDashboard/>
     </>
   )
@@ -101,6 +103,7 @@ function DocDash(){
 function AddMedRec(){
   return(
     <>
+    <DoctorNavbar/>
       <AddMedicalRecords/>
     </>
   )
@@ -109,6 +112,7 @@ function AddMedRec(){
 function ViewCon(){
   return(
     <>
+    <DoctorNavbar/>
       <ViewConsent/>
     </>
   )
@@ -117,6 +121,7 @@ function ViewCon(){
 function ConsentReq(){
   return(
     <>
+    <DoctorNavbar/>
       <ConsentRequest/>
     </>
   )
