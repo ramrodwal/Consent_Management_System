@@ -9,10 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { auth } from '../firebase.config';
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
-
-
 import { useState } from 'react';
-
 import axios from "axios";
 
 const validGenders = ["Male", "Female", "Others"];
@@ -84,6 +81,7 @@ function SignUp() {
         toast.success("Otp verified successfull", { position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
+        setVerified(false)
         toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
@@ -140,7 +138,7 @@ function SignUp() {
     if (isNotEmpty(fname) && containsOnlyLetters(fname) && isNotEmpty(lname) && containsOnlyLetters(lname)
       && isValidAge(age) && validGenders.includes(gender) && isValidEmail(email) && isValidContactNo(contactNo)
       && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode)
-      && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword)) {
+      && isValidAadhar(patientAadhar) && isMatchingPassword(password, confirmPassword) && verified) {
 
         axios.post('http://localhost:8765/api/auth/register', patient)
         .then(response => console.log(response))

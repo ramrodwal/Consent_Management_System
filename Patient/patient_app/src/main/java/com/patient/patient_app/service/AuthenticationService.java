@@ -43,9 +43,9 @@ public class AuthenticationService {
 
         patientsRepository.save(patient);
 
-        var jwtToken = jwtService.generateToken(patient);
+        // var jwtToken = jwtService.generateToken(patient);
 
-        return AuthenticationResponse.builder().token(jwtToken).build();
+        return AuthenticationResponse.builder().build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

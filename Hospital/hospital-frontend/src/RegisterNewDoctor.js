@@ -89,6 +89,7 @@ function RegisterNewDoctor() {
         toast.success("Otp verified successfull",{ position: toast.POSITION.TOP_CENTER })
       })
       .catch((error)=>{
+        setVerified(false);
         toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
         console.log(error);
       })
@@ -151,7 +152,7 @@ function RegisterNewDoctor() {
       if (isValidEmail(email) && isValidPhoneNumber(number) && isValidAadharNumber(practitionerAadhar)
         && (password === confirmPassword) && containsOnlyLetters(fname) && containsOnlyLetters(lname)
         && containsOnlyLettersAndSpaces(specialisation) && isValidAge(age) && isValidZipCode(zipcode) && containsOnlyLettersAndSpaces(state)
-        && containsOnlyLettersAndSpaces(city)) {
+        && containsOnlyLettersAndSpaces(city) && verified) {
 
         axios.post('http://localhost:9099/hospital/admin-login/signup', practitionerDetails)
           .then(response => console.log(response))

@@ -76,6 +76,7 @@ function AllReq(){
 function ViewUpProf(){
   return(
     <>
+    <PatientNavbar/>
     <ViewUpdateProfile/>
     </>
   )
