@@ -4,21 +4,25 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 function ConsentResponse() {
+  const navigate = useNavigate();
+
   const [requests, setRequests] = useState([]);
   const [declinedRequests, setDeclinedRequests] = useState([]);
   useEffect(() => {
 
-    axios.get("http://localhost:9092/patient/view-consent/111111111111").then((response) => {
+    axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
       setRequests(response.data);
       setDeclinedRequests(Array(response.data.length).fill(false));
     });
   }, []);
 
-  const handleDenyRequest  = (event, index) => {
+  const handleDenyRequest = (event, index) => {
     event.preventDefault();
     const resp = {
       consentId: requests[index].consentId,
@@ -32,12 +36,50 @@ function ConsentResponse() {
     console.log("cid");
     console.log(requests);
     console.log(requests[index].consentId);
-  
+
     if (cid) {
       axios
         .post(
           "http://localhost:9092/patient/login/consentManager/responseConsent/" +
-            cid,
+          cid,
+          resp
+        )
+        .then((response) => {
+          console.log(response);
+          // Update the declinedRequests array to set the corresponding index to true
+          setRequests((prevRequests) => {
+            const newRequests = [...prevRequests];
+            newRequests[index].status = "DECLINED";
+            return newRequests;
+          });
+          // navigate(`/ConsentResponse.js`);
+        })
+        .catch((error) => console.log(error));
+
+    } else {
+      console.log("Consent ID is undefined.");
+    }
+  };
+  const handleAcceptRequest = (event, index) => {
+    event.preventDefault();
+    const resp = {
+      consentId: requests[index].consentId,
+      hospitalId: requests[index].hospitalId,
+      practitionerAadhar: requests[index].practitionerAadhar,
+      patientAadhar: requests[index].patientAadhar,
+      diseaseName: requests[index].diseaseName,
+      status: "APPROVED",
+    };
+    const cid = requests[index].consentId;
+    console.log("cid");
+    console.log(requests);
+    console.log(requests[index].consentId);
+
+    if (cid) {
+      axios
+        .post(
+          "http://localhost:9092/patient/login/consentManager/responseConsent/" +
+          cid,
           resp
         )
         .then((response) => {
@@ -48,15 +90,16 @@ function ConsentResponse() {
             newDeclinedRequests[index] = true;
             return newDeclinedRequests;
           });
+          navigate(`/ApprovedRecords.js?consentId=${requests[index].consentId}`);
         })
         .catch((error) => console.log(error));
-        
+
     } else {
       console.log("Consent ID is undefined.");
     }
   };
 
-  
+
   return (
 
     <>
@@ -86,11 +129,11 @@ function ConsentResponse() {
               <td>{request.patientAadhar}</td>
               <td>{request.practitionerAadhar}</td>
               <td>{request.status}</td>
-              {request.status!=="pending"  ? (
+              {request.status !== "pending" ? (
                 <td>RESPONDED</td>
               ) : (
                 <td>
-                  <Button variant="success" href={`/ApprovedRecords.js?consentId=${request.consentId}`}>Accept</Button>
+                  <Button  onClick={(event) => handleAcceptRequest(event, index)}>Accept</Button>
                   <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Deny</Button>
                 </td>
               )}
