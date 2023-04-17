@@ -1,5 +1,7 @@
 package com.patient.patient_app.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patient.patient_app.entity.Patient;
+import com.patient.patient_app.repository.PatientsRepository;
 import com.patient.patient_app.service.PatientService;
 
 import jakarta.validation.Valid;
@@ -24,6 +27,9 @@ public class PatientController {
 
     @Autowired
     PatientService patientService;
+
+    @Autowired
+    PatientsRepository patientsRepository;
 
     @PostMapping("/register")
     public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
@@ -52,6 +58,7 @@ public class PatientController {
         return new ResponseEntity<>(patientService.getPatient(patient_aadhar), HttpStatus.OK);
     }
 
+   
   
 
     
