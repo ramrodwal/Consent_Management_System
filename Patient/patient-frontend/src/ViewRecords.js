@@ -49,8 +49,8 @@ function ViewRecords() {
         <tbody>
           {records.map((record) => (
             <tr key={record.id}>
-              <td className='tabledata'>{record.record_id}</td>
-              <td className='tabledata'>{record.disease_name}</td>
+              <td className='tabledata'>{record.recordId}</td>
+              <td className='tabledata'>{record.diseaseName}</td>
               <td className='tabledata'>{record.patientAadhar}</td>
               <td className='tabledata'>{record.record}</td>
               <td className='tabledata'>{record.centralHospital.hospitalId}</td>
