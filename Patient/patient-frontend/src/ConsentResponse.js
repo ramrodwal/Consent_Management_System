@@ -90,7 +90,7 @@ function ConsentResponse() {
                 <td>RESPONDED</td>
               ) : (
                 <td>
-                  <Button variant="success">Accept</Button>
+                  <Button variant="success" href="/ApprovedRecords.js">Accept</Button>
                   <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Deny</Button>
                 </td>
               )}

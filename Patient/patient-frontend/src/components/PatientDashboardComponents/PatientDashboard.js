@@ -45,39 +45,10 @@ function PatientDashboard(){
         <>
         <Container>
             <h1 className="patientdashboard">Welcome {patient.fname} {patient.lname} !</h1>
-            
-                {/* <h3>Your records</h3>
-                <br>
-                </br>
-                Sugar Reports{' '}
-                <Button variant="primary">View</Button>{' '}
-                <Button variant="secondary">Update</Button>{' '}
-                <Button variant="warning">Download PDF</Button>{' '}
-                <Button variant="danger">Delete</Button>{' '}
-
-                {['Consent'].map(
-        (variant) => (
-          <DropdownButton
-            as={ButtonGroup}
-            key={variant}
-            id={`dropdown-variants-${variant}`}
-            variant={variant.toLowerCase()}
-            title={variant}
-          >
-            <Dropdown.Item eventKey="1">Doctor 1</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Doctor 2</Dropdown.Item>
-            <Dropdown.Item eventKey="3" active>
-              Active Item
-            </Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-          </DropdownButton>
-        ),
-      )} */}
 
 <CardGroup className="patientcard">
       <Card >
-        <a className="patientdashboardcard" href="/AllRequest.js">
+        <a className="patientdashboardcard" href="/ConsentResponse.js">
         <Card.Img variant="top" src="/consent.png"  />
         </a>
         <Card.Body>
