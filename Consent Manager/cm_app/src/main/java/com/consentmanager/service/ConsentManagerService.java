@@ -1,8 +1,6 @@
 package com.consentmanager.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.consentmanager.entity.ApprovedRecords;
 import com.consentmanager.entity.ConsentManager;
 
@@ -16,6 +14,8 @@ public interface ConsentManagerService {
 
 
     List<ConsentManager> getConsents(String practitionerAadhar);
+
+    List<ApprovedRecords> getRecordsById(Integer consentId);
     
 
 }

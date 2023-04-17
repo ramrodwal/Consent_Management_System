@@ -12,7 +12,7 @@ function ConsentResponse() {
   const [declinedRequests, setDeclinedRequests] = useState([]);
   useEffect(() => {
 
-    axios.get("http://localhost:9092/patient/view-consent/111111111111").then((response) => {
+    axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
       setRequests(response.data);
       setDeclinedRequests(Array(response.data.length).fill(false));
     });
