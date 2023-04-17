@@ -129,7 +129,12 @@ function ConsentResponse() {
               <td>{request.patientAadhar}</td>
               <td>{request.practitionerAadhar}</td>
               <td>{request.status}</td>
-              {request.status !== "pending" ? (
+              {request.status !== "pending" ? 
+              (
+              request.status==="APPROVED"?
+              
+              <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Revoke</Button>:
+              
                 <td>RESPONDED</td>
               ) : (
                 <td>
