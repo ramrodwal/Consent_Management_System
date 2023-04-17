@@ -8,10 +8,10 @@ import PatientNavbar from './components/PatientDashboardComponents/PatientNavbar
 import Notification from './components/PatientDashboardComponents/Notification';
 import Appointments from './components/PatientDashboardComponents/Appointments';
 import { BrowserRouter as Router, Routes, Route,} from "react-router-dom";
-import AllRequest from './AllRequest';
+import ConsentResponse from './ConsentResponse';
 import ViewUpdateProfile from './ViewUpdateProfile';
 import ViewRecords from './ViewRecords';
-import AllRecords from './AllRecords';
+import ApprovedRecords from './ApprovedRecords';
 import PatientProfileView from './components/PatientProfileView';
 
 
@@ -65,10 +65,11 @@ function Appoin(){
   );
 }
 
-function AllReq(){
+function ConsentRes(){
   return(
     <>
-    <AllRequest/>
+    <PatientNavbar/>
+    <ConsentResponse/>
     </>
   )
 }
@@ -85,15 +86,17 @@ function ViewUpProf(){
 function ViewRecord(){
   return(
     <>
+      <PatientNavbar/>
       <ViewRecords/>
     </>
   )
 }
 
-function AllRecord(){
+function ApprovedRec(){
   return(
     <>
-      <AllRecords/>
+      <PatientNavbar/>
+      <ApprovedRecords/>
     </>
   )
 }
@@ -115,10 +118,10 @@ function App() {
         <Route exact path={"/SignUp.js"} element={<SignUpPage />}></Route>
         <Route exact path={"/PatientDashboard.js"} element={<PatientDash/>}></Route>
         <Route exact path={"/Notification.js"} element={<Notifi />}></Route>
-        <Route exact path={"/AllRequest.js"} element={<AllReq/>}></Route>
+        <Route exact path={"/ConsentResponse.js"} element={<ConsentRes/>}></Route>
         <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
         <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
-        <Route exact path={"/AllRecords.js"} element={<AllRecord/>}></Route>
+        <Route exact path={"/ApprovedRecords.js"} element={<ApprovedRec/>}></Route>
         <Route exact path={"/PatientProfileView.js"} element={<PatientProfileViews/>}></Route>
       </Routes>
       </Router>

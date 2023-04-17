@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-function ViewRecords() {
+function ApprovedRecords() {
 
   const [records, setRecords] = useState([]);
 
@@ -31,6 +31,7 @@ function ViewRecords() {
 
   return (
     <>
+
       <center><h1 className='pageheading'>View Records</h1></center>
 
 
@@ -63,4 +64,4 @@ function ViewRecords() {
   )
 }
 
-export default ViewRecords;
+export default ApprovedRecords;
