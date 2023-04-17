@@ -53,6 +53,7 @@ function ViewConsent() {
             <th>Hospital Name</th>
             <th>Patient Name</th>
             <th>Status</th>
+            <th>Fetch</th>
 
           </tr>
         </thead>
@@ -65,6 +66,13 @@ function ViewConsent() {
               <td>{getHospitalName(consent.hospitalId)}</td>
               <td>{getPatientName(consent.patientAadhar)}</td>
               <td>{consent.status}</td>
+              {consent.status==="DECLINED" && (
+                <tr>
+                  <div className='text-center'>
+                    <Button href={`/ViewApprovedRecords/?consentId=${consent.consentId}`}>Fetch</Button>
+                  </div>
+                </tr>
+              )}
             </tr>
           ))}
         </tbody>
