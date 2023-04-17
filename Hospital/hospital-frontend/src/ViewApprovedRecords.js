@@ -7,17 +7,26 @@ export default function ViewApprovedRecords() {
 
     const location=useLocation();
     const [records,setRecords]=useState([]);
-
+    const [patientName,setPatientName]=useState('');
     const consentId = new URLSearchParams(location.search).get("consentId");
     
     useEffect(()=>{
-        axios.post(`localhost:9092/hospital/approved-records/${consentId}`).then((response)=>{
-            setRecords(response.data);
-            console.log(records[0].diseaseName);
-        }).catch((error)=>{
-            console.log(error);
-        })
+        axios.get(`http://localhost:9092/hospital/approved-records/${consentId}`)
+            .then((response)=>{
+                setRecords(response.data);
+            })
+            .catch(error=>{
+                console.log(error);
+            });
     },[])
+    
+    const getPatientName=(patientAadhar)=>{
+        axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`).then((response)=>{
+          setPatientName(response.data);
+        },[])
+        return patientName;
+      }
+
 
   return (
     <>
@@ -35,11 +44,11 @@ export default function ViewApprovedRecords() {
         </thead>
         <tbody>
           {records.map((record) => (
-            <tr key={record.id}>
-              <td>{record.consentId}</td>
+            <tr key={record.recordId}>
+              <td>{record.cm.consentId}</td>
               <td>{record.recordId}</td>
               <td>{record.record}</td>
-              <td>{record.patientAadhar}</td>
+              <td>{getPatientName(record.patientAadhar)}</td>
               <td>{record.diseaseName}</td>
               <td>{record.approvedDate}</td>
             </tr>

@@ -66,7 +66,7 @@ function ViewConsent() {
               <td>{getHospitalName(consent.hospitalId)}</td>
               <td>{getPatientName(consent.patientAadhar)}</td>
               <td>{consent.status}</td>
-              {consent.status==="DECLINED" && (
+              {consent.status==="APPROVED" && (
                 <tr>
                   <div className='text-center'>
                     <Button href={`/ViewApprovedRecords/?consentId=${consent.consentId}`}>Fetch</Button>

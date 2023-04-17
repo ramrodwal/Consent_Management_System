@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.consentmanager.entity.ApprovedRecords;
 import com.consentmanager.entity.ConsentManager;
 import com.consentmanager.service.ConsentManagerService;
+
 
 import jakarta.validation.Valid;
 
@@ -63,6 +65,7 @@ public class ConsentController {
     }
 
     @GetMapping("/approved-records/{consentId}")
+    @Transactional
     public List<ApprovedRecords> getRecords(@Valid @PathVariable Integer consentId){
         System.out.println(consentId);
         return consentManagerService.getRecordsById(consentId);
