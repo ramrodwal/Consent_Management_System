@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import axios from 'react';
 
 
 
-function ApprovedRecords() {
+function ApprovedRecords(){
 
   const [records, setRecords] = useState([]);
 
@@ -26,17 +24,11 @@ function ApprovedRecords() {
     fetchRecord();
   }, []);
 
-
-
-
-  return (
+return(
     <>
-
-      <center><h1 className='pageheading'>View Records</h1></center>
-
-
-      <Table stripped bordered hover variant="dark" size="sm">
-        <thead>
+    <center><h1 className='pageheading'>List of all records</h1></center>
+    <Table stripped bordered hover variant="dark" size="sm">
+    <thead>
           <tr className='tablehead'>
             <th className='tabledata'>Record Id</th>
             <th className='tabledata'>Disease Name</th>
@@ -56,12 +48,56 @@ function ApprovedRecords() {
               <td className='tabledata'>{record.record}</td>
               <td className='tabledata'>{record.centralHospital.hospitalId}</td>
               <td className='tabledata'>{record.medicalPractitioner.practitionerAadhar}</td>
+              <td className='tabledata'><Form.Check aria-label="option 1" /></td>
             </tr>
           ))}
         </tbody>
-      </Table>
+  {/* <tbody>
+    <tr>
+        <td className='tabledata'>1</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+        
+        
+
+    </tr>
+    <tr>
+        <td className='tabledata'>2</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+       
+
+    </tr>
+    <tr>
+        <td className='tabledata'>3</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+     
+
+    </tr>
+    <tr>
+        <td className='tabledata'>4</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+        
+
+    </tr>
+    <tr>
+        <td className='tabledata'>5</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+        
+
+    </tr>
+    <tr>
+        <td className='tabledata'>6</td>
+        <td className='tabledata'><Form.Check aria-label="option 1" /></td>
+       
+
+    </tr>
+  </tbody> */}
+</Table>
+<center><button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+            </center>
     </>
-  )
+)
 }
 
 export default ApprovedRecords;
