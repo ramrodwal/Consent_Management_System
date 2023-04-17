@@ -25,6 +25,11 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
         return consentManagerRepository.findByPatientAadhar(patientAadhar);
     }
 
+    @Override
+    public List<ConsentManager> getConsents(String practitionerAadhar) {
+        return consentManagerRepository.findByPractitionerAadhar(practitionerAadhar);
+    }
+
    
     
 }

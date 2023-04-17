@@ -9,5 +9,6 @@ import com.consentmanager.entity.ConsentManager;
 public interface ConsentManagerRepository extends CrudRepository<ConsentManager,Integer> {  
     
     List<ConsentManager> findByPatientAadhar(String patientAadhar);
+    List<ConsentManager> findByPractitionerAadhar(String practitionerAadhar);
 
 }

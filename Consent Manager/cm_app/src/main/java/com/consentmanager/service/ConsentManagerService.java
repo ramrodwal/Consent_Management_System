@@ -8,5 +8,6 @@ import com.consentmanager.entity.ConsentManager;
 public interface ConsentManagerService {
     ConsentManager requestConsent(ConsentManager consentManager);
     List<ConsentManager> getConsentByPatientAadhar(String patientAadhar);
+    List<ConsentManager> getConsents(String practitionerAadhar);
     
 }

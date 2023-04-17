@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,12 @@ public class ConsentController {
     public ResponseEntity<ConsentManager> requestingConsent(@Valid @RequestBody ConsentManager consentManager){
         System.out.println(consentManager.getDiseaseName());
         return new ResponseEntity<ConsentManager>(consentManagerService.requestConsent(consentManager), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/practitioner-login/view-consent/{practitionerAadhar}")
+    public ResponseEntity<List<ConsentManager>> viewConsent(@Valid @PathVariable String practitionerAadhar){
+        System.out.println(practitionerAadhar);
+        return new ResponseEntity<List<ConsentManager>>(consentManagerService.getConsents(practitionerAadhar), HttpStatus.OK);
     }
 
     
