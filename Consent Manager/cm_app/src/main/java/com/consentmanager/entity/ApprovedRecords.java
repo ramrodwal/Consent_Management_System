@@ -2,6 +2,7 @@ package com.consentmanager.entity;
 
 import java.time.LocalDate;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -9,6 +10,8 @@ import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -35,20 +38,19 @@ public class ApprovedRecords {
     private ConsentManager cm;
 
     @Id
+    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
+    @GenericGenerator( name = "native", strategy = "native" )
     @Column(name = "approvedId",nullable = false)
-    @NonNull
-    @NotBlank(message = "Approved id cannot be blank")
     private int approvedId;
 
     @Column(name = "recordId",nullable = false)
     @NonNull
-    @NotBlank(message = "record id cannot be blank")
     private int recordId;
 
     @Column(name = "practitioner_aadhar",nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
-    private String practionerAadhar;
+    private String practitionerAadhar;
 
     
     @Column(name = "patientAadhar",nullable = false)
@@ -69,13 +71,9 @@ public class ApprovedRecords {
 
     
     @Column(name = "approvedDate",nullable = false)
-    @NonNull
-    @NotBlank(message = "approved date cannot be blank")
     private LocalDate approvedDate;
 
     
     @Column(name = "validity",nullable = false)
-    @NonNull
-    @NotBlank(message = "validity cannot be blank")
     private LocalDate validity;
 }

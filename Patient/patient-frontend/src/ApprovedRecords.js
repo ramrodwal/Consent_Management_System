@@ -16,9 +16,9 @@ function ApprovedRecords() {
       const headers = { Authorization: `Bearer ${token}` };
       const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
       console.log(data);
-      setRecords(data); 
+      setRecords(data);
     };
-  
+
     fetchRecord();
   }, []);
 
@@ -32,14 +32,93 @@ function ApprovedRecords() {
   const location = useLocation();
   const consentId = new URLSearchParams(location.search).get("consentId");
 
-  const handleFormSubmit = (event) => {
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   console.log('Selected rows:', selectedRows);
+
+  //   // Create an array of arrays that represents the selected rows
+  //   const selectedRecords = records
+  //     .filter(record => selectedRows.includes(record.recordId))
+  //     .map(record => [record.recordId, record.diseaseName, record.patientAadhar, record.record, record.centralHospital.hospitalId, record.medicalPractitioner.practitionerAadhar]);
+  //     try {
+  //       const response = await axios.post(`http://localhost:9092/hospital/consent/approve-records/${consentId}`, selectedRecords);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   console.log('Selected records:', selectedRecords);
+  //   console.log('Consent ID:', consentId);
+  // };
+
+
+  const [consent, setConsent] = useState({
+    cm: {
+      consentId: consentId
+    }
+  })
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log('Selected rows:', selectedRows);
-    // Do something with the selected rows, e.g. delete them
-    console.log(consentId);
+    const today = new Date();
+    const dateAfterTenDays = new Date();
+    dateAfterTenDays.setDate(today.getDate() + 10);
+
+    // Create an array of arrays that represents the selected rows
+    const selectedRecords = records
+    .filter(record => selectedRows.includes(record.recordId))
+    .map(record => ({
+      cm: { consentId: consent.cm.consentId },
+      recordId: record.recordId,
+      practitionerAadhar: record.medicalPractitioner.practitionerAadhar,
+      patientAadhar: record.patientAadhar,
+      diseaseName: record.diseaseName,
+      record: record.record,
+      approvedDate: today.toISOString(),
+      validity: dateAfterTenDays.toISOString()
+    }));
+
+
+    try {
+      const response = await axios.post(
+        'http://localhost:9092/hospital/consent/approve-records',
+        JSON.stringify(selectedRecords), // Serialize the data as a JSON array
+        { headers: { 'Content-Type': 'application/json' } } // Set the content type to application/json
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+    console.log('Selected records:', selectedRecords);
+    // console.log('Consent ID:', consentId);
   };
 
-  
+
+
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   // console.log('Selected rows:', selectedRows);
+
+  //   // Create an array of arrays that represents the selected rows
+  //   const today = new Date();
+  //   const dateAfterTenDays = new Date();
+  //   dateAfterTenDays.setDate(today.getDate() + 10);
+  //   const selectedRecords = [{cm : {consentId: consent.cm.consentId}},1, "cancer", "123412341234", "okay", 1, "123412341234", today.toISOString(),dateAfterTenDays.toISOString()]
+
+  //   try {
+  //     const response = await axios.post(`http://localhost:9092/hospital/consent/approve-records`, selectedRecords);
+  //     console.log(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+
+  //   console.log('Selected Records:', selectedRecords);
+  //   console.log('Consent ID:', consentId);
+  // };
+
+
+
+
+
 
   return (
     <>
@@ -67,7 +146,7 @@ function ApprovedRecords() {
                 <td className='tabledata'>{record.centralHospital.hospitalId}</td>
                 <td className='tabledata'>{record.medicalPractitioner.practitionerAadhar}</td>
                 <td className='tabledata'>
-                  <Form.Check 
+                  <Form.Check
                     aria-label="Select record"
                     checked={selectedRows.includes(record.recordId)}
                     onChange={(event) => handleCheckboxChange(event, record.recordId)}
