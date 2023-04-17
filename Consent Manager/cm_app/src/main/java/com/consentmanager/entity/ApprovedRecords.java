@@ -34,7 +34,8 @@ import lombok.Setter;
 
 public class ApprovedRecords {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    //lazy to eager 
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "consentId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

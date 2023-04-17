@@ -60,10 +60,11 @@ public class ConsentManagerServiceImpl implements ConsentManagerService {
     public List<ApprovedRecords> getRecordsById(Integer consentId) {
 
         List<ApprovedRecords> records = approvedRecordsRepository.findByCm_consentId(consentId);
-        if(records.size() == 0){
-            System.out.println("kuch ni");
-            return null;
-        }
+        
+      
+        // System.out.println(records.get(1).getDiseaseName());
+        // System.out.println(records.get(0).getDiseaseName());
+        // System.out.println(records.get(1).getDiseaseName());
 
         return records;
     }
