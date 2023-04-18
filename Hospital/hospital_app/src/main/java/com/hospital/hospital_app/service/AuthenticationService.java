@@ -2,13 +2,18 @@ package com.hospital.hospital_app.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.entity.MedicalPractitioner;
 import com.hospital.hospital_app.entity.Role;
+import com.hospital.hospital_app.repository.AdminRepository;
 import com.hospital.hospital_app.repository.PractitionerRepository;
+import com.hospital.hospital_app.request.AdminAuthenticationRequest;
 import com.hospital.hospital_app.request.AuthenticationRequest;
+import com.hospital.hospital_app.response.AdminAuthenticationResponse;
 import com.hospital.hospital_app.response.AuthenticationResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +26,11 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PractitionerRepository practitionerRepository;
+    private final AdminRepository adminRepository;
+
     
+
+    //Practitioner
     public AuthenticationResponse register(MedicalPractitioner medicalPractitioner){
         var medicalPractitioner1=MedicalPractitioner.builder()
             .practitionerAadhar(medicalPractitioner.getPractitionerAadhar())
@@ -63,6 +72,48 @@ public class AuthenticationService {
         var jwtToken=jwtService.generateToken(medicalPractitioner2);
 
         return AuthenticationResponse.builder().practitionerAadhar(medicalPractitioner2.getPractitionerAadhar()).token(jwtToken).build();
+
+
+    }
+
+    //admin
+
+    public AdminAuthenticationResponse registerAdmin(Admin admin){
+        var admin1=Admin.builder()
+            .email(admin.getEmail())
+            .password(passwordEncoder.encode(admin.getPassword()))
+            .role(Role.ADMIN)
+            .build();
+
+            adminRepository.save(admin1);
+           // var jwtToken=jwtService.generateToken(admin1);
+
+        return AdminAuthenticationResponse.builder().build();
+
+    }
+
+    public AdminAuthenticationResponse authenticateAdmin(AdminAuthenticationRequest request){
+
+        
+        try{
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        }
+        catch(UsernameNotFoundException exception){
+            System.out.println("hello");
+            System.out.println(exception);
+        }
+        
+        System.out.println(request.getPassword());
+
+        var admin=adminRepository.findByEmail(request.getEmail())
+            .orElseThrow();
+
+        System.out.println(admin);
+
+        var jwtToken=jwtService.generateToken(admin);
+        System.out.println(jwtToken);
+
+        return AdminAuthenticationResponse.builder().token(jwtToken).build();
 
 
     }
