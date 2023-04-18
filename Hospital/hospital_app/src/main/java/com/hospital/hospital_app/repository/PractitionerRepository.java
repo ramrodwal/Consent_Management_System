@@ -1,8 +1,13 @@
 package com.hospital.hospital_app.repository;
 
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import com.hospital.hospital_app.entity.MedicalPractitioner;
 
-public interface PractitionerRepository extends CrudRepository<MedicalPractitioner , String > {
+public interface PractitionerRepository extends JpaRepository<MedicalPractitioner , String > {
+
+    Optional<MedicalPractitioner> findByEmail(String email);
     
 }
