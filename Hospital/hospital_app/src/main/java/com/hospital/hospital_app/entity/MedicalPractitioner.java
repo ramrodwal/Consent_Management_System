@@ -1,10 +1,14 @@
 package com.hospital.hospital_app.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -29,7 +35,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "MedicalPractitioner")
-public class MedicalPractitioner {
+//implementing UserDetails in order to access user details
+public class MedicalPractitioner implements UserDetails{
 
     @Id
     private String practitionerAadhar;
@@ -72,6 +79,9 @@ public class MedicalPractitioner {
 
     private String confirmPassword;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @JsonIgnore
     @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedicalRecords> medicalRecords=new ArrayList<>();
@@ -86,5 +96,46 @@ public class MedicalPractitioner {
     @JsonIgnore
     @OneToMany(mappedBy = "medicalPractitioner" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PatientList> patientLists=new ArrayList<>();
+
+    //implements methods
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public String getUsername(){
+        return email;
+    }
+
+    @Override
+    public String getPassword(){
+        return password;
+    }
+
+    public String getPractitionerAadhar(){
+        return practitionerAadhar;
+    }
+
 
 }
