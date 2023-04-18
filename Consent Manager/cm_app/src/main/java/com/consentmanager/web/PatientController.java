@@ -31,6 +31,9 @@ public class PatientController {
     @Autowired
     ConsentManagerService consentManagerService;
     
+
+    //here we used postmapping so that we can automatically delete the approved records \with respect to consent Id
+     //provided in the pathvariable by setting status to declined in consent manager table
     @PostMapping("/login/consentManager/responseConsent/{consent_id}")
     public ResponseEntity<ConsentManager> updateStatus(@Valid @RequestBody ConsentManager updatedConsentManager,@PathVariable Integer consent_id ){
         
