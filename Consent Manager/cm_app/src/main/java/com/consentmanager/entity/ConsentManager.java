@@ -1,14 +1,9 @@
 package com.consentmanager.entity;
 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.micrometer.common.lang.NonNull;
@@ -34,41 +29,35 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name= "consentManager")
-
+@Table(name = "consentManager")
 
 public class ConsentManager {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cm",cascade = CascadeType.ALL,orphanRemoval = true )
-    private List<ApprovedRecords> approvedRecords=new ArrayList<>(); 
+    @OneToMany(mappedBy = "cm", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ApprovedRecords> approvedRecords = new ArrayList<>();
 
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "consentId",nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "consentId", nullable = false)
     private int consentId;
 
-    @Column(name = "hospitalId",nullable = false)
+    @Column(name = "hospitalId", nullable = false)
     @NonNull
     private int hospitalId;
 
-    
-    
     @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practitionerAadhar;
 
-    
     @Column(name = "patientAadhar")
     @NotBlank(message = "Patient aadhar can not be empty")
     private String patientAadhar;
 
-    
     @Column(name = "diseaseName")
     @NotBlank(message = "disease name cannot be blank")
     private String diseaseName;
 
-
     @Column(name = "status")
-    private String status="pending";
+    private String status = "pending";
 }

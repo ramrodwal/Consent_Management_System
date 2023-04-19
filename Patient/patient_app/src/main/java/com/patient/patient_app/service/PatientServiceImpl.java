@@ -13,13 +13,13 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class PatientServiceImpl implements PatientService{
+public class PatientServiceImpl implements PatientService {
 
     private PatientsRepository patientsRepository;
 
     @Override
     public Patient registerPatient(Patient patient) {
-        
+
         return patientsRepository.save(patient);
 
     }
@@ -32,8 +32,10 @@ public class PatientServiceImpl implements PatientService{
     }
 
     static Patient unwrapPatient(Optional<Patient> entity, String patientAadhar) {
-        if (entity.isPresent()) return entity.get();
-        else throw new EntityNotFoundException(patientAadhar, Patient.class);
+        if (entity.isPresent())
+            return entity.get();
+        else
+            throw new EntityNotFoundException(patientAadhar, Patient.class);
     }
 
     @Override
@@ -48,5 +50,5 @@ public class PatientServiceImpl implements PatientService{
         BeanUtils.copyProperties(updatedPatient, existingPatient, "patient_aadhar");
         return patientsRepository.save(existingPatient);
     }
-    
+
 }

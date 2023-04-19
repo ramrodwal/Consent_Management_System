@@ -13,8 +13,11 @@ function AddMedicalRecords() {
   const token = localStorage.getItem('practitionerAuthToken')
   const navigate = useNavigate();
   const headers = { Authorization: `Bearer ${token}` };
-  const id = localStorage.getItem('id');
-  const hid = localStorage.getItem('hospitalId');
+
+
+    const id=localStorage.getItem('id');
+    const hid=localStorage.getItem('hospitalId');
+
 
   const [recordId, setRecordId] = useState('');
   const [patientAadhar, setPatientAadhar] = useState('');
@@ -83,6 +86,7 @@ function AddMedicalRecords() {
     const recordDetails = { recordId: recordId, patientAadhar: patientAadhar, diseaseName: diseaseName, record: record, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }, medicalPractitioner: { practitionerAadhar: id } };
     if (isValidAadhar(patientAadhar) && isNotEmpty(diseaseName) && containsOnlyLettersAndSpaces(diseaseName) && isNotEmpty(record)) {
       axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails, { headers })
+
         .then(response => console.log(response))
         .catch(error => console.log("There is an error!!"));
 
@@ -93,6 +97,7 @@ function AddMedicalRecords() {
       };
       const recordDetail = { hospitalId: hospitalId.centralHospital.hospitalId, patient: patient };
       axios.post('http://localhost:8765/records/meta-data', recordDetail)
+
         .then(response => console.log(response))
         .catch(error => console.log("There is an error!!"));
 
@@ -148,8 +153,6 @@ function AddMedicalRecords() {
             {isNotEmpty(record) && (record.length < 5 || record.length > 1000) && <Form.Text className="text-danger">Please enter a prescription between 5 and 1000 characters</Form.Text>}
             {isNotEmpty(record) && !/^[a-zA-Z0-9 .,-/()\n]+$/.test(record) && <Form.Text className="text-danger">Please enter a valid prescription</Form.Text>}
           </Form.Group>
-
-
 
 
 

@@ -10,16 +10,24 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ConsentResponse() {
+  const token = localStorage.getItem('authToken')
   const navigate = useNavigate();
+  const headers = { Authorization: `Bearer ${token}` };
+  //const id = localStorage.getItem('id');
 
   const [requests, setRequests] = useState([]);
   const [declinedRequests, setDeclinedRequests] = useState([]);
   useEffect(() => {
+    if (token === null) {
+      navigate("/");
+    }
+    else {
+      axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
+        setRequests(response.data);
+        setDeclinedRequests(Array(response.data.length).fill(false));
+      });
+    }
 
-    axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
-      setRequests(response.data);
-      setDeclinedRequests(Array(response.data.length).fill(false));
-    });
   }, []);
 
   const handleDenyRequest = (event, index) => {
@@ -129,19 +137,19 @@ function ConsentResponse() {
               <td>{request.patientAadhar}</td>
               <td>{request.practitionerAadhar}</td>
               <td>{request.status}</td>
-              {request.status !== "pending" ? 
-              (
-              request.status==="APPROVED"?
-              
-              <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Revoke</Button>:
-              
-                <td>RESPONDED</td>
-              ) : (
-                <td>
-                  <Button  onClick={(event) => handleAcceptRequest(event, index)}>Accept</Button>
-                  <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Deny</Button>
-                </td>
-              )}
+              {request.status !== "pending" ?
+                (
+                  request.status === "APPROVED" ?
+
+                    <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Revoke</Button> :
+
+                    <td>RESPONDED</td>
+                ) : (
+                  <td>
+                    <Button onClick={(event) => handleAcceptRequest(event, index)}>Accept</Button>
+                    <Button variant="danger" onClick={(event) => handleDenyRequest(event, index)}>Deny</Button>
+                  </td>
+                )}
             </tr>
           ))}
         </tbody>

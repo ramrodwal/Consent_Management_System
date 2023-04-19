@@ -1,7 +1,5 @@
 package com.patient.patient_app.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.patient.patient_app.entity.RecordMapping;
@@ -11,16 +9,13 @@ import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
-public class RecordServiceImpl implements RecordService{
+public class RecordServiceImpl implements RecordService {
 
     private RecordMetaDataRepository recordMetaDataRepository;
 
-
     @Override
-    public RecordMapping addData(RecordMapping recordMapping){
+    public RecordMapping addData(RecordMapping recordMapping) {
         return recordMetaDataRepository.save(recordMapping);
     }
 
-
-    
 }
