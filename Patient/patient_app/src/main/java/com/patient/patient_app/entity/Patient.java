@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,25 +29,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "patient")
-public class Patient implements UserDetails{
-    
+public class Patient implements UserDetails {
+
     @JsonIgnore
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<RecordMapping> recordList = new ArrayList<>();
 
     @NotBlank
     private String fname;
-    
+
     @Column
     private String mname;
-    
+
     @NotBlank
     private String lname;
 
@@ -57,15 +55,13 @@ public class Patient implements UserDetails{
     @Min(value = 18, message = "only patients above 18 can register")
     private int age;
 
-    
     @NotBlank
     private String gender;
 
     @NotBlank
-    @Pattern(regexp="\\d{10}", message="please enter a valid phone number")
+    @Pattern(regexp = "\\d{10}", message = "please enter a valid phone number")
     private String contactNo;
 
-    
     @NotBlank
     private String state;
 
@@ -80,11 +76,10 @@ public class Patient implements UserDetails{
     private String address;
 
     @Id
-    @Column( unique = true)
+    @Column(unique = true)
     @Pattern(regexp = "^\\d{12}$", message = "please enter a valid aadhar")
     private String patientAadhar;
 
-    
     @NotBlank
     @Email(message = "please enter a valid email")
     private String email;
@@ -93,7 +88,6 @@ public class Patient implements UserDetails{
     @NotBlank
     private String password;
 
-    
     @Size(min = 6)
     @NotBlank
     private String confirmPassword;
@@ -101,53 +95,45 @@ public class Patient implements UserDetails{
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        
+
         return List.of(new SimpleGrantedAuthority(role.name()));
 
     }
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return email;
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    
-    public String getPatientAadhar(){
+    public String getPatientAadhar() {
         return patientAadhar;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
 
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-
     @Override
     public boolean isEnabled() {
         return true;
     }
-
-
 
 }
