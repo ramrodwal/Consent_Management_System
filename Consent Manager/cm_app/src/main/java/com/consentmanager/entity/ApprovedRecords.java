@@ -29,55 +29,51 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name= "approvedRecords")
+@Table(name = "approvedRecords")
 // @IdClass(ApprovedId.class)
 
 public class ApprovedRecords {
 
-    //lazy to eager 
+    // lazy to eager
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "consentId")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private ConsentManager cm;
 
     @Id
-    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
-    @Column(name = "approvedId",nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "approvedId", nullable = false)
     private int approvedId;
 
-    @Column(name = "recordId",nullable = false)
+    @Column(name = "recordId", nullable = false)
     @NonNull
     private int recordId;
 
-    @Column(name = "practitioner_aadhar",nullable = false)
+    @Column(name = "practitioner_aadhar", nullable = false)
     @NonNull
     @NotBlank(message = "practitioner aadhar cannot be blank")
     private String practitionerAadhar;
 
-    
-    @Column(name = "patientAadhar",nullable = false)
+    @Column(name = "patientAadhar", nullable = false)
     @NonNull
     @NotBlank(message = "patient aadhar cannot be blank")
     private String patientAadhar;
-    
-    @Column(name = "diseaseName",nullable = false)
+
+    @Column(name = "diseaseName", nullable = false)
     @NonNull
     @NotBlank(message = "disease name cannot be blank")
     private String diseaseName;
 
-    
-    @Column(name = "record",nullable = false)
+    @Column(name = "record", nullable = false)
     @NonNull
     @NotBlank(message = "record  cannot be blank")
     private String record;
 
-    
-    @Column(name = "approvedDate",nullable = false)
+    @Column(name = "approvedDate", nullable = false)
     private LocalDate approvedDate;
 
-    
-    @Column(name = "validity",nullable = false)
+    @Column(name = "validity", nullable = false)
     private LocalDate validity;
 }
