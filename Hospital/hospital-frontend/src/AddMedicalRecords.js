@@ -14,6 +14,7 @@ function AddMedicalRecords() {
   const navigate = useNavigate();
   const headers = { Authorization: `Bearer ${token}` };
     const id=localStorage.getItem('id');
+    const hid=localStorage.getItem('hospitalId');
 
   const [recordId, setRecordId] = useState('');
   const [patientAadhar, setPatientAadhar] = useState('');
@@ -21,7 +22,7 @@ function AddMedicalRecords() {
   const [record, setRecord] = useState('');
   const [hospitalId, setHospitalId] = useState({
     centralHospital: {
-      hospitalId: ''
+      hospitalId: hid
     }
   });
 
@@ -84,16 +85,16 @@ function AddMedicalRecords() {
       axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails,{headers})
         .then(response => console.log(response))
         .catch(error => console.log("There is an error!!"));
-      const hid = hospitalId.centralHospital.hospitalId;
-      const patient = {
-        fname: "vartika", mname: " ", lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
-        contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
-        patientAadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
-      };
-      const recordDetail = { hospitalId: hid, patient: patient };
-      axios.post('http://localhost:8765/records/meta-data', recordDetail)
-        .then(response => console.log(response))
-        .catch(error => console.log("There is an error!!"));
+      
+        const patient = {
+          fname: "vartika", mname: " ", lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
+          contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
+          patientAadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
+        };
+        const recordDetail = { hospitalId: hospitalId.centralHospital.hospitalId, patient: patient };
+        axios.post('http://localhost:8765/records/meta-data', recordDetail)
+          .then(response => console.log(response))
+          .catch(error => console.log("There is an error!!"));
 
       navigate("/DoctorDashboard");
     }
@@ -150,17 +151,7 @@ function AddMedicalRecords() {
 
 
 
-          <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
-              <option value="">Hospital Name</option>
-              {hospitals.map((hospital) => (
-                <option key={hospital.id} value={hospital.hospitalId}>{hospital.hospitalName}</option>
-              ))}
-            </Form.Control>
-            {hospitalId.centralHospital.hospitalId === "" && <Form.Text className="text-danger">Please select a hospital id</Form.Text>}
-          </Form.Group>
-
+          
 
           
 
