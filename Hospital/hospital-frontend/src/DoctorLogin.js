@@ -37,6 +37,7 @@ function DoctorLogin() {
         const Token = await axios.post('http://localhost:9099/api/auth/authenticate', login)
         localStorage.setItem('practitionerAuthToken', Token.data.token);
         localStorage.setItem('id',Token.data.practitionerAadhar)
+        localStorage.setItem('hospitalId', Token.data.hospitalId)
 
         navigate("/DoctorDashboard");
 

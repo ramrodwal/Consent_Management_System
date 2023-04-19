@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationResponse {
-    
+
+    private int hospitalId;
     private String practitionerAadhar;
     private String token;
 }

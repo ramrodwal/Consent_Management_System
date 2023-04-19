@@ -23,7 +23,7 @@ function ViewConsent() {
     }
 
     else{
-      axios.get(`http://localhost:9092/hospital/practitioner-login/view-consent/${practitionerAadhar}`,{headers}).then((response) => {
+      axios.get(`http://localhost:9092/hospital/practitioner-login/view-consent/${practitionerAadhar}`).then((response) => {
         setConsentDetails(response.data);
       });
     }
