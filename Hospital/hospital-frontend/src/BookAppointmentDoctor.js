@@ -17,6 +17,8 @@ function BookAppointmentDoctor() {
   const [hospitals, setHospitals] = useState([]);
   const [practitioners, setPractitioners] = useState([]);
 
+
+
   const [patientAadhar, setPatientId] = useState('');
   const [patientName, setPatientName] = useState('');
   const [practitionerAadhar, setPractitionerAadhar] = useState({
@@ -31,17 +33,22 @@ function BookAppointmentDoctor() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
+    axios.get("http://localhost:9099/book-appointment/hospital-list").then((response) => {
       setHospitals(response.data);
     });
   }, []);
 
-  useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
+ 
+  const getPractitionerByHospitalId=(id)=>{
+    axios.get(`http://localhost:9099/book-appointment/practitioner-list/${id}`).then((response) => {
       setPractitioners(response.data);
     });
-  }, []);
-
+  }
+  
+  const onChangeFunction=(event)=>{
+    setHospitalId({ centralHospital1: { hospitalId: event.target.value } });
+    getPractitionerByHospitalId(event.target.value);
+  }
 
 
   const isNotEmpty = (value) => {
@@ -67,7 +74,7 @@ function BookAppointmentDoctor() {
     const patient = { patientAadhar: patientAadhar, patientName: patientName, medicalPractitioner: { practitionerAadhar: practitionerAadhar.medicalPractitioner.practitionerAadhar }, centralHospital1: { hospitalId: hospitalId.centralHospital1.hospitalId } };
     if (isNotEmpty(hospitalId.centralHospital1.hospitalId) && isValidAadhar(patientAadhar) && containsOnlyLettersAndSpaces(patientName)) {
 
-      axios.post('http://localhost:9099/hospital/add-patient', patient)
+      axios.post('http://localhost:9099/book-appointment/add-patient', patient)
         .then(response => console.log(response))
         .catch(error => console.log(error));
       navigate("/");
@@ -113,13 +120,19 @@ function BookAppointmentDoctor() {
         <form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select" value={hospitalId.centralHospital1.hospitalId} onChange={(event) => setHospitalId({ centralHospital1: { hospitalId: event.target.value } })}>
+            <Form.Control as="select" value={hospitalId.centralHospital1.hospitalId} onChange={onChangeFunction}>
               <option>Hospital Name</option>
               {hospitals.map((hospital) => (
                 <option value={hospital.hospitalId}>{hospital.hospitalName}</option>
               ))}
             </Form.Control>
           </Form.Group>
+
+                {/* {hospitalId.centralHospital1.hospitalId==null}
+
+              {console.log(hospitalId.centralHospital1.hospitalId)}
+              {getPractitionerByHospitalId(hospitalId.centralHospital1.hospitalId)} */}
+          
 
           <br></br>
 
@@ -154,14 +167,6 @@ function BookAppointmentDoctor() {
               <Form.Text className="text-danger">Please enter a valid patient Name</Form.Text>
             )}
             </Form.Group>
-
-          {/* <Form.Group controlId="formBasicSelect">
-            <Form.Label>Select Practitioner Name</Form.Label>
-            <Form.Control as="select" value={practitionerName} onChange={(event) => setPractitionerName(event.target.value)}>
-              <option>Practitioner Name</option>
-              
-            </Form.Control>
-          </Form.Group>  */}
 
             <Form.Group controlId="formBasicSelect">
               <Form.Label>Select Practitioner </Form.Label>
