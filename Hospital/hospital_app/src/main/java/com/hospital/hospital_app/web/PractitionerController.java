@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,11 +25,14 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 @RequestMapping("/hospital")
 @AllArgsConstructor
 @NoArgsConstructor
 public class PractitionerController {
+
+    @Autowired
+    private  PasswordEncoder passwordEncoder;
 
     @Autowired
     PractitionerService practitionerService;
@@ -40,6 +44,7 @@ public class PractitionerController {
     @PostMapping("/admin-login/signup")
     public ResponseEntity<MedicalPractitioner> hospitalRegistration( @Valid @RequestBody MedicalPractitioner medicalPractitioner){
         System.out.println(medicalPractitioner.getGender());
+        medicalPractitioner.setPassword(passwordEncoder.encode(medicalPractitioner.getPassword()));
         return new ResponseEntity<MedicalPractitioner>(practitionerService.registerPractitioner(medicalPractitioner), HttpStatus.CREATED);
     }
 

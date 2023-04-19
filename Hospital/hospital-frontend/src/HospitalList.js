@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from 'react';
 import "./HospitalComponents/HospitalStyle.css"
 import Table from 'react-bootstrap/Table'
-
+import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import axios from "axios";
@@ -10,44 +10,33 @@ import axios from "axios";
 
 function HospitalList() {
 
+  const navigate=useNavigate();
   const [hospitals,setHospitals]=useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
-      setHospitals(response.data);
-    });
+
+    const token = localStorage.getItem('adminAuthToken')
+
+  
+    
+        
+      if(token===null){
+        navigate("/AdminLogin");  
+      }
+      else{
+      const headers = { Authorization: `Bearer ${token}` }; // add token to headers
+        axios.get("http://localhost:9099/hospital/admin-login/hospital-list",{headers}).then((response) => {
+          setHospitals(response.data);
+        });
+      }
+  
   }, []);
 
   return (
     <>
 
 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-
-        <Navbar.Brand href="/AdminPostLogin"><img
-          alt=""
-          src="/Admin.jpg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}Admin</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
-            <Nav.Link href="/RegisterNewDoctor">Register New Practitioner</Nav.Link>
-            <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Practitioner's List</Nav.Link>
-
-          </Nav>
-          <Nav>
-            <Nav.Link href="/AdminLogin">Logout</Nav.Link>
-
-          </Nav>
-        </Navbar.Collapse>
-
-      </Navbar>
-
+    
 
       <center><h1 className='pageheading'>Hospital List</h1></center>
 

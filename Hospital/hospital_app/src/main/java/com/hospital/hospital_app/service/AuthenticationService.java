@@ -105,8 +105,8 @@ public class AuthenticationService {
         
         System.out.println(request.getPassword());
 
-        var admin=adminRepository.findByEmail(request.getEmail())
-            .orElseThrow();
+        var admin=adminRepository.findByEmail(request.getEmail());
+            // .orElseThrow();
 
         System.out.println(admin);
 

@@ -2,27 +2,27 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
 
-  const DoctorNavbar = () => {
+  const AdminNavbar = () => {
     const navigate = useNavigate();
     const handleLogout=() =>{
     //   console.log("ho raha hai call")
-      localStorage.removeItem('practitionerAuthToken');
+      localStorage.removeItem('adminAuthToken');
       localStorage.removeItem('id');
-      navigate("/DoctorLogin");
+      navigate("/");
     }
 
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       
-      <Navbar.Brand href="/DoctorDashboard">Practitioner</Navbar.Brand>
+      <Navbar.Brand href="/AdminPostLogin">Admin</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="/ConsentRequest">Request Consent</Nav.Link>
-          <Nav.Link href="/ViewConsent">View Consent</Nav.Link>
-          <Nav.Link href="/AddMedicalRecords">Add Medical Records</Nav.Link>
-          
+          <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
+          <Nav.Link href="/RegisterNewDoctor">Register New Practitiioner</Nav.Link>
+          <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
+          <Nav.Link href="/DoctorList">Practitioner List</Nav.Link>
           
         </Nav>
         <Nav>
@@ -35,4 +35,4 @@ import { useNavigate } from 'react-router-dom';
     </>
   )
 }
-export default DoctorNavbar;
+export default AdminNavbar;

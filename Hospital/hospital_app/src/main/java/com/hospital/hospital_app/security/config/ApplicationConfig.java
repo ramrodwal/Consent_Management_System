@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.hospital.hospital_app.entity.Admin;
 import com.hospital.hospital_app.repository.AdminRepository;
 import com.hospital.hospital_app.repository.PractitionerRepository;
 
@@ -30,14 +31,14 @@ public class ApplicationConfig {
 
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                var admin = adminRepository.findByEmail(username);
+                Admin admin = adminRepository.findByEmail(username);
                 if(admin==null){
                     return practitionerRepository.findByEmail(username)
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
                 }
                 else{
-                    return adminRepository.findByEmail(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                    return adminRepository.findByEmail(username);
+                        // .orElseThrow(() -> new UsernameNotFoundException("User not found"));
                 }
                 
             }

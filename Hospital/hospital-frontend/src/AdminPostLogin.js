@@ -1,11 +1,27 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import "./HospitalComponents/HospitalStyle.css"
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-
+import { useNavigate } from 'react-router-dom';
 
 function AdminPostLogin() {
+
+  const navigate=useNavigate();
+  const token = localStorage.getItem('adminAuthToken')
+
+
+    useEffect(() => {
+      
+    if(token===null){
+      navigate("/AdminLogin");  
+    }
+  
+    
+    
+    },[]);
+    
+
     return(
         <>
         <center><h1 className='pageheading'>Welcome Admin</h1></center>

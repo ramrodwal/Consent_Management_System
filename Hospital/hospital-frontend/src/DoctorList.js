@@ -4,45 +4,38 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 function DoctorList() {
+  const navigate = useNavigate();
   const [practitioners, setPractitioners] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
-      setPractitioners(response.data);
-    });
+
+    const token = localStorage.getItem('adminAuthToken')
+    // console.log(token)
+
+
+
+    if (token === null) {
+      navigate("/AdminLogin");
+    }
+
+    else {
+      const headers = { Authorization: `Bearer ${token}` }; // add token to headers
+      axios.get("http://localhost:9099/hospital/admin-login/practitioner-list", { headers }).then((response) => {
+        setPractitioners(response.data);
+      });
+    }
+
+
   }, []);
 
   return (
     <>
 
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 
-        <Navbar.Brand href="/AdminPostLogin"><img
-          alt=""
-          src="/Admin.jpg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}Admin</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
-            <Nav.Link href="/RegisterNewDoctor">Register New Practitioner</Nav.Link>
-            <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Practitioner's List</Nav.Link>
-
-          </Nav>
-          <Nav>
-            <Nav.Link href="/AdminLogin" className="navbar-nav ml-auto">Logout</Nav.Link>
-
-          </Nav>
-        </Navbar.Collapse>
-
-      </Navbar>
       <center><h1 className="pageheading">Practitioner's List</h1></center>
 
       <Table stripped bordered hover variant="dark" size="sm">
