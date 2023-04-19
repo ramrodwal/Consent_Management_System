@@ -18,6 +18,7 @@ import ViewConsent from './ViewConsent';
 import ConsentRequest from './ConsentRequest';
 import DoctorNavbar from './HospitalComponents/DoctorNavbar';
 import ViewApprovedRecords from './ViewApprovedRecords';
+import AdminNavbar from './HospitalComponents/AdminNavbar';
 
 function HospHome(){
   return(
@@ -54,6 +55,7 @@ function AdminLog(){
 function AdmPostLog(){
   return(
       <>
+      <AdminNavbar/>
         <AdminPostLogin/>
       </>
   );
@@ -62,6 +64,7 @@ function AdmPostLog(){
 function HospList(){
   return(
       <>
+      <AdminNavbar/>
         <HospitalList/>
       </>
   );
@@ -70,6 +73,7 @@ function HospList(){
 function RegNewDoc(){
   return(
     <>
+    <AdminNavbar/>
       <RegisterNewDoctor/>
     </>
   );
@@ -78,6 +82,7 @@ function RegNewDoc(){
 function RegNewHosp(){
   return(
     <>
+    <AdminNavbar/>
       <RegisterNewHospital/>
     </>
   )
@@ -86,6 +91,7 @@ function RegNewHosp(){
 function DocList(){
   return(
     <>
+    <AdminNavbar/>
       <DoctorList/>
     </>
   )
@@ -136,6 +142,7 @@ function ViewApprovedRec(){
       </>
   );
 }
+
 
 function App() {
   return (

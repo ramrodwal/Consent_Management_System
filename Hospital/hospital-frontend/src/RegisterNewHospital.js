@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from "react-bootstrap/esm/Container";
 import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
@@ -14,7 +12,7 @@ import { useState } from 'react';
 import axios from "axios";
 
 function RegisterNewHospital() {
-  
+
   const navigate = useNavigate();
 
   const [hospitalId, setHospitalId] = useState('');
@@ -24,6 +22,19 @@ function RegisterNewHospital() {
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
+
+
+
+
+  const token = localStorage.getItem('adminAuthToken')
+
+
+  useEffect(() => {
+
+    if (token === null) {
+      navigate("/AdminLogin");
+    }
+  }, []);
 
   const isNotEmpty = (value) => {
     return value.trim().length > 0;
@@ -46,54 +57,34 @@ function RegisterNewHospital() {
     return /^[A-Za-z]+$/.test(str);
   }
 
-   const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const hospitalDetails = { hospitalId: hospitalId, hospitalName: hospitalName, contactNumber: contactNumber, state: state, city: city, address: address, zipcode: zipcode };
-    if( containsOnlyLetters(hospitalName) && isValidPhoneNumber(contactNumber)
+    if (containsOnlyLetters(hospitalName) && isValidPhoneNumber(contactNumber)
       && containsOnlyLettersAndSpaces(state) && isValidZipCode(zipcode)
-      && containsOnlyLettersAndSpaces(city) ){
-        axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails)
+      && containsOnlyLettersAndSpaces(city)) {
+
+
+      const headers = { Authorization: `Bearer ${token}` }; // add token to headers
+      // console.log(token)
+
+      await axios.post('http://localhost:9099/hospital/admin-login/register-hospital', hospitalDetails, { headers })
         .then(response => console.log(response))
-      .catch(error =>   console.log(error));
-        
-      navigate("/");
-      
-      } else {
+        .catch(error => console.log(error));
+
+      navigate("/AdminPostLogin");
+
+    } else {
       toast.error('Please fill in all the required fields with valid input.',
-         { position: toast.POSITION.TOP_CENTER});
-      
-      }
-    };
+        { position: toast.POSITION.TOP_CENTER });
+
+    }
+  };
 
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
 
-        <Navbar.Brand href="/AdminPostLogin"><img
-          alt=""
-          src="/Admin.jpg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}Admin</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/RegisterNewHospital">Register New Hospital</Nav.Link>
-            <Nav.Link href="/RegisterNewDoctor">Register New Practitioner</Nav.Link>
-            <Nav.Link href="/HospitalList">Hospital List</Nav.Link>
-            <Nav.Link href="/DoctorList">Practitioner's List</Nav.Link>
-
-          </Nav>
-          <Nav>
-
-            <Nav.Link href="/AdminLogin" className='navright'>Logout</Nav.Link>
-
-          </Nav>
-        </Navbar.Collapse>
-
-      </Navbar>
 
       <Container>
         <ToastContainer />
@@ -156,17 +147,17 @@ function RegisterNewHospital() {
             <Form.Control type="text" placeholder="Enter Address" value={address} onChange={(event) => setAddress(event.target.value)} required={true} />
           </Form.Group>
 
-<Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Zip Code</Form.Label>
-          <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} />
-          {!isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicText">
+            <Form.Label>Zip Code</Form.Label>
+            <Form.Control type="number" placeholder="Enter Zip Code" value={zipcode} onChange={(event) => setZipcode(event.target.value)} required={true} />
+            {!isValidZipCode(zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
+          </Form.Group>
 
-       
-            <Button variant="primary" type="submit"  >
-              Submit
-            </Button>
-   
+
+          <Button variant="primary" type="submit"  >
+            Submit
+          </Button>
+
 
         </Form>
 

@@ -2,36 +2,45 @@ import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewApprovedRecords() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('practitionerAuthToken')
 
-    const location=useLocation();
-    const [records,setRecords]=useState([]);
-    const [patientName,setPatientName]=useState('');
-    const consentId = new URLSearchParams(location.search).get("consentId");
-    
-    useEffect(()=>{
-        axios.get(`http://localhost:9092/hospital/approved-records/${consentId}`)
-            .then((response)=>{
-                setRecords(response.data);
-            })
-            .catch(error=>{
-                console.log(error);
-            });
-    },[])
-    
-    const getPatientName=(patientAadhar)=>{
-        axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`).then((response)=>{
-          setPatientName(response.data);
-        },[])
-        return patientName;
-      }
+  const location = useLocation();
+  const [records, setRecords] = useState([]);
+  const [patientName, setPatientName] = useState('');
+  const consentId = new URLSearchParams(location.search).get("consentId");
+
+  useEffect(() => {
+    if (token === null) {
+      navigate("/DoctorLogin");
+    }
+    else {
+      axios.get(`http://localhost:9092/hospital/approved-records/${consentId}`)
+        .then((response) => {
+          setRecords(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
+  }, [])
+
+  const getPatientName = (patientAadhar) => {
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`).then((response) => {
+      setPatientName(response.data);
+    }, [])
+    return patientName;
+  }
 
 
   return (
     <>
-    <center><h1 className='pageheading'>Approved Records List</h1></center>
-    <Table stripped bordered hover variant="dark" size="sm">
+      <center><h1 className='pageheading'>Approved Records List</h1></center>
+      <Table stripped bordered hover variant="dark" size="sm">
         <thead>
           <tr className='tablehead'>
             <th>Consent Id</th>
@@ -54,7 +63,7 @@ export default function ViewApprovedRecords() {
             </tr>
           ))}
         </tbody>
-        </Table>
+      </Table>
     </>
   )
 }

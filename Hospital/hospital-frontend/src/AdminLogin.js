@@ -1,83 +1,108 @@
-import React from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { useState } from 'react';
-import axios from "axios";
-import Form from 'react-bootstrap/Form';
+import React, { useState } from "react";
 import Container from "react-bootstrap/esm/Container";
+import Card from "react-bootstrap/Card";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 
-function AdminLogin(){
 
-  const[adminId,setAdminId]=useState('');
-  const [username, setUsername]=useState('');
+function AdminLogin() {
+
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const isNotEmpty = (value) => {
+    return value.trim().length > 0;
+  }
+
+  const isValidEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
   
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const hospitalDetails = { adminId:adminId, username: username,password: password};
-    axios.post('http://localhost:9099/hospital/admin-login', hospitalDetails)
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
-}
-    return(
+    const login = {
+      email: email, password: password
+    };
+    if (isNotEmpty(email) && isValidEmail(email) && isNotEmpty(password)) {
 
-      
-        <>
+      try {
+        const Token = await axios.post('http://localhost:9099/api/auth/admin/authenticate', login)
+        localStorage.setItem('adminAuthToken', Token.data.token);
 
-<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      
-      <Navbar.Brand href="/"><img
-              alt=""
-              src="/HospitalHome.jpg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{' '}Hospital Home</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="/BookAppointmentDoctor">Book Appointment</Nav.Link>
-          <Nav.Link href="/DoctorLogin">Practitioner's Login</Nav.Link>
-          <Nav.Link href="/AdminLogin">Admin Login</Nav.Link>
-          
-          
-        </Nav>
-        
-      </Navbar.Collapse>
-    
-  </Navbar>
-            <div className='pageheading'>
-            <center><h1 className='pageheading'>Admin Login</h1></center>
-            </div>
-        <Container className='formcontainernew' > 
-            <Form className='formpad'>
+        navigate("/AdminPostLogin");
 
-            <Form.Group className="mb-3" controlId="formBasicText" >
-            <Form.Control type="hidden" value={adminId} onChange={(event)=>setAdminId(event.target.value)}/>
-            </Form.Group>
+      } catch (error) {
+        console.log("this is an error!!!")
+      }
 
-            <Form.Group className="mb-3" controlId="formBasicText" >
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Username" value={username} onChange={(event)=>setUsername(event.target.value)}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicText" >
+
+    } else {
+      toast.error('Please fill in all the required fields with valid input.',
+        { position: toast.POSITION.TOP_CENTER });
+
+    }
+  };
+
+  return (
+
+
+    <>
+
+      <div className='pageheading'>
+        <center><h1 className='pageheading'>Admin Login</h1></center>
+      </div>
+
+
+
+
+
+      <Container>
+        <ToastContainer />
+        <Card>
+          <Card.Img class="logo" src="logo.png" />
+        </Card>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required={true}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              title="Please enter a valid email address"
+            />
+            {!isNotEmpty(email) && <Form.Text className="text-danger">Please enter an email address</Form.Text>}
+            {isNotEmpty(email) && !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email) && <Form.Text className="text-danger">Please enter a valid email address</Form.Text>}
+
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={username} onChange={(event)=>setUsername(event.target.value)}/>
-            </Form.Group>
-            </Form>
-            <br></br>
-            <center>
-        <button type="submit" className="btn btn-primary">
-              Login
-            </button>
-            </center>
+            <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)} required={true} minLength={8} />
+            {!isNotEmpty(password) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
+            {isNotEmpty(password) && password.length < 8 && <Form.Text className="text-danger">Password must be at least 8 characters long</Form.Text>}
+          </Form.Group>
 
-            </Container>
-        </>
-    );
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+
+      </Container>
+
+
+    </>
+  );
 }
 
 export default AdminLogin;

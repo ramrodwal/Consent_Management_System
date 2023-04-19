@@ -11,6 +11,6 @@ import com.hospital.hospital_app.entity.MedicalPractitioner;
 
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
-    Optional<Admin> findByEmail(String email);
+    Admin findByEmail(String email);
     
 }

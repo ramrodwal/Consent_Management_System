@@ -1,24 +1,34 @@
 import React , {useState,useEffect} from 'react'
 import "./HospitalComponents/HospitalStyle.css"
 import Table from 'react-bootstrap/Table'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
 
 
 function DoctorDashboard(){
-
+  
+  const token = localStorage.getItem('practitionerAuthToken')
+  const headers = { Authorization: `Bearer ${token}` };
+    const practitionerAadhar=localStorage.getItem('id');
+const navigate=useNavigate();
   const [patientDetails,setPatient]=useState([]);
 
   useEffect(() => {
-  
-    let practitionerAadhar='123412341234'
-    axios.get(`http://localhost:9099/hospital/getPatientsByPractitionerAadhar/${practitionerAadhar}`).then((response) => {
-      setPatient(response.data);
-    });
+    
+
+      if(token===null){
+        navigate("/DoctorLogin");  
+      }
+      else{
+        axios.get(`http://localhost:9099/hospital/getPatientsByPractitionerAadhar/${practitionerAadhar}`,{headers}).then((response) => {
+          setPatient(response.data);
+        });
+      }
+
+    
   }, []);
 
 

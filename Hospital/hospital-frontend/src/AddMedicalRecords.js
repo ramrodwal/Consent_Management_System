@@ -3,8 +3,6 @@ import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
@@ -12,6 +10,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 
 function AddMedicalRecords() {
+  const token = localStorage.getItem('practitionerAuthToken')
   const navigate = useNavigate();
 
   const [recordId, setRecordId] = useState('');
@@ -34,7 +33,7 @@ function AddMedicalRecords() {
 
   const [hospitals, setHospitals] = useState([]);
   const [doctors, setDoctors] = useState([]);
-  const [patients, setPatient]=useState([]);
+  const [patients, setPatient] = useState([]);
 
   function isValidAadhar(aadharNumber) {
     // Validate length
@@ -50,59 +49,67 @@ function AddMedicalRecords() {
     return value.trim().length !== 0;
   }
   useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
-      setHospitals(response.data);
-    });
+
+    if (token === null) {
+      navigate("/DoctorLogin");
+    }
+    else {
+      axios.get("http://localhost:9099/hospital/admin-login/hospital-list").then((response) => {
+        setHospitals(response.data);
+      });
+
+      axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
+        setDoctors(response.data);
+      });
+
+      axios.get("http://localhost:9099/hospital/get-patients").then((response) => {
+        setPatient(response.data);
+      });
+    }
+
+
+
+
   }, []);
 
-  useEffect(() => {
-    axios.get("http://localhost:9099/hospital/admin-login/practitioner-list").then((response) => {
-      setDoctors(response.data);
-    });
-  }, []);
 
-  useEffect(() => {
-    axios.get("http://localhost:9099/hospital/get-patients").then((response) => {
-      setPatient(response.data);
-    });
-  }, []);
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const recordDetails = { recordId: recordId, patientAadhar: patientAadhar, diseaseName: diseaseName, record: record, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }, medicalPractitioner: { practitionerAadhar: practitionerAadhar.medicalPractitioner.practitionerAadhar } };
-    if(isValidAadhar(patientAadhar) && isNotEmpty(diseaseName) && containsOnlyLettersAndSpaces(diseaseName) && isNotEmpty(record)){
+    if (isValidAadhar(patientAadhar) && isNotEmpty(diseaseName) && containsOnlyLettersAndSpaces(diseaseName) && isNotEmpty(record)) {
       axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails)
-      .then(response => console.log(response))
-      .catch(error => console.log("There is an error!!"));
-    const hid = hospitalId.centralHospital.hospitalId;
-    const patient = {
-      fname: "vartika", mname: " ", lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
-      contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
-      patientAadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
-    };
-    const recordDetail = { hospitalId: hid, patient: patient };
-    axios.post('http://localhost:8765/records/meta-data', recordDetail)
-      .then(response => console.log(response))
-      .catch(error => console.log("There is an error!!"));
+        .then(response => console.log(response))
+        .catch(error => console.log("There is an error!!"));
+      const hid = hospitalId.centralHospital.hospitalId;
+      const patient = {
+        fname: "vartika", mname: " ", lname: "chaturvedi", age: 23, gender: "female", email: "vartika@gmail.com",
+        contactNo: "2345123456", state: "karnataka", city: "bangalore", zipcode: "560100", address: "electronic ",
+        patientAadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
+      };
+      const recordDetail = { hospitalId: hid, patient: patient };
+      axios.post('http://localhost:8765/records/meta-data', recordDetail)
+        .then(response => console.log(response))
+        .catch(error => console.log("There is an error!!"));
 
       navigate("/DoctorDashboard");
     }
     else {
       toast.error('Please fill in all the required fields with valid input.',
-         { position: toast.POSITION.TOP_CENTER});
-      
-      }
-    
+        { position: toast.POSITION.TOP_CENTER });
+
+    }
+
   };
 
- 
+
 
 
   return (
     <>
 
-      
+
 
       <center><h1 className='pageheading'>Add Medical Records</h1></center>
       <Container className='formcontainer'>
@@ -121,7 +128,7 @@ function AddMedicalRecords() {
                 <option value={patient.patientAadhar}>{patient.patientName}</option>
               ))}
             </Form.Control>
-            </Form.Group>
+          </Form.Group>
 
 
           <Form.Group className="mb-3" controlId="formBasicText">
@@ -143,7 +150,7 @@ function AddMedicalRecords() {
 
           <Form.Group controlId="formBasicSelect">
             <Form.Label>Select Hospital Name</Form.Label>
-            <Form.Control as="select"  value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
+            <Form.Control as="select" value={hospitalId.centralHospital.hospitalId} onChange={(event) => setHospitalId({ centralHospital: { hospitalId: event.target.value } })} required={true}>
               <option value="">Hospital Name</option>
               {hospitals.map((hospital) => (
                 <option key={hospital.id} value={hospital.hospitalId}>{hospital.hospitalName}</option>

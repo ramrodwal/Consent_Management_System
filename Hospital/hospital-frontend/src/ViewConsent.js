@@ -1,16 +1,16 @@
 import React,{useEffect, useState} from 'react'
-import Container from "react-bootstrap/esm/Container";
-import Card from "react-bootstrap/Card";
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import "./HospitalComponents/HospitalStyle.css"
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import Table from 'react-bootstrap/Table'
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function ViewConsent() {
-  let practitionerAadhar='123412341234';
+  const navigate=useNavigate();
+  const token = localStorage.getItem('practitionerAuthToken')
+  const headers = { Authorization: `Bearer ${token}` };
+    const practitionerAadhar=localStorage.getItem('id');
+
 
   const [consentDetails,setConsentDetails]=useState([]);
   const [hospitalName,setHospitalName]=useState('');
@@ -18,21 +18,27 @@ function ViewConsent() {
 
   useEffect(() => {
   
-    let practitionerAadhar='123412341234'
-    axios.get(`http://localhost:9092/hospital/practitioner-login/view-consent/${practitionerAadhar}`).then((response) => {
-      setConsentDetails(response.data);
-    });
+    if(token===null){
+      navigate("/DoctorLogin");  
+    }
+
+    else{
+      axios.get(`http://localhost:9092/hospital/practitioner-login/view-consent/${practitionerAadhar}`,{headers}).then((response) => {
+        setConsentDetails(response.data);
+      });
+    }
+    
   }, []);
 
   const getHospitalName=(hospitalId)=>{
-    axios.get(`http://localhost:9099/hospital/practitioner-login/get-hospital/${hospitalId}`).then((response)=>{
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-hospital/${hospitalId}`,{headers}).then((response)=>{
       setHospitalName(response.data);
     },[])
     return hospitalName;
   }
 
   const getPatientName=(patientAadhar)=>{
-    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`).then((response)=>{
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`,{headers}).then((response)=>{
       setPatientName(response.data);
     },[])
     return patientName;
@@ -60,7 +66,7 @@ function ViewConsent() {
         
         <tbody>
           {consentDetails.map((consent) => (
-            <tr key={consent.id}>
+            <tr key={consent.consentId}>
               <td>{consent.consentId}</td>
               <td>{consent.diseaseName}</td>
               <td>{getHospitalName(consent.hospitalId)}</td>

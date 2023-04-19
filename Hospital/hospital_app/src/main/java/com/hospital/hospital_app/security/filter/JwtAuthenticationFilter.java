@@ -34,6 +34,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
         final String jwt;
         final String userEmail;
 
+        if (request.getMethod().equals("OPTIONS")) {
+            // Allow preflight requests without authentication
+            response.setStatus(HttpServletResponse.SC_OK);
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+
+
         if(authHeader==null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request, response);
             return ;
