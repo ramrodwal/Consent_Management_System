@@ -28,4 +28,9 @@ public class PractitionerServiceImpl implements PractitionerService{
         return (List<MedicalPractitioner>) practitionerRepository.findAll();
     }
 
+    @Override
+    public List<MedicalPractitioner> getMedicalPractitionerByHospital(Integer hospitalId) {
+        return practitionerRepository.findByCentralHospital_hospitalId(hospitalId);
+    }
+
 }

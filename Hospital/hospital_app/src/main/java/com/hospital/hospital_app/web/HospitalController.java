@@ -52,12 +52,7 @@ public class HospitalController {
         return hospitalService.getAllDetails();
     }
 
-    @PostMapping("/add-patient")
-    public ResponseEntity<PatientList> addPatientToHospital(@RequestBody PatientList patientList) {
-
-        return new ResponseEntity<>(hospitalService.addPatient(patientList), HttpStatus.CREATED);
-
-    }
+    
 
     @GetMapping("/get-patients")
     public List<PatientList> getAllPatients() {
