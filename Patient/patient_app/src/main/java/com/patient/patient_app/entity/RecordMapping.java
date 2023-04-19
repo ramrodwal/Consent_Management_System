@@ -25,13 +25,13 @@ import lombok.Setter;
 @NoArgsConstructor
 // @AllArgsConstructor
 @Entity
-@Table(name="RecordMapping")
+@Table(name = "RecordMapping")
 public class RecordMapping {
-    
+
     @Id
     @Column(nullable = false)
-    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int Id;
 
     @Column(nullable = false)
@@ -41,15 +41,14 @@ public class RecordMapping {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "patientAadhar")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Patient patient;
 
     public RecordMapping(int Id, int hospitalId, Patient patient) {
         this.Id = Id;
         this.hospitalId = hospitalId;
         this.patient = patient;
-        
-    }
 
+    }
 
 }
