@@ -71,7 +71,7 @@ public class AuthenticationService {
 
         var jwtToken=jwtService.generateToken(medicalPractitioner2);
 
-        return AuthenticationResponse.builder().practitionerAadhar(medicalPractitioner2.getPractitionerAadhar()).token(jwtToken).build();
+        return AuthenticationResponse.builder().hospitalId(medicalPractitioner2.getCentralHospital().getHospitalId()).practitionerAadhar(medicalPractitioner2.getPractitionerAadhar()).token(jwtToken).build();
 
 
     }
