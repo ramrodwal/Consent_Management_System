@@ -14,7 +14,7 @@ import axios from "axios";
 
 const validGenders = ["Male", "Female", "Others"];
 const MIN_AGE = 18;
-
+let otp_val;
 
 function SignUp() {
 
@@ -38,8 +38,11 @@ function SignUp() {
 
   // otp
   const [otp, setOTP] = useState();
-
+  const [otp2,setOtp2]=useState();
+  
+  // const [otp_val,setOtpVal]=useState();
   const [verified, setVerified] = useState(false);
+  const [verified2,setVerified2]=useState(false);
 
 
   const onCaptchVerify = () => {
@@ -55,7 +58,8 @@ function SignUp() {
     }
   }
 
-  const handleOTP = () => {
+  const handleOTP = (event) => {
+    event.preventDefault();
     onCaptchVerify();
 
     const appVerifier = window.recaptchaVerifier;
@@ -63,7 +67,7 @@ function SignUp() {
     signInWithPhoneNumber(auth, formatPh, appVerifier)
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
-        toast.success("Otp send successfull", { position: toast.POSITION.TOP_CENTER })
+        toast.success("Otp send successfull to your phone number "+contactNo, { position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
         toast.error("Something went wrong , try again later",{ position: toast.POSITION.TOP_CENTER })
@@ -72,20 +76,68 @@ function SignUp() {
   }
 
 
-  const onSubmitOTP = () => {
+  const onSubmitOTP = (event) => {
+    event.preventDefault();
     window.confirmationResult
       .confirm(otp)
       .then(async (res) => {
-        console.log(res);
         setVerified(true);
         toast.success("Otp verified successfull", { position: toast.POSITION.TOP_CENTER })
       })
       .catch((error) => {
         setVerified(false)
         toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
-        console.log(error);
       })
   }
+
+
+  const sendEmailOtp=(event)=>{
+    event.preventDefault(); 
+
+    otp_val=Math.floor(Math.random()*100000);
+
+   let emailbody=`
+    <h1>This mail is regarding otp verification</h1>
+    <br>
+    <h2>Your OTP is ${otp_val}</h2>
+    `;
+
+    if(window.Email){
+      window.Email.send({
+        SecureToken : "d131c847-cf6e-41e1-b9b0-91b8c1b15d94",
+        To : email,
+        From : "consentmanagementsystem@gmail.com",
+        Subject : "Otp Verification",
+        Body : emailbody
+      }).then(
+        message=>{
+          if(message==="OK"){
+            toast.success("Otp sent successfully to your email "+email,{position: toast.POSITION.TOP_CENTER});
+          }
+        }
+      );
+    }
+    else{
+      toast.error("SMTPJS library not loaded.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+
+  }
+
+  const verifyEmailOtp=(event)=>{
+    event.preventDefault(); 
+    if(otp2==otp_val){
+      setVerified2(true);
+      toast.success("Otp verified successfull", { position: toast.POSITION.TOP_CENTER })
+    }
+    else{
+      setVerified2(false)
+      toast.error("Invalid Otp Entered",{ position: toast.POSITION.TOP_CENTER })
+    }
+
+  }
+
   //otp
 
   const isNotEmpty = (value) => {
@@ -225,35 +277,37 @@ function SignUp() {
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required={true}
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            title="Please enter a valid email address"
-          />
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.target.value)} required={true} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address"/>
           {!isNotEmpty(email) && <Form.Text className="text-danger">Please enter an email address</Form.Text>}
           {isNotEmpty(email) && !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email) && <Form.Text className="text-danger">Please enter a valid email address</Form.Text>}
-
+          <br/>
+          <Button variant="success" type="submit" onClick={sendEmailOtp} style={{fontSize: '15px'}}>Generate Otp</Button>
         </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicText">
+          <Form.Label>Enter Otp</Form.Label>
+          <Form.Control type="text" placeholder="Enter Otp" value={otp2} onChange={(event) => setOtp2(event.target.value)} required={true} />
+          <br />
+          <Button variant="success" type="submit" onClick={verifyEmailOtp} style={{fontSize: '15px'}}>Verify Otp</Button>
+          {verified2 ? <h5 style={{ color: "green" }}>{email} is verified</h5> : <h5 style={{ color: "red" }}>{email} Verification Required</h5>}
+        </Form.Group>
+        
 
         <Form.Group className="mb-3" controlId="formBasicText">
 
           <Form.Label>Enter Phone Number</Form.Label>
           <Form.Control type="text" placeholder="Enter Phone Number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} pattern="[0-9]{10}" title="Please enter a 10-digit phone number without any spaces or special characters" />
           <br />
-          <Button variant="primary" type="submit" onClick={handleOTP}>Generate Otp</Button>
+          <Button variant="success" type="submit" onClick={handleOTP} style={{fontSize: '15px'}}>Generate Otp</Button>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Label>Enter Otp</Form.Label>
           <Form.Control type="text" placeholder="Enter Otp" value={otp} onChange={(event) => setOTP(event.target.value)} required={true} />
           <br />
-          <Button variant="primary" type="submit" onClick={onSubmitOTP}>Verify Otp</Button>
+          <Button variant="success" type="submit" onClick={onSubmitOTP} style={{fontSize: '15px'}}>Verify Otp</Button>
 
-          {verified ? <h3 style={{ color: "green" }}>verified</h3> : <h4 style={{ color: "red" }}>Verification Required</h4>}
+          {verified ? <h5 style={{ color: "green" }}>{contactNo} is verified</h5> : <h5 style={{ color: "red" }}>{contactNo} Verification Required</h5>}
         </Form.Group>
 
         <div id="recaptcha-container"></div>
@@ -321,11 +375,11 @@ function SignUp() {
           {!isNotEmpty(confirmPassword) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
           {isNotEmpty(confirmPassword) && password !== confirmPassword && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
         </Form.Group>
-        {verified ?
+        {verified && verified2 ?
           <Button variant="primary" type="submit" >
             Submit
           </Button>
-          : <Button variant="primary">Mobile Number verification required</Button>
+          : <Button variant="success">Mobile Number and Email verification required</Button>
         }
         <br />
         <br />
