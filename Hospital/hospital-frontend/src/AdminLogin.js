@@ -24,7 +24,7 @@ function AdminLogin() {
   const isValidEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
-  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

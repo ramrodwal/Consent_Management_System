@@ -3,16 +3,13 @@ package com.hospital.hospital_app.entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,8 +34,8 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table(name = "MedicalPractitioner")
-//implementing UserDetails in order to access user details
-public class MedicalPractitioner implements UserDetails{
+// implementing UserDetails in order to access user details
+public class MedicalPractitioner implements UserDetails {
 
     @Id
     private String practitionerAadhar;
@@ -86,20 +83,21 @@ public class MedicalPractitioner implements UserDetails{
 
     @JsonIgnore
     @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> medicalRecords=new ArrayList<>();
+    private List<MedicalRecords> medicalRecords = new ArrayList<>();
 
-    //hid is foreign key refrencing centralhospital hospital_id with on delete cascade 
+    // hid is foreign key refrencing centralhospital hospital_id with on delete
+    // cascade
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "hospitalId")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private CentralHospital centralHospital;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "medicalPractitioner" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PatientList> patientLists=new ArrayList<>();
+    @OneToMany(mappedBy = "medicalPractitioner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientList> patientLists = new ArrayList<>();
 
-    //implements methods
+    // implements methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
@@ -126,18 +124,17 @@ public class MedicalPractitioner implements UserDetails{
     }
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return email;
     }
 
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
-    public String getPractitionerAadhar(){
+    public String getPractitionerAadhar() {
         return practitionerAadhar;
     }
-
 
 }

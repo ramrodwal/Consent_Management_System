@@ -1,7 +1,5 @@
 import "./HospitalComponents/HospitalStyle.css"
 import Table from 'react-bootstrap/Table'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

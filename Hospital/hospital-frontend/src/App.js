@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import React from 'react';
 // import './App.css';
 import HospitalHome from './HospitalHome';
-import { BrowserRouter as Router, Routes, Route, Redirect,} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Redirect, } from "react-router-dom";
 
 import DoctorLogin from './DoctorLogin';
 import BookAppointmentDoctor from './BookAppointmentDoctor';
@@ -20,126 +20,126 @@ import DoctorNavbar from './HospitalComponents/DoctorNavbar';
 import ViewApprovedRecords from './ViewApprovedRecords';
 import AdminNavbar from './HospitalComponents/AdminNavbar';
 
-function HospHome(){
-  return(
-      <>
-        <HospitalHome/>
-      </>
-  );
-}
-
-function BookAppointmentDoc(){
-  return(
+function HospHome() {
+  return (
     <>
-      <BookAppointmentDoctor/>
+      <HospitalHome />
     </>
   );
 }
 
-function DocLogin(){
-  return(
+function BookAppointmentDoc() {
+  return (
     <>
-      <DoctorLogin/>
+      <BookAppointmentDoctor />
     </>
   );
 }
 
-function AdminLog(){
-  return(
+function DocLogin() {
+  return (
     <>
-      <AdminLogin/>
+      <DoctorLogin />
     </>
   );
 }
 
-function AdmPostLog(){
-  return(
-      <>
-      <AdminNavbar/>
-        <AdminPostLogin/>
-      </>
-  );
-}
-
-function HospList(){
-  return(
-      <>
-      <AdminNavbar/>
-        <HospitalList/>
-      </>
-  );
-}
-
-function RegNewDoc(){
-  return(
+function AdminLog() {
+  return (
     <>
-    <AdminNavbar/>
-      <RegisterNewDoctor/>
+      <AdminLogin />
     </>
   );
 }
 
-function RegNewHosp(){
-  return(
+function AdmPostLog() {
+  return (
     <>
-    <AdminNavbar/>
-      <RegisterNewHospital/>
+      <AdminNavbar />
+      <AdminPostLogin />
+    </>
+  );
+}
+
+function HospList() {
+  return (
+    <>
+      <AdminNavbar />
+      <HospitalList />
+    </>
+  );
+}
+
+function RegNewDoc() {
+  return (
+    <>
+      <AdminNavbar />
+      <RegisterNewDoctor />
+    </>
+  );
+}
+
+function RegNewHosp() {
+  return (
+    <>
+      <AdminNavbar />
+      <RegisterNewHospital />
     </>
   )
 }
 
-function DocList(){
-  return(
+function DocList() {
+  return (
     <>
-    <AdminNavbar/>
-      <DoctorList/>
+      <AdminNavbar />
+      <DoctorList />
     </>
   )
 }
 
 
-function DocDash(){
-  return(
+function DocDash() {
+  return (
     <>
-    <DoctorNavbar/>
-      <DoctorDashboard/>
+      <DoctorNavbar />
+      <DoctorDashboard />
     </>
   )
 }
 
-function AddMedRec(){
-  return(
+function AddMedRec() {
+  return (
     <>
-    <DoctorNavbar/>
-      <AddMedicalRecords/>
+      <DoctorNavbar />
+      <AddMedicalRecords />
     </>
   )
 }
 
-function ViewCon(){
-  return(
+function ViewCon() {
+  return (
     <>
-    <DoctorNavbar/>
-      <ViewConsent/>
+      <DoctorNavbar />
+      <ViewConsent />
     </>
   )
 }
 
-function ConsentReq(){
-  return(
+function ConsentReq() {
+  return (
     <>
-    <DoctorNavbar/>
-      <ConsentRequest/>
+      <DoctorNavbar />
+      <ConsentRequest />
     </>
   )
 }
 
-function ViewApprovedRec(){
-  return(
-      <>
-        <DoctorNavbar/>
-        <ViewApprovedRecords/>
-      </>
+function ViewApprovedRec() {
+  return (
+    <>
+      <DoctorNavbar />
+      <ViewApprovedRecords />
+    </>
   );
 }
 
@@ -148,28 +148,28 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Routes>
-        {/* <Route exact path="*" element={<Redirect to="/"/>}></Route> */}
-         
-        <Route exact path={"/"} element={<HospHome/>}></Route>
-        <Route exact path={"/BookAppointmentDoctor"} element={<BookAppointmentDoc/>}></Route>
-        <Route exact path={"/DoctorLogin"} element={<DocLogin/>}></Route>
-        <Route exact path={"/AdminLogin"} element={<AdminLog/>}></Route>
-        <Route exact path={"/AdminPostLogin"} element={<AdmPostLog/>}></Route>
-        <Route exact path={"/HospitalList"} element={<HospList/>}></Route>
-        <Route exact path={"/RegisterNewDoctor"} element={<RegNewDoc/>}></Route>
-        <Route exact path={"/DoctorList"} element={<DocList/>}></Route>
-        <Route exact path={"/RegisterNewHospital"} element={<RegNewHosp/>}></Route>
-        <Route exact path={"/DoctorDashboard"} element={<DocDash/>}></Route>
-        <Route exact path={"/AddMedicalRecords"} element={<AddMedRec/>}></Route>
-        <Route exact path={"/ViewConsent"} element={<ViewCon/>}></Route>
-        <Route exact path={"/ConsentRequest"} element={<ConsentReq/>}></Route>
-        <Route exact path={"/ViewApprovedRecords"} element={<ViewApprovedRec/>}></Route>
+        <Routes>
+          {/* <Route exact path="*" element={<Redirect to="/"/>}></Route> */}
+
+          <Route exact path={"/"} element={<HospHome />}></Route>
+          <Route exact path={"/BookAppointmentDoctor"} element={<BookAppointmentDoc />}></Route>
+          <Route exact path={"/DoctorLogin"} element={<DocLogin />}></Route>
+          <Route exact path={"/AdminLogin"} element={<AdminLog />}></Route>
+          <Route exact path={"/AdminPostLogin"} element={<AdmPostLog />}></Route>
+          <Route exact path={"/HospitalList"} element={<HospList />}></Route>
+          <Route exact path={"/RegisterNewDoctor"} element={<RegNewDoc />}></Route>
+          <Route exact path={"/DoctorList"} element={<DocList />}></Route>
+          <Route exact path={"/RegisterNewHospital"} element={<RegNewHosp />}></Route>
+          <Route exact path={"/DoctorDashboard"} element={<DocDash />}></Route>
+          <Route exact path={"/AddMedicalRecords"} element={<AddMedRec />}></Route>
+          <Route exact path={"/ViewConsent"} element={<ViewCon />}></Route>
+          <Route exact path={"/ConsentRequest"} element={<ConsentReq />}></Route>
+          <Route exact path={"/ViewApprovedRecords"} element={<ViewApprovedRec />}></Route>
 
 
 
         </Routes>
-      </Router>           
+      </Router>
     </div>
   );
 }

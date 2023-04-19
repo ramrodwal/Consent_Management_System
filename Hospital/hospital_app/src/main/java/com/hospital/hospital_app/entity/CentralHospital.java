@@ -1,13 +1,9 @@
 package com.hospital.hospital_app.entity;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,12 +25,12 @@ import lombok.Setter;
 @Table(name = "centralHospital")
 public class CentralHospital {
 
-    //primary key
-    @Id 
-    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
+    // primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int hospitalId;
-    
+
     private String hospitalName;
 
     @Column(unique = true)
@@ -49,16 +45,15 @@ public class CentralHospital {
     private String zipcode;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalPractitioner> medicalPractitioner=new ArrayList<>();
+    @OneToMany(mappedBy = "centralHospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalPractitioner> medicalPractitioner = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "centralHospital" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MedicalRecords> medicalRecords=new ArrayList<>();
+    @OneToMany(mappedBy = "centralHospital", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicalRecords> medicalRecords = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "centralHospital1" , cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PatientList> patientLists=new ArrayList<>();
-    
-    
+    @OneToMany(mappedBy = "centralHospital1", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PatientList> patientLists = new ArrayList<>();
+
 }
