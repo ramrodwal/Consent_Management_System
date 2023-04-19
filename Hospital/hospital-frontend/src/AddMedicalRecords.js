@@ -13,7 +13,7 @@ function AddMedicalRecords() {
   const token = localStorage.getItem('practitionerAuthToken')
   const navigate = useNavigate();
   const headers = { Authorization: `Bearer ${token}` };
-    const id=localStorage.getItem('id');
+  const id = localStorage.getItem('id');
 
   const [recordId, setRecordId] = useState('');
   const [patientAadhar, setPatientAadhar] = useState('');
@@ -56,16 +56,16 @@ function AddMedicalRecords() {
       navigate("/DoctorLogin");
     }
     else {
-      axios.get("http://localhost:9099/hospital/admin-login/hospital-list",{headers}).then((response) => {
+      axios.get("http://localhost:9099/hospital/admin-login/hospital-list", { headers }).then((response) => {
         setHospitals(response.data);
       });
 
-      axios.get("http://localhost:9099/hospital/admin-login/practitioner-list",{headers}).then((response) => {
+      axios.get("http://localhost:9099/hospital/admin-login/practitioner-list", { headers }).then((response) => {
         setDoctors(response.data);
       });
 
-      axios.get(`http://localhost:9099/hospital/getPatientsByPractitionerAadhar/${id}`,{headers}).then((response) => {
-          setPatient(response.data);
+      axios.get(`http://localhost:9099/hospital/getPatientsByPractitionerAadhar/${id}`, { headers }).then((response) => {
+        setPatient(response.data);
       });
     }
 
@@ -81,7 +81,7 @@ function AddMedicalRecords() {
     event.preventDefault();
     const recordDetails = { recordId: recordId, patientAadhar: patientAadhar, diseaseName: diseaseName, record: record, centralHospital: { hospitalId: hospitalId.centralHospital.hospitalId }, medicalPractitioner: { practitionerAadhar: id } };
     if (isValidAadhar(patientAadhar) && isNotEmpty(diseaseName) && containsOnlyLettersAndSpaces(diseaseName) && isNotEmpty(record)) {
-      axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails,{headers})
+      axios.post('http://localhost:9099/hospital/practitioner-login/add-record', recordDetails, { headers })
         .then(response => console.log(response))
         .catch(error => console.log("There is an error!!"));
       const hid = hospitalId.centralHospital.hospitalId;
@@ -162,7 +162,7 @@ function AddMedicalRecords() {
           </Form.Group>
 
 
-          
+
 
 
 

@@ -4,11 +4,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function ViewRecords() {
-
+  const navigate = useNavigate();
   const [records, setRecords] = useState([]);
 
 
@@ -18,9 +19,16 @@ function ViewRecords() {
       const token = localStorage.getItem('authToken'); // get token from localStorage
       const id = localStorage.getItem('id');
       const headers = { Authorization: `Bearer ${token}` }; // add token to headers
-      const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
-      console.log(data);
-      setRecords(data); 
+   
+      if (token === null) {
+        navigate("/");
+      }
+      else{
+        const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
+        console.log(data);
+        setRecords(data); 
+      }
+     
     };
   
     fetchRecord();

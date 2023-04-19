@@ -14,12 +14,19 @@ function ApprovedRecords() {
 
   useEffect(() => {
     const fetchRecord = async () => {
+      
       const token = localStorage.getItem('authToken');
       const id = localStorage.getItem('id');
       const headers = { Authorization: `Bearer ${token}` };
-      const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
-      console.log(data);
-      setRecords(data);
+      if(token===null){
+        navigate("/");
+      }
+      else{
+        const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
+        console.log(data);
+        setRecords(data);
+      }
+
     };
 
     fetchRecord();

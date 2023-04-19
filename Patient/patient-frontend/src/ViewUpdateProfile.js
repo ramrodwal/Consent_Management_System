@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -33,7 +33,7 @@ function ViewUpdateProfile() {
   const [patientAadhar, setAadhar] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [patient,setPatient]=useState('');
+  const [patient, setPatient] = useState('');
 
   const isNotEmpty = (value) => {
     return value !== undefined && value !== null && value.trim() !== '';
@@ -81,11 +81,18 @@ function ViewUpdateProfile() {
       const token = localStorage.getItem('authToken'); // get token from localStorage
       const id = localStorage.getItem('id');
       const headers = { Authorization: `Bearer ${token}` }; // add token to headers
-      const { data } = await axios.get(`http://localhost:8765/patient/register/${id}`, { headers });
-      console.log(data);
-      setPatient(data); 
+
+      if (token === null) {
+        navigate("/");
+      }
+      else {
+        const { data } = await axios.get(`http://localhost:8765/patient/register/${id}`, { headers });
+        console.log(data);
+        setPatient(data);
+      }
+
     };
-  
+
     fetchPatient();
   }, []);
 
@@ -97,7 +104,7 @@ function ViewUpdateProfile() {
       ...prevData,
       [fname]: value,
     })
-    
+
     );
     console.log(patient.fname);
   };
@@ -117,14 +124,14 @@ function ViewUpdateProfile() {
     //   && containsOnlyLettersAndSpaces(city) && containsOnlyLettersAndSpaces(state) && isValidZip(zipcode)
     //   && isValidAadhar(patientAadhar)) {
 
-        console.log('if condition done');
-        const token = localStorage.getItem('authToken'); // get token from localStorage
-        const id = localStorage.getItem('id')
-        const headers = { Authorization: `Bearer ${token}` }; 
-        const { data } = axios.post(`http://localhost:8765/patient/update/${id}`, { headers });
-        console.log('api done');
-        setPatient(updatedPatient); 
-        console.log(updatedPatient);
+    console.log('if condition done');
+    const token = localStorage.getItem('authToken'); // get token from localStorage
+    const id = localStorage.getItem('id')
+    const headers = { Authorization: `Bearer ${token}` };
+    const { data } = axios.post(`http://localhost:8765/patient/update/${id}`, { headers });
+    console.log('api done');
+    setPatient(updatedPatient);
+    console.log(updatedPatient);
     // } else {
     //   console.log('no job done');
     //   toast.error('Please fill in all the required fields with valid input.',
@@ -143,21 +150,21 @@ function ViewUpdateProfile() {
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter First Name" value={patient.fname}   onChange={(event) => setPatient(prevData => ({...prevData, fname: event.target.value}))} 
- required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
+            <Form.Control type="text" placeholder="Enter First Name" value={patient.fname} onChange={(event) => setPatient(prevData => ({ ...prevData, fname: event.target.value }))}
+              required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
             {!isNotEmpty(patient.fname) && <Form.Text className="text-danger">Please enter a first name</Form.Text>}
             {isNotEmpty(patient.fname) && !containsOnlyLetters(patient.fname) && <Form.Text className="text-danger">Please enter only letters for the first name</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Middle Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Middle Name" value={patient.mname} onChange={(event) => setPatient(prevData => ({...prevData, mname: event.target.value}))}  pattern="[A-Za-z]+" title="Please enter only letters" />
-             {/* <Form.Text className="text-danger">Please enter only letters for the middle name</Form.Text> */}
+            <Form.Control type="text" placeholder="Enter Middle Name" value={patient.mname} onChange={(event) => setPatient(prevData => ({ ...prevData, mname: event.target.value }))} pattern="[A-Za-z]+" title="Please enter only letters" />
+            {/* <Form.Text className="text-danger">Please enter only letters for the middle name</Form.Text> */}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Last Name" value={patient.lname} onChange={(event) => setPatient(prevData => ({...prevData, lname: event.target.value}))} required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
+            <Form.Control type="text" placeholder="Enter Last Name" value={patient.lname} onChange={(event) => setPatient(prevData => ({ ...prevData, lname: event.target.value }))} required={true} pattern="[A-Za-z]+" title="Please enter only letters" />
             {!isNotEmpty(patient.lname) && <Form.Text className="text-danger">Please enter a last name</Form.Text>}
             {isNotEmpty(patient.lname) && !containsOnlyLetters(patient.lname) && <Form.Text className="text-danger">Please enter only letters for the last name</Form.Text>}
           </Form.Group>
@@ -173,7 +180,7 @@ function ViewUpdateProfile() {
                   const enteredAge = event.target.value;
                   // Check if the entered age is a valid number and greater than or equal to 18, and not null or empty
                   if (!isNaN(enteredAge) && enteredAge >= MIN_AGE.toString() && enteredAge <= 110 && enteredAge !== null && enteredAge !== "") {
-                    setPatient(prevData => ({...prevData, age: enteredAge})) 
+                    setPatient(prevData => ({ ...prevData, age: enteredAge }))
                   } else {
                     setAge("");
                   }
@@ -192,7 +199,7 @@ function ViewUpdateProfile() {
             <Form.Control as="select" value={patient.gender} onChange={(event) => {
               const selectedGender = event.target.value;
               if (validGenders.includes(selectedGender)) {
-                setPatient(prevData => ({...prevData, gender: selectedGender})) 
+                setPatient(prevData => ({ ...prevData, gender: selectedGender }))
               }
             }}>
               <option value="none">select</option>
@@ -208,7 +215,7 @@ function ViewUpdateProfile() {
               type="email"
               placeholder="Enter email"
               value={patient.email}
-              onChange={(event) => setPatient(prevData => ({...prevData, email: event.target.value}))} 
+              onChange={(event) => setPatient(prevData => ({ ...prevData, email: event.target.value }))}
               required={true}
               // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               title="Please enter a valid email address"
@@ -219,31 +226,31 @@ function ViewUpdateProfile() {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Enter Phone Number</Form.Label>
-            <Form.Control type="text" placeholder="Enter Phone Number" value={patient.contactNo} onChange={(event) => setPatient(prevData => ({...prevData, contactNo: event.target.value}))} pattern="[0-9]{10}" title="Please enter a 10-digit phone number without any spaces or special characters" />
+            <Form.Control type="text" placeholder="Enter Phone Number" value={patient.contactNo} onChange={(event) => setPatient(prevData => ({ ...prevData, contactNo: event.target.value }))} pattern="[0-9]{10}" title="Please enter a 10-digit phone number without any spaces or special characters" />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Enter Address</Form.Label>
-            <Form.Control type="text" placeholder="Enter your address" value={patient.address} onChange={(event) => setPatient(prevData => ({...prevData, address: event.target.value}))}  required={true} />
+            <Form.Control type="text" placeholder="Enter your address" value={patient.address} onChange={(event) => setPatient(prevData => ({ ...prevData, address: event.target.value }))} required={true} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>State</Form.Label>
-            <Form.Control type="text" placeholder="Enter State" value={patient.state} onChange={(event) => setPatient(prevData => ({...prevData, state: event.target.value}))} required={true} pattern="[A-Za-z ]+" title="Please enter only letters and spaces" />
+            <Form.Control type="text" placeholder="Enter State" value={patient.state} onChange={(event) => setPatient(prevData => ({ ...prevData, state: event.target.value }))} required={true} pattern="[A-Za-z ]+" title="Please enter only letters and spaces" />
             {!isNotEmpty(patient.state) && <Form.Text className="text-danger">Please enter a state</Form.Text>}
             {isNotEmpty(patient.state) && !containsOnlyLettersAndSpaces(patient.state) && <Form.Text className="text-danger">Please enter only letters and spaces for the state</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>City</Form.Label>
-            <Form.Control type="text" placeholder="Enter City" value={patient.city} onChange={(event) => setPatient(prevData => ({...prevData, city: event.target.value}))}  required={true} pattern="[A-Za-z\s]+" title="Please enter only letters and spaces" />
+            <Form.Control type="text" placeholder="Enter City" value={patient.city} onChange={(event) => setPatient(prevData => ({ ...prevData, city: event.target.value }))} required={true} pattern="[A-Za-z\s]+" title="Please enter only letters and spaces" />
             {!isNotEmpty(patient.city) && <Form.Text className="text-danger">Please enter a city</Form.Text>}
             {isNotEmpty(patient.city) && !containsOnlyLettersAndSpaces(patient.city) && <Form.Text className="text-danger">Please enter only letters and spaces for the city</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicText">
             <Form.Label>Zip Code</Form.Label>
-            <Form.Control type="number" placeholder="Enter Zip Code" value={patient.zipcode} onChange={(event) => setPatient(prevData => ({...prevData, zipcode: event.target.value}))}  required={true} />
+            <Form.Control type="number" placeholder="Enter Zip Code" value={patient.zipcode} onChange={(event) => setPatient(prevData => ({ ...prevData, zipcode: event.target.value }))} required={true} />
             {!isValidZip(patient.zipcode) && <Form.Text className="text-danger">Please enter a valid zip code with 6 digits</Form.Text>}
           </Form.Group>
 
@@ -253,7 +260,7 @@ function ViewUpdateProfile() {
               type="text"
               placeholder="Enter Aadhar Card Number"
               value={patient.patientAadhar}
-              onChange={(event) => setPatient(prevData => ({...prevData, patientAadhar: event.target.value}))} 
+              onChange={(event) => setPatient(prevData => ({ ...prevData, patientAadhar: event.target.value }))}
               required={true}
               pattern="[0-9]{12}"
               title="Please enter a valid Aadhar Card number"
@@ -266,16 +273,16 @@ function ViewUpdateProfile() {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={patient.password} onChange={(event) => setPatient(prevData => ({...prevData, password: event.target.value}))}  required={true} minLength={8} />
+            <Form.Control type="password" placeholder="Password" value={patient.password} onChange={(event) => setPatient(prevData => ({ ...prevData, password: event.target.value }))} required={true} minLength={8} />
             {!isNotEmpty(patient.password) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
             {isNotEmpty(patient.password) && patient.password.length < 8 && <Form.Text className="text-danger">Password must be at least 8 characters long</Form.Text>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="Confirm Password" value={patient.confirmPassword}onChange={(event) => setPatient(prevData => ({...prevData, confirmPassword: event.target.value}))}  required={true} />
+            <Form.Control type="password" placeholder="Confirm Password" value={patient.confirmPassword} onChange={(event) => setPatient(prevData => ({ ...prevData, confirmPassword: event.target.value }))} required={true} />
             {!isNotEmpty(patient.confirmPassword) && <Form.Text className="text-danger">Please enter a password</Form.Text>}
-            {!isNotEmpty(patient.confirmPassword)  && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
+            {!isNotEmpty(patient.confirmPassword) && <Form.Text className="text-danger">Passwords do not match</Form.Text>}
           </Form.Group>
 
           <center>
