@@ -7,7 +7,7 @@ import PatientDashboard from './components/PatientDashboardComponents/PatientDas
 import PatientNavbar from './components/PatientDashboardComponents/PatientNavbar';
 import Notification from './components/PatientDashboardComponents/Notification';
 import Appointments from './components/PatientDashboardComponents/Appointments';
-import { BrowserRouter as Router, Routes, Route,} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import ConsentResponse from './ConsentResponse';
 import ViewUpdateProfile from './ViewUpdateProfile';
 import ViewRecords from './ViewRecords';
@@ -16,23 +16,23 @@ import PatientProfileView from './components/PatientProfileView';
 
 
 
-function LoginPage(){
-return (
-  <>
-    <Header />
-    <Login />
-  </>
-);
+function LoginPage() {
+  return (
+    <>
+      <Header />
+      <Login />
+    </>
+  );
 }
-function ForgotPass(){
-return (
-  <>
-    <Header />
-    <ForgotPassword />
-  </>
-);
+function ForgotPass() {
+  return (
+    <>
+      <Header />
+      <ForgotPassword />
+    </>
+  );
 }
-function SignUpPage(){
+function SignUpPage() {
   return (
     <>
       <Header />
@@ -40,71 +40,71 @@ function SignUpPage(){
     </>
   );
 }
-function PatientDash(){
-  return(
-      <>
+function PatientDash() {
+  return (
+    <>
       <PatientNavbar />
-      <PatientDashboard/>
-      </>
-  );
-}function Notifi(){
-  return(
-    <>
-    <PatientNavbar/>
-    <Notification/>
+      <PatientDashboard />
     </>
   );
-}
-
-function Appoin(){
-  return(
+} function Notifi() {
+  return (
     <>
-    <PatientNavbar/>
-    <Appointments/>
+      <PatientNavbar />
+      <Notification />
     </>
   );
 }
 
-function ConsentRes(){
-  return(
+function Appoin() {
+  return (
     <>
-    <PatientNavbar/>
-    <ConsentResponse/>
+      <PatientNavbar />
+      <Appointments />
+    </>
+  );
+}
+
+function ConsentRes() {
+  return (
+    <>
+      <PatientNavbar />
+      <ConsentResponse />
     </>
   )
 }
 
-function ViewUpProf(){
-  return(
+function ViewUpProf() {
+  return (
     <>
-    <PatientNavbar/>
-    <ViewUpdateProfile/>
+      <PatientNavbar />
+      <ViewUpdateProfile />
     </>
   )
 }
 
-function ViewRecord(){
-  return(
+function ViewRecord() {
+  return (
     <>
-      <PatientNavbar/>
-      <ViewRecords/>
+      <PatientNavbar />
+      <ViewRecords />
     </>
   )
 }
 
-function ApprovedRec(){
-  return(
+function ApprovedRec() {
+  return (
     <>
-      <PatientNavbar/>
-      <ApprovedRecords/>
+      <PatientNavbar />
+      <ApprovedRecords />
     </>
   )
 }
-function PatientProfileViews(){
-  return(
+function PatientProfileViews() {
+  return (
     <>
-    <PatientNavbar/>
-    <PatientProfileView/>
+      <PatientNavbar />
+      <PatientProfileView />
     </>
   )
 }
@@ -112,18 +112,18 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Routes>
-        <Route exact path={"/"} element={<LoginPage />}></Route>
-        <Route exact path={"/ForgotPassword.js"} element={<ForgotPass />}></Route>
-        <Route exact path={"/SignUp.js"} element={<SignUpPage />}></Route>
-        <Route exact path={"/PatientDashboard.js"} element={<PatientDash/>}></Route>
-        <Route exact path={"/Notification.js"} element={<Notifi />}></Route>
-        <Route exact path={"/ConsentResponse.js"} element={<ConsentRes/>}></Route>
-        <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf/>}></Route>
-        <Route exact path={"/ViewRecords.js"} element={<ViewRecord/>}></Route>
-        <Route exact path={"/ApprovedRecords.js"} element={<ApprovedRec/>}></Route>
-        <Route exact path={"/PatientProfileView.js"} element={<PatientProfileViews/>}></Route>
-      </Routes>
+        <Routes>
+          <Route exact path={"/"} element={<LoginPage />}></Route>
+          <Route exact path={"/ForgotPassword.js"} element={<ForgotPass />}></Route>
+          <Route exact path={"/SignUp.js"} element={<SignUpPage />}></Route>
+          <Route exact path={"/PatientDashboard.js"} element={<PatientDash />}></Route>
+          <Route exact path={"/Notification.js"} element={<Notifi />}></Route>
+          <Route exact path={"/ConsentResponse.js"} element={<ConsentRes />}></Route>
+          <Route exact path={"/ViewUpdateProfile.js"} element={<ViewUpProf />}></Route>
+          <Route exact path={"/ViewRecords.js"} element={<ViewRecord />}></Route>
+          <Route exact path={"/ApprovedRecords.js"} element={<ApprovedRec />}></Route>
+          <Route exact path={"/PatientProfileView.js"} element={<PatientProfileViews />}></Route>
+        </Routes>
       </Router>
     </div>
   );

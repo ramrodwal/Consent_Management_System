@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function PatientProfileView () {
+function PatientProfileView() {
   const [patient, setPatient] = useState([]);
 
   const navigate = useNavigate();
@@ -12,33 +12,18 @@ function PatientProfileView () {
   const headers = { Authorization: `Bearer ${token}` }; // add token to headers
 
   useEffect(() => {
-    // const fetchPatient = async () => {
-      console.log(token);
-      if (token === null) {
-        navigate("/");
-      }
-      else {
-        // const { data } =  await axios.get(`http://localhost:8765/patient/register/${id}`, { headers });
-        // console.log(data);
-        // setPatient(data);
-        // fetchPatient();
+    console.log(token);
+    if (token === null) {
+      navigate("/");
+    }
+    else {
 
-        axios.get(`http://localhost:8765/patient/register/${id}`, { headers }).then((response) => {
+      axios.get(`http://localhost:8765/patient/register/${id}`, { headers }).then((response) => {
         setPatient(response.data);
       });
-      }
-      
-    // };
- 
+    }
+
   }, []);
-   
-
-
-
-
-  // if (!patient) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';

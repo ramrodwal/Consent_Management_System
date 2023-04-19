@@ -14,14 +14,14 @@ function ApprovedRecords() {
 
   useEffect(() => {
     const fetchRecord = async () => {
-      
+
       const token = localStorage.getItem('authToken');
       const id = localStorage.getItem('id');
       const headers = { Authorization: `Bearer ${token}` };
-      if(token===null){
+      if (token === null) {
         navigate("/");
       }
-      else{
+      else {
         const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
         console.log(data);
         setRecords(data);
@@ -77,14 +77,14 @@ function ApprovedRecords() {
         { headers: { 'Content-Type': 'application/json' } } // Set the content type to application/json
       );
       console.log("hello");
- 
+
     } catch (error) {
       console.error(error);
     }
     console.log('Selected records:', selectedRecords);
-    
 
-      navigate(`/ConsentResponse.js`);
+
+    navigate(`/ConsentResponse.js`);
 
   };
 
