@@ -1,13 +1,9 @@
 package com.hospital.hospital_app.entity;
 
-
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,32 +27,32 @@ import lombok.Setter;
 
 public class MedicalRecords {
 
-
-    @Id 
-    @GeneratedValue( strategy= GenerationType. AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int recordId;
 
-    @Column(name="patientAadhar")
+    @Column(name = "patientAadhar")
     private String patientAadhar;
 
     private String diseaseName;
-    
+
     private String record;
 
-
-    //hospital_id is foreign key refrencing centralhospital hospital_id with on delete cascade 
+    // hospital_id is foreign key refrencing centralhospital hospital_id with on
+    // delete cascade
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "hospitalId")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private CentralHospital centralHospital;
 
-    //practitioner_aadhar is the foreign key referencing medicalPractitioner practioner_aadhar with on delete cascade 
+    // practitioner_aadhar is the foreign key referencing medicalPractitioner
+    // practioner_aadhar with on delete cascade
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "practitionerAadhar")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private MedicalPractitioner medicalPractitioner;
-   
+
 }

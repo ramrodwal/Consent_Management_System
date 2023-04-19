@@ -38,14 +38,14 @@ function BookAppointmentDoctor() {
     });
   }, []);
 
- 
-  const getPractitionerByHospitalId=(id)=>{
+
+  const getPractitionerByHospitalId = (id) => {
     axios.get(`http://localhost:9099/book-appointment/practitioner-list/${id}`).then((response) => {
       setPractitioners(response.data);
     });
   }
-  
-  const onChangeFunction=(event)=>{
+
+  const onChangeFunction = (event) => {
     setHospitalId({ centralHospital1: { hospitalId: event.target.value } });
     getPractitionerByHospitalId(event.target.value);
   }
@@ -128,11 +128,11 @@ function BookAppointmentDoctor() {
             </Form.Control>
           </Form.Group>
 
-                {/* {hospitalId.centralHospital1.hospitalId==null}
+          {/* {hospitalId.centralHospital1.hospitalId==null}
 
               {console.log(hospitalId.centralHospital1.hospitalId)}
               {getPractitionerByHospitalId(hospitalId.centralHospital1.hospitalId)} */}
-          
+
 
           <br></br>
 
@@ -166,21 +166,21 @@ function BookAppointmentDoctor() {
             {isNotEmpty(patientName) && !isValidAadhar(patientName) && !containsOnlyLettersAndSpaces(patientName) && (
               <Form.Text className="text-danger">Please enter a valid patient Name</Form.Text>
             )}
-            </Form.Group>
+          </Form.Group>
 
-            <Form.Group controlId="formBasicSelect">
-              <Form.Label>Select Practitioner </Form.Label>
-              <Form.Control as="select" value={practitionerAadhar.medicalPractitioner.practitionerAadhar} onChange={(event) => setPractitionerAadhar({ medicalPractitioner: { practitionerAadhar: event.target.value } })}>
-                <option>Select Name</option>
-                {practitioners.map((practitioner) => (
-                  <option value={practitioner.practitionerAadhar}>{practitioner.fname} {practitioner.lname}</option>
-                ))}
-              </Form.Control>
-            </Form.Group>
+          <Form.Group controlId="formBasicSelect">
+            <Form.Label>Select Practitioner </Form.Label>
+            <Form.Control as="select" value={practitionerAadhar.medicalPractitioner.practitionerAadhar} onChange={(event) => setPractitionerAadhar({ medicalPractitioner: { practitionerAadhar: event.target.value } })}>
+              <option>Select Name</option>
+              {practitioners.map((practitioner) => (
+                <option value={practitioner.practitionerAadhar}>{practitioner.fname} {practitioner.lname}</option>
+              ))}
+            </Form.Control>
+          </Form.Group>
 
-            <Button variant="primary" type="submit" >
-              Book
-            </Button>
+          <Button variant="primary" type="submit" >
+            Book
+          </Button>
         </form>
       </Container>
 

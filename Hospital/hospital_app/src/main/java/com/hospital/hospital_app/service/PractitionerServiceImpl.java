@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 public class PractitionerServiceImpl implements PractitionerService{
     
     private PractitionerRepository practitionerRepository;
-    private HospitalRepository hospitalRepository;
+
 
     //method to sav practitiones details
     @Override
