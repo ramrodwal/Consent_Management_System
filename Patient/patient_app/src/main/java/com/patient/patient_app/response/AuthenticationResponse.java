@@ -13,5 +13,5 @@ public class AuthenticationResponse {
 
     private String patientAadhar;
     private String token;
-    
+
 }
