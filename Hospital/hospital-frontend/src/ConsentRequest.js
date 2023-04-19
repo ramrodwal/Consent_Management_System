@@ -61,7 +61,7 @@ function ConsentRequest() {
 
     const consentDetails = { consentId: consentId, hospitalId: hospitalId, practitionerAadhar: id, patientAadhar: patientAadhar, diseaseName: diseaseName, status: status };
     if (isNotEmpty(hospitalId) && isNotEmpty(patientAadhar) && containsOnlyLettersAndSpaces(diseaseName)) {
-      axios.post('http://localhost:9092/hospital/practitioner-login/view-patient/consent', consentDetails, { headers })
+      axios.post('http://localhost:9092/hospital/practitioner-login/view-patient/consent', consentDetails)
         .then(response => console.log(response))
         .catch(error => console.log("this is an error!"));
       navigate("/DoctorDashboard");
@@ -109,7 +109,7 @@ function ConsentRequest() {
             <Form.Control as="select" value={patientAadhar} onChange={(event) => setPatientAadhar(event.target.value)} required={true}>
               <option value="">Patient Name</option>
               {patientDetails.map((patient) => (
-                <option key={patient.id} value="{patient.patientAadhar}">{patient.patientName}</option>
+                <option key={patient.id} value={patient.patientAadhar}>{patient.patientName}</option>
               ))}
             </Form.Control>
           </Form.Group>
