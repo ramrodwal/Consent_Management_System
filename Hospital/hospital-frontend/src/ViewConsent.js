@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import "./HospitalComponents/HospitalStyle.css"
 import Table from 'react-bootstrap/Table'
@@ -6,48 +6,48 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
 function ViewConsent() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const token = localStorage.getItem('practitionerAuthToken')
   const headers = { Authorization: `Bearer ${token}` };
-    const practitionerAadhar=localStorage.getItem('id');
+  const practitionerAadhar = localStorage.getItem('id');
 
 
-  const [consentDetails,setConsentDetails]=useState([]);
-  const [hospitalName,setHospitalName]=useState('');
-  const [patientName,setPatientName]=useState('');
+  const [consentDetails, setConsentDetails] = useState([]);
+  const [hospitalName, setHospitalName] = useState('');
+  const [patientName, setPatientName] = useState('');
 
   useEffect(() => {
-  
-    if(token===null){
-      navigate("/DoctorLogin");  
+
+    if (token === null) {
+      navigate("/DoctorLogin");
     }
 
-    else{
+    else {
       axios.get(`http://localhost:9092/hospital/practitioner-login/view-consent/${practitionerAadhar}`).then((response) => {
         setConsentDetails(response.data);
       });
     }
-    
+
   }, []);
 
-  const getHospitalName=(hospitalId)=>{
-    axios.get(`http://localhost:9099/hospital/practitioner-login/get-hospital/${hospitalId}`,{headers}).then((response)=>{
+  const getHospitalName = (hospitalId) => {
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-hospital/${hospitalId}`, { headers }).then((response) => {
       setHospitalName(response.data);
-    },[])
+    }, [])
     return hospitalName;
   }
 
-  const getPatientName=(patientAadhar)=>{
-    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`,{headers}).then((response)=>{
+  const getPatientName = (patientAadhar) => {
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`, { headers }).then((response) => {
       setPatientName(response.data);
-    },[])
+    }, [])
     return patientName;
   }
 
   return (
     <>
 
-     
+
 
       <center><h1 className='pageheading'>Consent List</h1></center>
 
@@ -63,7 +63,7 @@ function ViewConsent() {
 
           </tr>
         </thead>
-        
+
         <tbody>
           {consentDetails.map((consent) => (
             <tr key={consent.consentId}>
@@ -72,7 +72,7 @@ function ViewConsent() {
               <td>{getHospitalName(consent.hospitalId)}</td>
               <td>{getPatientName(consent.patientAadhar)}</td>
               <td>{consent.status}</td>
-              {consent.status==="APPROVED" && (
+              {consent.status === "APPROVED" && (
                 <tr>
                   <div className='text-center'>
                     <Button href={`/ViewApprovedRecords/?consentId=${consent.consentId}`}>Fetch</Button>

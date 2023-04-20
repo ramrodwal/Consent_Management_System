@@ -1,14 +1,10 @@
 package com.hospital.hospital_app.entity;
-
-
 import java.util.Collection;
 import java.util.List;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,9 +15,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Builder
@@ -29,11 +23,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "admin_details")
-public class Admin implements UserDetails{
+public class Admin implements UserDetails {
 
-    @Id 
-    @GeneratedValue( strategy= GenerationType.AUTO, generator="native" ) 
-    @GenericGenerator( name = "native", strategy = "native" )
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int adminId;
 
     private String password;
@@ -53,7 +47,7 @@ public class Admin implements UserDetails{
         return email;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
@@ -74,7 +68,7 @@ public class Admin implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-       return true;
+        return true;
     }
 
 }
