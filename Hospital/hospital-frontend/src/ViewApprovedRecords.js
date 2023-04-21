@@ -18,7 +18,7 @@ export default function ViewApprovedRecords() {
       navigate("/DoctorLogin");
     }
     else {
-      axios.get(`http://localhost:9092/hospital/approved-records/${consentId}`)
+      axios.get(`http://localhost:9099/hospital/view-approvedRecords/${consentId}`)
         .then((response) => {
           setRecords(response.data);
         })
