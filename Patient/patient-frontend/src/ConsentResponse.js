@@ -77,9 +77,9 @@ function ConsentResponse() {
       status: "APPROVED",
     };
     const cid = requests[index].consentId;
-    console.log("cid");
-    console.log(requests);
-    console.log(requests[index].consentId);
+    // console.log("cid");
+    // console.log(requests);
+    // console.log(requests[index].consentId);
 
     if (cid) {
       axios
