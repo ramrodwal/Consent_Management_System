@@ -78,7 +78,7 @@ function Login() {
           {isNotEmpty(password) && password.length < 8 && <Form.Text className="text-danger">Password must be at least 8 characters long</Form.Text>}
         </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <a href="/ForgotPassword.js" >Forgot Password ?</a>
+        {/* <a href="/ForgotPassword.js" >Forgot Password ?</a> */}
         <p>Don't have an account? <a href="/SignUp.js"> Sign Up</a></p>
       </Form.Group>
       <Button variant="primary" type="submit">
