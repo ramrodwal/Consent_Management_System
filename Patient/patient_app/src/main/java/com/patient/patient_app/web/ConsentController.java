@@ -53,4 +53,13 @@ public class ConsentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/approved-records/{consentId}")
+    public ResponseEntity<Boolean> sendApprovedRecords(@RequestBody List<Object> consentManager)
+            throws JsonProcessingException {
+        String apiUrl = "http://localhost:9092/hospital/consent/approve-records";
+        restTemplate.postForEntity(apiUrl, consentManager, String.class);
+
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
 }
