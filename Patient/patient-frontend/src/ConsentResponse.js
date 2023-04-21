@@ -20,7 +20,7 @@ function ConsentResponse() {
       navigate("/");
     }
     else {
-      axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
+      axios.get("http://localhost:8765/consent/view-consent/123412341234").then((response) => {
         setRequests(response.data);
         setDeclinedRequests(Array(response.data.length).fill(false));
       });
