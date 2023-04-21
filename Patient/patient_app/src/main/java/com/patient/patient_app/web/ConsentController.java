@@ -3,10 +3,13 @@ package com.patient.patient_app.web;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -24,7 +27,8 @@ public class ConsentController {
     private RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("/view-consent/{patientAadhar}")
-    public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar) throws JsonMappingException, JsonProcessingException{
+    public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
+            throws JsonMappingException, JsonProcessingException {
 
         String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
@@ -35,9 +39,18 @@ public class ConsentController {
                 });
         return consents;
 
-
     }
 
-    
+    @PostMapping("/update-status/{consentId}")
+    public ResponseEntity<Object> updateStatus(@RequestBody Object consentManager, @PathVariable Integer consentId)
+            throws JsonProcessingException {
+        String apiUrl = "http://localhost:9092/patient/login/consentManager/responseConsent/" + consentId;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, consentManager, String.class);
+        String responseJson = responseEntity.getBody();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> response = objectMapper.readValue(responseJson, new TypeReference<Map<String, Object>>() {
+        });
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
