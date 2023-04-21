@@ -72,7 +72,7 @@ function ApprovedRecords() {
 
     try {
       const response = await axios.post(
-        'http://localhost:9092/hospital/consent/approve-records',
+        'http://localhost:8765/consent/approved-records',
         JSON.stringify(selectedRecords), // Serialize the data as a JSON array
         { headers: { 'Content-Type': 'application/json' } } // Set the content type to application/json
       );
