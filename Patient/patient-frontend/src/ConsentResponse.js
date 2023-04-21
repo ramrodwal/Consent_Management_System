@@ -21,7 +21,7 @@ function ConsentResponse() {
       navigate("/");
     }
     else {
-      axios.get(`http://localhost:8765/consent/view-consent/${id}`).then((response) => {
+      axios.get(`http://localhost:8765/consent/view-consent/${id}`,{ headers }).then((response) => {
         setRequests(response.data);
         setDeclinedRequests(Array(response.data.length).fill(false));
       });
