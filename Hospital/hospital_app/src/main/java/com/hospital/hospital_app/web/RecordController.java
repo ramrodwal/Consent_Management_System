@@ -3,7 +3,10 @@ package com.hospital.hospital_app.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.hospital.hospital_app.entity.MedicalRecords;
 import com.hospital.hospital_app.service.MedicalrecordsService;
@@ -23,18 +27,33 @@ import jakarta.validation.Valid;
 @RequestMapping("/hospital")
 public class RecordController {
 
+    private RestTemplate restTemplate = new RestTemplate();
+
     @Autowired
     MedicalrecordsService medicalrecordsService;
 
     @PostMapping("/practitioner-login/add-record")
-    public ResponseEntity<MedicalRecords> addingRecords(@Valid @RequestBody MedicalRecords medicalRecords){
-        return new ResponseEntity<MedicalRecords>(medicalrecordsService.addMedicalRecords(medicalRecords),HttpStatus.CREATED);
+    public ResponseEntity<MedicalRecords> addingRecords(@Valid @RequestBody MedicalRecords medicalRecords) {
+        return new ResponseEntity<MedicalRecords>(medicalrecordsService.addMedicalRecords(medicalRecords),
+                HttpStatus.CREATED);
     }
 
     @GetMapping("/record-mapping/{patientAadhar}")
-    public List<MedicalRecords> getEntitiesByName(@PathVariable String patientAadhar){
+    public List<MedicalRecords> getEntitiesByName(@PathVariable String patientAadhar) {
         return medicalrecordsService.getEntitiesByName(patientAadhar);
     }
 
-    
+    @PostMapping("/add-metaData-patientSide")
+public ResponseEntity<Boolean> addMetaDataToPatientSide(@RequestBody Object metaData) {
+
+    String apiUrl = "http://localhost:8765/records/meta-data";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<Object> request = new HttpEntity<>(metaData, headers);
+    restTemplate.postForEntity(apiUrl, request, String.class);
+    return new ResponseEntity<>(true, HttpStatus.OK);
+
+}
+
+
 }
