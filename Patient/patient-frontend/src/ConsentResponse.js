@@ -11,6 +11,7 @@ function ConsentResponse() {
   const token = localStorage.getItem('authToken')
   const navigate = useNavigate();
   const headers = { Authorization: `Bearer ${token}` };
+  const id=localStorage.getItem('id');
   //const id = localStorage.getItem('id');
 
   const [requests, setRequests] = useState([]);
@@ -20,7 +21,7 @@ function ConsentResponse() {
       navigate("/");
     }
     else {
-      axios.get("http://localhost:8765/consent/view-consent/123412341234").then((response) => {
+      axios.get(`http://localhost:8765/consent/view-consent/${id}`).then((response) => {
         setRequests(response.data);
         setDeclinedRequests(Array(response.data.length).fill(false));
       });
@@ -46,7 +47,7 @@ function ConsentResponse() {
     if (cid) {
       axios
         .post(
-          "http://localhost:9092/patient/login/consentManager/responseConsent/" +
+          "http://localhost:8765/consent/update-status/" +
           cid,
           resp
         )
@@ -84,7 +85,7 @@ function ConsentResponse() {
     if (cid) {
       axios
         .post(
-          "http://localhost:9092/patient/login/consentManager/responseConsent/" +
+          "http://localhost:8765/consent/update-status/" +
           cid,
           resp
         )

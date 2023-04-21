@@ -22,7 +22,7 @@ function ApprovedRecords() {
         navigate("/");
       }
       else {
-        const { data } = await axios.get(`http://localhost:9099/hospital/record-mapping/${id}`, { headers });
+        const { data } = await axios.get(`http://localhost:8765/records/medical-records/${id}`, { headers });
         console.log(data);
         setRecords(data);
       }
