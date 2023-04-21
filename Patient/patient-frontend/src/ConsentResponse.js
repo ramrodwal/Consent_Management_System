@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +20,7 @@ function ConsentResponse() {
       navigate("/");
     }
     else {
-      axios.get("http://localhost:9092/patient/view-consent/123412341234").then((response) => {
+      axios.get("http://localhost:8765/consent/view-consent/123412341234").then((response) => {
         setRequests(response.data);
         setDeclinedRequests(Array(response.data.length).fill(false));
       });
