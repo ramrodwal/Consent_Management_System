@@ -61,7 +61,7 @@ function ConsentRequest() {
 
     const consentDetails = { consentId: consentId, hospitalId: hospitalId, practitionerAadhar: id, patientAadhar: patientAadhar, diseaseName: diseaseName, status: status };
     if (isNotEmpty(hospitalId) && isNotEmpty(patientAadhar) && containsOnlyLettersAndSpaces(diseaseName)) {
-      axios.post('http://localhost:9099/hospital/request-consent', consentDetails)
+      axios.post('http://localhost:9099/hospital/request-consent', consentDetails,{headers})
         .then(response => console.log(response))
         .catch(error => console.log("this is an error!"));
       navigate("/DoctorDashboard");

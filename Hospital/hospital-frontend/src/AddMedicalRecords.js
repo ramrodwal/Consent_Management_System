@@ -96,7 +96,7 @@ function AddMedicalRecords() {
         patientAadhar: patientAadhar, username: "vartika", password: "qwerty12", confirmPassword: "qwerty12"
       };
       const recordDetail = { hospitalId: hospitalId.centralHospital.hospitalId, patient: patient };
-      axios.post('http://localhost:9099/hospital/add-metaData-patientSide', recordDetail)
+      axios.post('http://localhost:9099/hospital/add-metaData-patientSide', recordDetail,{headers})
 
         .then(response => console.log(response))
         .catch(error => console.log("There is an error!!"));
