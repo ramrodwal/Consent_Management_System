@@ -52,7 +52,7 @@ function ConsentResponse() {
         .post(
           "http://localhost:8765/consent/update-status/" +
           cid,
-          resp
+          resp,{headers}
         )
         .then((response) => {
           console.log(response);
@@ -90,7 +90,7 @@ function ConsentResponse() {
         .post(
           "http://localhost:8765/consent/update-status/" +
           cid,
-          resp
+          resp, {headers}
         )
         .then((response) => {
           console.log(response);

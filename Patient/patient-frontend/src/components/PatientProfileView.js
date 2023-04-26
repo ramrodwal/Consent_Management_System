@@ -12,7 +12,7 @@ function PatientProfileView() {
   const headers = { Authorization: `Bearer ${token}` }; // add token to headers
 
   useEffect(() => {
-    console.log(token);
+    
     if (token === null) {
       navigate("/");
     }

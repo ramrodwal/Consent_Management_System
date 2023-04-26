@@ -34,44 +34,66 @@ public class ConsentController {
     private RestTemplate restTemplate = new RestTemplate();
 
     // @GetMapping("/view-consent/{patientAadhar}")
-    // public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
-    //         throws JsonMappingException, JsonProcessingException {
+    // public List<Map<String, Object>> getConsents(@PathVariable String
+    // patientAadhar)
+    // throws JsonMappingException, JsonProcessingException {
 
-    //     String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
-    //     ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
-    //     String responseJson = responseEntity.getBody();
-    //     ObjectMapper objectMapper = new ObjectMapper();
-    //     List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
-    //             new TypeReference<List<Map<String, Object>>>() {
-    //             });
-    //     return consents;
+    // String apiUrl = "http://localhost:9092/patient/view-consent/" +
+    // patientAadhar;
+    // ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl,
+    // String.class);
+    // String responseJson = responseEntity.getBody();
+    // ObjectMapper objectMapper = new ObjectMapper();
+    // List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+    // new TypeReference<List<Map<String, Object>>>() {
+    // });
+    // return consents;
 
     // }
 
     @GetMapping("/view-consent/{patientAadhar}")
-public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
-        throws JsonMappingException, JsonProcessingException {
+    public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
+            throws JsonMappingException, JsonProcessingException {
 
-    String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
-    HttpHeaders headers = new HttpHeaders();
-    headers.set("Authorization", "Bearer " + token);
-    HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-    ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
-    String responseJson = responseEntity.getBody();
-    ObjectMapper objectMapper = new ObjectMapper();
-    List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
-            new TypeReference<List<Map<String, Object>>>() {
-            });
-    return consents;
+        String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+        String responseJson = responseEntity.getBody();
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+                new TypeReference<List<Map<String, Object>>>() {
+                });
+        return consents;
 
-}
+    }
 
+    // @PostMapping("/update-status/{consentId}")
+    // public ResponseEntity<Object> updateStatus(@RequestBody Object
+    // consentManager, @PathVariable Integer consentId)
+    // throws JsonProcessingException {
+    // String apiUrl =
+    // "http://localhost:9092/patient/login/consentManager/responseConsent/" +
+    // consentId;
+    // ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl,
+    // consentManager, String.class);
+    // String responseJson = responseEntity.getBody();
+    // ObjectMapper objectMapper = new ObjectMapper();
+    // Map<String, Object> response = objectMapper.readValue(responseJson, new
+    // TypeReference<Map<String, Object>>() {
+    // });
+    // return new ResponseEntity<>(response, HttpStatus.OK);
+    // }
 
     @PostMapping("/update-status/{consentId}")
     public ResponseEntity<Object> updateStatus(@RequestBody Object consentManager, @PathVariable Integer consentId)
             throws JsonProcessingException {
         String apiUrl = "http://localhost:9092/patient/login/consentManager/responseConsent/" + consentId;
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(apiUrl, consentManager, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<Object> entity = new HttpEntity<>(consentManager, headers);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, String.class);
         String responseJson = responseEntity.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> response = objectMapper.readValue(responseJson, new TypeReference<Map<String, Object>>() {
@@ -79,13 +101,27 @@ public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/approved-records")
-    public ResponseEntity<Boolean> sendApprovedRecords(@RequestBody List<Object> consentManager)
-            throws JsonProcessingException {
-        String apiUrl = "http://localhost:9092/hospital/consent/approve-records";
-        restTemplate.postForEntity(apiUrl, consentManager, String.class);
+    // @PostMapping("/approved-records")
+    // public ResponseEntity<Boolean> sendApprovedRecords(@RequestBody List<Object> consentManager)
+    //         throws JsonProcessingException {
+    //     String apiUrl = "http://localhost:9092/hospital/consent/approve-records";
+    //     restTemplate.postForEntity(apiUrl, consentManager, String.class);
 
-        return new ResponseEntity<>(true, HttpStatus.OK);
-    }
+    //     return new ResponseEntity<>(true, HttpStatus.OK);
+    // }
+
+
+    @PostMapping("/approved-records")
+public ResponseEntity<Boolean> sendApprovedRecords(@RequestBody List<Object> consentManager)
+        throws JsonProcessingException {
+    String apiUrl = "http://localhost:9092/hospital/consent/approve-records";
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + token);
+    HttpEntity<List<Object>> requestEntity = new HttpEntity<>(consentManager, headers);
+    restTemplate.exchange(apiUrl, HttpMethod.POST, requestEntity, String.class);
+
+    return new ResponseEntity<>(true, HttpStatus.OK);
+}
+
 
 }
