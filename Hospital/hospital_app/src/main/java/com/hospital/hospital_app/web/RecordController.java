@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,15 @@ import com.hospital.hospital_app.service.MedicalrecordsService;
 
 import jakarta.validation.Valid;
 
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/hospital")
 public class RecordController {
+
+    @Value("${CM_TOKEN}")
+    private String token;
+
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -60,20 +67,39 @@ public ResponseEntity<Boolean> addMetaDataToPatientSide(@RequestBody Object meta
 
 }
 
+// @GetMapping("/view-approvedRecords/{consentId}")
+//     public List<Map<String, Object>> getConsents(@PathVariable Integer consentId)
+//             throws JsonMappingException, JsonProcessingException {
+
+//         String apiUrl = "http://localhost:9092/hospital/approved-records/" + consentId;
+//         ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+//         String responseJson = responseEntity.getBody();
+//         ObjectMapper objectMapper = new ObjectMapper();
+//         List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+//                 new TypeReference<List<Map<String, Object>>>() {
+//                 });
+//         return consents;
+
+//     }
+
+
 @GetMapping("/view-approvedRecords/{consentId}")
-    public List<Map<String, Object>> getConsents(@PathVariable Integer consentId)
-            throws JsonMappingException, JsonProcessingException {
+public List<Map<String, Object>> getApprovedRecords(@PathVariable Integer consentId)
+        throws JsonMappingException, JsonProcessingException {
 
-        String apiUrl = "http://localhost:9092/hospital/approved-records/" + consentId;
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
-        String responseJson = responseEntity.getBody();
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
-                new TypeReference<List<Map<String, Object>>>() {
-                });
-        return consents;
+    String apiUrl = "http://localhost:9092/hospital/approved-records/" + consentId;
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + token); // Replace with your actual token value
+    HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+    ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+    String responseJson = responseEntity.getBody();
+    ObjectMapper objectMapper = new ObjectMapper();
+    List<Map<String, Object>> approvedRecords = objectMapper.readValue(responseJson,
+            new TypeReference<List<Map<String, Object>>>() {
+            });
+    return approvedRecords;
+}
 
-    }
 
 
 }

@@ -3,6 +3,10 @@ package com.patient.patient_app.web;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,22 +28,44 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/consent")
 public class ConsentController {
 
+    @Value("${CM_TOKEN}")
+    private String token;
+
     private RestTemplate restTemplate = new RestTemplate();
 
+    // @GetMapping("/view-consent/{patientAadhar}")
+    // public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
+    //         throws JsonMappingException, JsonProcessingException {
+
+    //     String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
+    //     ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+    //     String responseJson = responseEntity.getBody();
+    //     ObjectMapper objectMapper = new ObjectMapper();
+    //     List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+    //             new TypeReference<List<Map<String, Object>>>() {
+    //             });
+    //     return consents;
+
+    // }
+
     @GetMapping("/view-consent/{patientAadhar}")
-    public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
-            throws JsonMappingException, JsonProcessingException {
+public List<Map<String, Object>> getConsents(@PathVariable String patientAadhar)
+        throws JsonMappingException, JsonProcessingException {
 
-        String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
-        String responseJson = responseEntity.getBody();
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
-                new TypeReference<List<Map<String, Object>>>() {
-                });
-        return consents;
+    String apiUrl = "http://localhost:9092/patient/view-consent/" + patientAadhar;
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + token);
+    HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+    ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+    String responseJson = responseEntity.getBody();
+    ObjectMapper objectMapper = new ObjectMapper();
+    List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+            new TypeReference<List<Map<String, Object>>>() {
+            });
+    return consents;
 
-    }
+}
+
 
     @PostMapping("/update-status/{consentId}")
     public ResponseEntity<Object> updateStatus(@RequestBody Object consentManager, @PathVariable Integer consentId)

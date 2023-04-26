@@ -12,6 +12,7 @@ function ConsentResponse() {
   const navigate = useNavigate();
   const headers = { Authorization: `Bearer ${token}` };
   const id=localStorage.getItem('id');
+  
   //const id = localStorage.getItem('id');
 
   const [requests, setRequests] = useState([]);
@@ -21,7 +22,9 @@ function ConsentResponse() {
       navigate("/");
     }
     else {
+
       axios.get(`http://localhost:8765/consent/view-consent/${id}`,{ headers }).then((response) => {
+
         setRequests(response.data);
         setDeclinedRequests(Array(response.data.length).fill(false));
       });

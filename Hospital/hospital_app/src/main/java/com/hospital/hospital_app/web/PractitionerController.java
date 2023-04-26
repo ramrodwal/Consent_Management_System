@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PractitionerController {
+
+    @Value("${CM_TOKEN}")
+    private String token;
+
+    
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -73,37 +80,71 @@ public class PractitionerController {
         return ResponseEntity.ok(hospital.get().getHospitalName());
     }
 
+    // @PostMapping("/request-consent")
+    // public ResponseEntity<Object> requestConsent(@RequestBody Object consent) {
+
+    //     String apiUrl = "http://localhost:9092/hospital/practitioner-login/view-patient/consent"; // Corrected URL to
+    //                                                                                               // include protocol
+    //                                                                                               // (http)
+    //     RestTemplate restTemplate = new RestTemplate(); // Instantiating RestTemplate
+    //     HttpHeaders headers = new HttpHeaders(); // Creating HttpHeaders object
+    //     headers.setContentType(MediaType.APPLICATION_JSON); // Setting content type to application/json
+    //     HttpEntity<Object> requestEntity = new HttpEntity<>(consent, headers); // Creating HttpEntity with consent and
+    //                                                                            // headers
+    //     ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, requestEntity, String.class); // Making the
+    //                                                                                                        // POST
+    //                                                                                                        // request
+
+    //     return new ResponseEntity<>(response.getBody(), HttpStatus.OK); // Returning the response body as Object
+    // }
+
+
     @PostMapping("/request-consent")
     public ResponseEntity<Object> requestConsent(@RequestBody Object consent) {
-
-        String apiUrl = "http://localhost:9092/hospital/practitioner-login/view-patient/consent"; // Corrected URL to
-                                                                                                  // include protocol
-                                                                                                  // (http)
-        RestTemplate restTemplate = new RestTemplate(); // Instantiating RestTemplate
-        HttpHeaders headers = new HttpHeaders(); // Creating HttpHeaders object
-        headers.setContentType(MediaType.APPLICATION_JSON); // Setting content type to application/json
-        HttpEntity<Object> requestEntity = new HttpEntity<>(consent, headers); // Creating HttpEntity with consent and
-                                                                               // headers
-        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, requestEntity, String.class); // Making the
-                                                                                                           // POST
-                                                                                                           // request
-
-        return new ResponseEntity<>(response.getBody(), HttpStatus.OK); // Returning the response body as Object
+    
+        String apiUrl = "http://localhost:9092/hospital/practitioner-login/view-patient/consent";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + token); // Replace with your actual token value
+        HttpEntity<Object> requestEntity = new HttpEntity<>(consent, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, requestEntity, String.class);
+    
+        return new ResponseEntity<>(response.getBody(), HttpStatus.OK);
     }
+    
+    
+
+    // @GetMapping("/view-consent/{practitionerAadhar}")
+    // public List<Map<String, Object>> getConsents(@PathVariable String practitionerAadhar)
+    //         throws JsonMappingException, JsonProcessingException {
+
+    //     String apiUrl = "http://localhost:9092/patient/view-consent/" + practitionerAadhar;
+    //     ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
+    //     String responseJson = responseEntity.getBody();
+    //     ObjectMapper objectMapper = new ObjectMapper();
+    //     List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+    //             new TypeReference<List<Map<String, Object>>>() {
+    //             });
+    //     return consents;
+
+    // }
 
     @GetMapping("/view-consent/{practitionerAadhar}")
-    public List<Map<String, Object>> getConsents(@PathVariable String practitionerAadhar)
-            throws JsonMappingException, JsonProcessingException {
+public List<Map<String, Object>> getConsents(@PathVariable String practitionerAadhar)
+        throws JsonMappingException, JsonProcessingException {
 
-        String apiUrl = "http://localhost:9092/patient/view-consent/" + practitionerAadhar;
-        ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
-        String responseJson = responseEntity.getBody();
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
-                new TypeReference<List<Map<String, Object>>>() {
-                });
-        return consents;
+    String apiUrl = "http://localhost:9092/hospital/practitioner-login/view-consent/" + practitionerAadhar;
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + token);
+    HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+    ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+    String responseJson = responseEntity.getBody();
+    ObjectMapper objectMapper = new ObjectMapper();
+    List<Map<String, Object>> consents = objectMapper.readValue(responseJson,
+            new TypeReference<List<Map<String, Object>>>() {
+            });
+    return consents;
+}
 
-    }
 
 }
