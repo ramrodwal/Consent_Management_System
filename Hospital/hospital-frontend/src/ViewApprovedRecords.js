@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function ViewApprovedRecords() {
   const navigate = useNavigate();
   const token = localStorage.getItem('practitionerAuthToken')
-
+  const headers = { Authorization: `Bearer ${token}` };
   const location = useLocation();
   const [records, setRecords] = useState([]);
   const [patientName, setPatientName] = useState('');
@@ -18,7 +18,7 @@ export default function ViewApprovedRecords() {
       navigate("/DoctorLogin");
     }
     else {
-      axios.get(`http://localhost:9092/hospital/approved-records/${consentId}`)
+      axios.get(`http://localhost:9099/hospital/view-approvedRecords/${consentId}`,{headers})
         .then((response) => {
           setRecords(response.data);
         })
@@ -30,7 +30,7 @@ export default function ViewApprovedRecords() {
   }, [])
 
   const getPatientName = (patientAadhar) => {
-    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`).then((response) => {
+    axios.get(`http://localhost:9099/hospital/practitioner-login/get-patient/${patientAadhar}`,{headers}).then((response) => {
       setPatientName(response.data);
     }, [])
     return patientName;
