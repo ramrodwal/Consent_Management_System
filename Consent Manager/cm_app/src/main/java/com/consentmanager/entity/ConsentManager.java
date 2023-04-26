@@ -34,7 +34,8 @@ import lombok.Setter;
 public class ConsentManager {
 
     @JsonIgnore
-    @OneToMany(mappedBy = "cm", cascade = CascadeType.ALL, orphanRemoval = true)
+     //@OneToMany(mappedBy = "cm", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cm", cascade = CascadeType.ALL)
     private List<ApprovedRecords> approvedRecords = new ArrayList<>();
 
     @Id

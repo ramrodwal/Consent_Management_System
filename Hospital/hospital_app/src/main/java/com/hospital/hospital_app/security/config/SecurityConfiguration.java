@@ -30,7 +30,7 @@ public class SecurityConfiguration {
             .csrf() //broweser gives by deafult csrf ssecurity so we need to disable it
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("/api/auth/**", "/book-appointment/**") //this is usd for signup and login since for signup and login no need to authenticate
+            .requestMatchers("/api/auth/**", "/book-appointment/**", "/hospital/record-mapping/**") //this is usd for signup and login since for signup and login no need to authenticate
             .permitAll()
             .anyRequest()
             .authenticated()

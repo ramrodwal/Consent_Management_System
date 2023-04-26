@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ApprovedRecords() {
+
+  const token = localStorage.getItem('authToken');
+  const id = localStorage.getItem('id');
+  const headers = { Authorization: `Bearer ${token}` };
+
   const navigate = useNavigate();
 
   const [records, setRecords] = useState([]);
@@ -15,9 +20,7 @@ function ApprovedRecords() {
   useEffect(() => {
     const fetchRecord = async () => {
 
-      const token = localStorage.getItem('authToken');
-      const id = localStorage.getItem('id');
-      const headers = { Authorization: `Bearer ${token}` };
+      
       if (token === null) {
         navigate("/");
       }
@@ -74,7 +77,7 @@ function ApprovedRecords() {
       const response = await axios.post(
         'http://localhost:8765/consent/approved-records',
         JSON.stringify(selectedRecords), // Serialize the data as a JSON array
-        { headers: { 'Content-Type': 'application/json' } } // Set the content type to application/json
+        { headers: { 'Content-Type': 'application/json' , ...headers} } // Set the content type to application/json
       );
       console.log("hello");
 
