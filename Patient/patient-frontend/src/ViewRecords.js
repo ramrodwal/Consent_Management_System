@@ -46,10 +46,9 @@ function ViewRecords() {
           <tr className='tablehead'>
             <th className='tabledata'>Record Id</th>
             <th className='tabledata'>Disease Name</th>
-            <th className='tabledata'>Patient Aadhar</th>
             <th className='tabledata'>Priescription</th>
-            <th className='tabledata'>Hospital Id</th>
-            <th className='tabledata'>Practitioners Aadhar</th>
+            <th className='tabledata'>Hospital Name</th>
+            <th className='tabledata'>Practitioners Name</th>
 
           </tr>
         </thead>
@@ -58,10 +57,9 @@ function ViewRecords() {
             <tr key={record.id}>
               <td className='tabledata'>{record.recordId}</td>
               <td className='tabledata'>{record.diseaseName}</td>
-              <td className='tabledata'>{record.patientAadhar}</td>
               <td className='tabledata'>{record.record}</td>
-              <td className='tabledata'>{record.centralHospital.hospitalId}</td>
-              <td className='tabledata'>{record.medicalPractitioner.practitionerAadhar}</td>
+              <td className='tabledata'>{record.centralHospital.hospitalName}</td>
+              <td className='tabledata'>{record.medicalPractitioner.fname} {record.medicalPractitioner.mname} {record.medicalPractitioner.lname}</td>
             </tr>
           ))}
         </tbody>
