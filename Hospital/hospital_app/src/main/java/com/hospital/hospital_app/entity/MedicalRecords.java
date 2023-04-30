@@ -55,4 +55,6 @@ public class MedicalRecords {
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private MedicalPractitioner medicalPractitioner;
 
+    
+
 }
